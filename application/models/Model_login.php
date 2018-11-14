@@ -16,7 +16,7 @@ class Model_login extends CI_Model{
       if($this->num_rows() == 1){
         return true;
       }else{
-        return false;    
+        return false;
       }
     }else{
       return false;
@@ -32,7 +32,16 @@ class Model_login extends CI_Model{
   }
 
   public function getStoredPass(){
+    $kode = $this->input->post('username');
+    $cond = array('' => $kode);
+    $query = $this->db->get_where('',$cond);
 
+    if($query->num_rows() == 1){
+      $row = $query->row();
+      return $row->Password;
+    }else{
+      return false;
+    }
   }
 
 }
