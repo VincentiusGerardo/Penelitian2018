@@ -1,0 +1,26 @@
+.judulHalaman{
+    text-align: center;
+}
+.pentings{
+    text-align: center;
+    font-size:500%;
+    margin: auto;
+}
+
+.tombolAdd{
+    margin-top: 12px;
+    margin-bottom: -65px;
+}
+
+.gambarloadingajax{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+}
+
+.tengah{
+    text-align: center;
+    font-size:300%;
+    margin: auto;
+}

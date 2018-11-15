@@ -23,7 +23,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+if(!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])){
+    $url = 'https://';
+} else {
+    $url = 'http://';
+}
+$config['base_url'] = $url . $_SERVER['HTTP_HOST'] . '/Penelitian2018/';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +40,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
