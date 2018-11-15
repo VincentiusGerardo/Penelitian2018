@@ -59,6 +59,7 @@
               <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
               </a>
+            </nav>
           </header>
           <aside class="main-sidebar">
 
@@ -67,7 +68,7 @@
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
                 <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/IdentitasDiri'); ?>"><i class="fa fa-link"></i> <span>Identitas Diri</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/IdentitasDiri'); ?>"><i class="fa fa-edit"></i> <span>Identitas Diri</span></a></li>
                 <li><a href="<?php echo base_url('Dosen/Pedidikan'); ?>"><i class="fa fa-link"></i> <span>Pendidikan</span></a></li>
                 <li><a href="<?php echo base_url('Dosen/Pengajaran'); ?>"><i class="fa fa-link"></i> <span>Pengajaran</span></a></li>
                 <li><a href="<?php echo base_url('Dosen/Pembimbing'); ?>"><i class="fa fa-link"></i> <span>Pembimbing</span></a></li>

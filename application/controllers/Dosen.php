@@ -21,7 +21,7 @@
 
     public function identitasdiri(){
       $this->load->view('header');
-      //$this->load->view('');
+      $this->load->view('identitas_diri');
       $this->load->view('footer');
     }
 
