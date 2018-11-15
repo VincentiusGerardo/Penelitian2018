@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>Portofolio Dosen | <?php echo $judul; ?></title>
+        <title>Portofolio Dosen</title>
 
         <!--jQuery 3-->
         <script src="<?php echo base_url('js/jquery/jquery.min.js'); ?>"></script>
@@ -48,41 +48,17 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('dist/summernote.css'); ?>"/>
         <script src="<?php echo base_url('dist/summernote.min.js'); ?>"></script>
     </head>
-    <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+    <body class="hold-transition skin-blue sidebar-mini ">
         <div class="wrapper">
           <header class="main-header">
             <a class="logo">
-              <span class="logo-mini"><b>MaXXi</b></span>
-              <span class="logo-lg"><b>Admin</b> MaXXi</span>
+              <span class="logo-mini"><b>PD</b></span>
+              <span class="logo-lg"><b>Portofolio</b> Dosen</span>
             </a>
             <nav class="navbar navbar-static-top" role="navigation">
               <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
               </a>
-              <div class="navbar-custom-menu">
-                  <ul class="nav navbar-nav">
-                    <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                          <i class="fa fa-user-o"></i>
-                          &nbsp;
-                          <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li>
-                            <ul class="menu">
-                            <li>
-                                    <a href="<?php echo $path . 'changePassword'; ?>"><i class="fa fa-key fa-fw"></i> Change Password</a>
-                              </li>
-                              <li>
-                                  <a href="<?php echo base_url('Login/doLogOut'); ?>"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                    </li>
-                  </ul>
-              </div>
-            </nav>
           </header>
           <aside class="main-sidebar">
 
@@ -91,33 +67,20 @@
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
                 <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
-                <?php
-                    foreach($menu as $m){
-                        if($m->URL === '#'){
-                ?>
-                    <li class="treeview">
-                        <a href="#"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span>
-                          <span class="pull-right-container">
-                              <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                          <?php
-                            $sql = "select b.ID_SubMenu,b.NamaSubMenu,b.URL,b.ID_Menu from tr_authorizesubmenu a, ms_submenu b where a.ID_SubMenu = b.ID_SubMenu and a.KodeKaryawan = ? and b.FlagActive = 'Y' and b.ID_Menu = ?";
-                            $query = $this->db->query($sql, array($kodeUser,$m->ID_Menu)) ;
-                            foreach($query->result() as $s){
-                          ?>
-                          <li><a href="<?php echo $path . $s->URL; ?>"><?php echo $s->NamaSubMenu ?></a></li>
-                        <?php
-                          }
-                        ?>
-                        </ul>
-                    </li>
-                <?php
-                        }else{
-                ?>
-                    <li><a href="<?php echo $path . $m->URL; ?>"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span></a></li>
-                    <?php } }?>
+                <li><a href="<?php echo base_url('Dosen/IdentitasDiri'); ?>"><i class="fa fa-link"></i> <span>Identitas Diri</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Pedidikan'); ?>"><i class="fa fa-link"></i> <span>Pendidikan</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Pengajaran'); ?>"><i class="fa fa-link"></i> <span>Pengajaran</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Pembimbing'); ?>"><i class="fa fa-link"></i> <span>Pembimbing</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Penguji'); ?>"><i class="fa fa-link"></i> <span>Penguji</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/OrganisasiProfesi'); ?>"><i class="fa fa-link"></i> <span>Organisasi Profesi/Ilmiah</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Penghargaan'); ?>"><i class="fa fa-link"></i> <span>Penghargaan</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Penelitian'); ?>"><i class="fa fa-link"></i> <span>Penelitian</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Publikasi'); ?>"><i class="fa fa-link"></i> <span>Publikasi</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/BahanAjar'); ?>"><i class="fa fa-link"></i> <span>Bahan Ajar</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Seminar'); ?>"><i class="fa fa-link"></i> <span>Seminar</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/PKM'); ?>"><i class="fa fa-link"></i> <span>Pengabdian Kepada Masyarakat</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/PengelolaanInstitusi'); ?>"><i class="fa fa-link"></i> <span>Pengelolaan Institusi</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/CV'); ?>"><i class="fa fa-link"></i> <span>Buat Curriculum Viatae (CV)</span></a></li>
               </ul>
               <!-- /.sidebar-menu -->
             </section>
