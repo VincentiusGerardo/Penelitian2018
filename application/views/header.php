@@ -68,8 +68,13 @@
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
                 <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
+<<<<<<< HEAD
                 <li><a href="<?php echo base_url('Dosen/IdentitasDiri'); ?>"><i class="fa fa-edit"></i> <span>Identitas Diri</span></a></li>
                 <li><a href="<?php echo base_url('Dosen/Pedidikan'); ?>"><i class="fa fa-link"></i> <span>Pendidikan</span></a></li>
+=======
+                <li><a href="<?php echo base_url('Dosen/IdentitasDiri'); ?>"><i class="fa fa-link"></i> <span>Identitas Diri</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Pendidikan'); ?>"><i class="fa fa-link"></i> <span>Pendidikan</span></a></li>
+>>>>>>> f60c164094ae22e43bcb3fa463051f0ea1f7b1bc
                 <li><a href="<?php echo base_url('Dosen/Pengajaran'); ?>"><i class="fa fa-link"></i> <span>Pengajaran</span></a></li>
                 <li><a href="<?php echo base_url('Dosen/Pembimbing'); ?>"><i class="fa fa-link"></i> <span>Pembimbing</span></a></li>
                 <li><a href="<?php echo base_url('Dosen/Penguji'); ?>"><i class="fa fa-link"></i> <span>Penguji</span></a></li>
