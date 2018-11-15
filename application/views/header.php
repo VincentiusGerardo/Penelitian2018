@@ -59,6 +59,52 @@
               <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
               </a>
+
+              <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                  <!-- User Account: style can be found in dropdown.less -->
+                  <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-gears"></i>
+                      <span class="hidden-xs">Alexander Pierce</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <!-- User image -->
+                      <li class="user-header">
+                        <p>
+                          Alexander Pierce - Web Developer
+                          <small>Member since Nov. 2012</small>
+                        </p>
+                      </li>
+                      <!-- Menu Body -->
+                      <li class="user-body">
+                        <div class="row">
+                          <div class="col-xs-4 text-center">
+                            <a href="#">Followers</a>
+                          </div>
+                          <div class="col-xs-4 text-center">
+                            <a href="#">Sales</a>
+                          </div>
+                          <div class="col-xs-4 text-center">
+                            <a href="#">Friends</a>
+                          </div>
+                        </div>
+                        <!-- /.row -->
+                      </li>
+                      <!-- Menu Footer-->
+                      <li class="user-footer">
+                        <div class="pull-left">
+                          <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        </div>
+                        <div class="pull-right">
+                          <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- Control Sidebar Toggle Button -->
+                </ul>
+              </div>
             </nav>
           </header>
           <aside class="main-sidebar">
@@ -68,25 +114,20 @@
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
                 <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
-<<<<<<< HEAD
-                <li><a href="<?php echo base_url('Dosen/IdentitasDiri'); ?>"><i class="fa fa-edit"></i> <span>Identitas Diri</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/Pedidikan'); ?>"><i class="fa fa-link"></i> <span>Pendidikan</span></a></li>
-=======
-                <li><a href="<?php echo base_url('Dosen/IdentitasDiri'); ?>"><i class="fa fa-link"></i> <span>Identitas Diri</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/Pendidikan'); ?>"><i class="fa fa-link"></i> <span>Pendidikan</span></a></li>
->>>>>>> f60c164094ae22e43bcb3fa463051f0ea1f7b1bc
-                <li><a href="<?php echo base_url('Dosen/Pengajaran'); ?>"><i class="fa fa-link"></i> <span>Pengajaran</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/Pembimbing'); ?>"><i class="fa fa-link"></i> <span>Pembimbing</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/Penguji'); ?>"><i class="fa fa-link"></i> <span>Penguji</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/OrganisasiProfesi'); ?>"><i class="fa fa-link"></i> <span>Organisasi Profesi/Ilmiah</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/Penghargaan'); ?>"><i class="fa fa-link"></i> <span>Penghargaan</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/Penelitian'); ?>"><i class="fa fa-link"></i> <span>Penelitian</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/Publikasi'); ?>"><i class="fa fa-link"></i> <span>Publikasi</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/BahanAjar'); ?>"><i class="fa fa-link"></i> <span>Bahan Ajar</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/Seminar'); ?>"><i class="fa fa-link"></i> <span>Seminar</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/PKM'); ?>"><i class="fa fa-link"></i> <span>Pengabdian Kepada Masyarakat</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/PengelolaanInstitusi'); ?>"><i class="fa fa-link"></i> <span>Pengelolaan Institusi</span></a></li>
-                <li><a href="<?php echo base_url('Dosen/CV'); ?>"><i class="fa fa-link"></i> <span>Buat Curriculum Viatae (CV)</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/IdentitasDiri'); ?>"><i class="fa fa-id-card"></i> <span>Identitas Diri</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Pedidikan'); ?>"><i class="fa fa-graduation-cap"></i> <span>Pendidikan</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Pengajaran'); ?>"><i class="fa fa-edit"></i> <span>Pengajaran</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Pembimbing'); ?>"><i class="fa fa-odnoklassniki"></i> <span>Pembimbing</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Penguji'); ?>"><i class="fa fa-odnoklassniki-square"></i> <span>Penguji</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/OrganisasiProfesi'); ?>"><i class="fa fa-flask"></i> <span>Organisasi Profesi/Ilmiah</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Penghargaan'); ?>"><i class="fa fa-star"></i> <span>Penghargaan</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Penelitian'); ?>"><i class="fa fa-magic"></i> <span>Penelitian</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Publikasi'); ?>"><i class="fa fa-book"></i> <span>Publikasi</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/BahanAjar'); ?>"><i class="fa fa-file-text-o"></i> <span>Bahan Ajar</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/Seminar'); ?>"><i class="fa fa-desktop"></i> <span>Seminar</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/PKM'); ?>"><i class="fa fa-users"></i> <span>Pengabdian Kepada Masyarakat</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/PengelolaanInstitusi'); ?>"><i class="fa fa-university"></i> <span>Pengelolaan Institusi</span></a></li>
+                <li><a href="<?php echo base_url('Dosen/CV'); ?>"><i class="fa fa-print"></i> <span>Buat Curriculum Vitae (CV)</span></a></li>
               </ul>
               <!-- /.sidebar-menu -->
             </section>
