@@ -5,15 +5,14 @@
 
     public function __construct(){
       parent::__construct();
-      //Codeigniter : Write Less Do More
     }
 
     public function login($user,$pass){
       if($this->validatePass($pass)){
-        $con = array('' => $user);
-        $query = $this->db->get_where('',$cond);
+        $con = array('NIP_NIK' => $user);
+        $query = $this->db->get_where('identitas_diri',$con);
 
-        if($this->num_rows() == 1){
+        if($query->num_rows() > 0){
           return true;
         }else{
           return false;
@@ -33,10 +32,10 @@
 
     public function getStoredPass(){
       $kode = $this->input->post('username');
-      $cond = array('' => $kode);
-      $query = $this->db->get_where('',$cond);
+      $cond = array('NIP_NIK' => $kode);
+      $query = $this->db->get_where('identitas_diri',$cond);
 
-      if($query->num_rows() == 1){
+      if($query->num_rows() > 0){
         $row = $query->row();
         return $row->Password;
       }else{

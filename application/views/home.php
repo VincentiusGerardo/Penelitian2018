@@ -1,9 +1,6 @@
 <script src="<?php echo base_url('js/jam.js') ?>"></script>
 <div>
-
     <div class="pentings">
-        Welcome 
-        <br>
         <?php echo date("l, j F Y"); ?>
     </div>
         <table class="pentings" align="center">
