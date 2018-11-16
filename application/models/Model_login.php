@@ -37,7 +37,7 @@
 
       if($query->num_rows() > 0){
         $row = $query->row();
-        return $row->Password;
+        return $row->PASSWORD;
       }else{
         return false;
       }
