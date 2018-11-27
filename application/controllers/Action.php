@@ -46,8 +46,9 @@
         $perT = $this->input->post('pt');
         $jurusan = $this->input->post('jur');
 
-        //upload Ijazah
-        $config['upload_path'] = './media/ijazah/'
+
+        //Upload Ijazah
+        
       }else{
         echo "Ada yang kurang nih";
       }

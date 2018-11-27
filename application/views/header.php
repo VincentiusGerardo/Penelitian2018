@@ -70,7 +70,7 @@
                     <ul class="dropdown-menu">
                       <!-- User image -->
                       <li class="user-header">
-                        <img src="http://kalbisphere.kalbis.ac.id/Kalbisphere/Images/Kalbiser/<?php echo $this->session->userdata('username'); ?>.jpg" class="img-circle" alt="User Image">
+                        <img src="http://kalbisphere.kalbis.ac.id/Kalbisphere/Images/Kalbiser/<?php echo $this->session->userdata('username'); ?>.jpg" class="img-circle" alt="User Image" onerror="this.src='<?php echo base_url('media/nopic.jpg'); ?>'">
                         <p>
                           <?php echo $this->session->userdata('username') . " - " . $nama; ?>
                         </p>
