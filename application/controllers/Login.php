@@ -10,7 +10,7 @@
 
     public function index(){
       if(!$this->session->userdata('is_logged')){
-        $this->load->view('login');
+        $this->load->view('v_login');
       }else{
         redirect('Dosen/');
       }

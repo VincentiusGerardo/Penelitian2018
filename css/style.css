@@ -24,3 +24,11 @@
     font-size:300%;
     margin: auto;
 }
+
+.butAdd{
+  margin-bottom: -6.5%;
+}
+
+.inputFile{
+  margin-top: 6px;
+}

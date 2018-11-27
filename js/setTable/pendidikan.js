@@ -22,6 +22,10 @@ $(function(){
                title: "Jurusan",
                field: "Jurusan",
                align: "center"
+           }, {
+               title: "Action",
+               field: "Action",
+               align: "center"
            }
        ]
    });

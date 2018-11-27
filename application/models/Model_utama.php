@@ -26,4 +26,12 @@
     public function getPengajaran(){
 
     }
+
+    public function insertPendidikan(){
+
+    }
+
+    public function updatePendidikan(){
+      
+    }
   }

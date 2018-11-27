@@ -1,7 +1,7 @@
 <?php
   defined('BASEPATH') OR exit('No direct script access allowed');
 
-  class Do extends CI_Controller{
+  class Action extends CI_Controller{
 
     public function __construct(){
       parent::__construct();
@@ -33,11 +33,28 @@
     }
 
     public function doInsertPendidikan(){
+      $this->form_validation->set_rules('selProgram','selectProgram','required|xss_clean|trim');
+      $this->form_validation->set_rules('thn','tahun','required|xss_clean|trim|max_length[4]');
+      $this->form_validation->set_rules('pt','perguruanTinggi','required|xss_clean|trim');
+      $this->form_validation->set_rules('jur','jurusan','required|xss_clean|trim');
+      // $this->form_validation->set_rules('ij','ijazah','required|xss_clean|trim');
+      // $this->form_validation->set_rules('tr','transkrip','required|xss_clean|trim');
 
+      if($this->form_validation->run() == TRUE){
+        $pro = $this->input->post('selProgram');
+        $tahun = $this->input->post('thn');
+        $perT = $this->input->post('pt');
+        $jurusan = $this->input->post('jur');
+
+        //upload Ijazah
+        $config['upload_path'] = './media/ijazah/'
+      }else{
+        echo "Ada yang kurang nih";
+      }
     }
 
     public function doUpdatePendidikan(){
-
+      echo "ini update";
     }
 
     public function doInsertPengajaran(){

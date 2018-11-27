@@ -19,19 +19,21 @@
 
     public function index(){
       $this->getHeader();
-      $this->load->view('home');
+      $this->load->view('v_home');
       $this->load->view('footer');
     }
 
     public function identitasdiri(){
       $this->getHeader();
-      $this->load->view('identitas_diri');
+      $this->load->view('v_identitas_diri');
       $this->load->view('footer');
     }
 
     public function pendidikan(){
+      $data['pendidikan'] = $this->model_utama->getPendidikan();
       $this->getHeader();
-      $this->load->view('pendidikan');
+      $this->load->view('v_pendidikan',$data);
+      $this->load->view('modals/m_pendidikan',$data);
       $this->load->view('footer');
     }
 
