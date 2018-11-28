@@ -53,5 +53,5 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-//buat route biar buat ke do
-$route['do/(:any)'] = 'Action/$1';
+//Custom Route
+$route['Source/do/(:any)'] = 'Action/$1';

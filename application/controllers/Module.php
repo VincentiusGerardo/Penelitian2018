@@ -1,7 +1,7 @@
 <?php
   defined('BASEPATH') OR exit('No direct script access allowed');
 
-  class Dosen extends CI_Controller{
+  class Module extends CI_Controller{
 
     public function __construct(){
       parent::__construct();
@@ -106,6 +106,12 @@
     public function cv(){
       $this->getHeader();
       //$this->load->view('');
+      $this->load->view('footer');
+    }
+
+    public function users(){
+      $this->getHeader();
+      // $this->load->view('', $data);
       $this->load->view('footer');
     }
   }

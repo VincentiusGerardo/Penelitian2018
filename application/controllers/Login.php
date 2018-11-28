@@ -12,7 +12,7 @@
       if(!$this->session->userdata('is_logged')){
         $this->load->view('v_login');
       }else{
-        redirect('Dosen/');
+        redirect('Module/');
       }
     }
 
@@ -32,7 +32,7 @@
           );
 
           $this->session->set_userdata($data);
-          redirect('Dosen/');
+          redirect('Module/');
         }else{
           $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Invalid Username or Password!</div>");
           redirect(base_url());
