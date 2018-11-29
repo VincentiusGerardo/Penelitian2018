@@ -24,12 +24,23 @@
 
     }
 
-    public function doInsertIdentitas(){
-
-    }
+    // kayaknya ini gaperlu, karna dosen hanya edit2 identitas saja (sudah punya nik dari awal)
+    // public function doInsertIdentitas(){
+    //
+    // }
 
     public function doUpdateIdentitas(){
+  		$res = $this->model_utama->updateIdentitas($this->session->userdata('username'));
 
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', $this->input->post('NIP_NIK'));
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah Identitas diri!');
+      }
+
+  		redirect('Module/identitasdiri');
     }
 
     public function doInsertPendidikan(){
@@ -51,6 +62,9 @@
         $jurusan = $this->input->post('jur');
 
         //Upload Ijazah
+<<<<<<< HEAD
+
+=======
         if(!empty($_FILES['ij']['name'])){
           $config['upload_path']          = './media/ijazah/';
           $config['allowed_types']        = 'pdf';
@@ -88,6 +102,7 @@
 
         $this->model_utama->insertPendidikan($data);
         redirect(base_url('Module/Pendidikan'));
+>>>>>>> 8602fa6420661d4ce1b79f34849fd07e75f7af42
       }else{
         echo "Ada yang kurang nih";
       }

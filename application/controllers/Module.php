@@ -24,8 +24,9 @@
     }
 
     public function identitasdiri(){
+      $data['dosen'] = $this->model_utama->getIdentitas();
       $this->getHeader();
-      $this->load->view('v_identitas_diri');
+      $this->load->view('v_identitas_diri', $data);
       $this->load->view('footer');
     }
 
