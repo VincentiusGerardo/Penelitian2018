@@ -36,10 +36,6 @@
       }
     }
 
-    public function updatePendidikan(){
-
-    }
-
     public function updateIdentitas($NIP_NIK){
       $data = array(
   			'NIDN' => $this->input->post('NIDN'),
