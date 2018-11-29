@@ -62,7 +62,13 @@
         $jurusan = $this->input->post('jur');
 
         //Upload Ijazah
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8d526f2c457f73e8316bf79602b5393ecedff4a4
         if(!empty($_FILES['ij']['name'])){
           $config['upload_path']          = './media/ijazah/';
           $config['allowed_types']        = 'pdf';
@@ -100,6 +106,7 @@
 
         $this->model_utama->insertPendidikan($data);
         redirect(base_url('Module/Pendidikan'));
+>>>>>>> 8602fa6420661d4ce1b79f34849fd07e75f7af42
       }else{
         echo "Ada yang kurang nih";
       }
