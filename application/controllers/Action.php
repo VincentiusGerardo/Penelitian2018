@@ -48,8 +48,12 @@
       $this->form_validation->set_rules('thn','tahun','required|xss_clean|trim|max_length[4]');
       $this->form_validation->set_rules('pt','perguruanTinggi','required|xss_clean|trim');
       $this->form_validation->set_rules('jur','jurusan','required|xss_clean|trim');
-      // $this->form_validation->set_rules('ij','ijazah','required|xss_clean|trim');
-      // $this->form_validation->set_rules('tr','transkrip','required|xss_clean|trim');
+      if(empty($_FILES['ij']['name'])){
+        $this->form_validation->set_rules('ij','ijazah','required|xss_clean|trim');
+      }
+      if(empty($_FILES['tr']['name'])){
+        $this->form_validation->set_rules('tr','transkrip','required|xss_clean|trim');
+      }
 
       if($this->form_validation->run() == TRUE){
         $pro = $this->input->post('selProgram');
@@ -57,16 +61,108 @@
         $perT = $this->input->post('pt');
         $jurusan = $this->input->post('jur');
 
-
         //Upload Ijazah
+<<<<<<< HEAD
 
+=======
+        if(!empty($_FILES['ij']['name'])){
+          $config['upload_path']          = './media/ijazah/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = 'TRUE';
+          $config['file_name']            = $this->session->userdata('username');
+
+          $this->upload->initialize($config);
+          $this->upload->do_upload('ij');
+        }
+
+        //Upload Transkrip
+        if(!empty($_FILES['tr']['name'])){
+          $config['upload_path']          = './media/transkrip/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = 'TRUE';
+          $config['file_name']            = $this->session->userdata('username');
+
+          $this->upload->initialize($config);
+          $this->upload->do_upload('tr');
+        }
+
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'PROGRAM' => $pro,
+          'TAHUN' => $tahun,
+          'PERGURUAN_TINGGI' => $perT,
+          'JURUSAN' => $jurusan,
+          'IJASAH' => $this->upload->data('file_name'),
+          'TRANSKRIP' => $this->upload->data('file_name')
+        );
+
+        $this->model_utama->insertPendidikan($data);
+        redirect(base_url('Module/Pendidikan'));
+>>>>>>> 8602fa6420661d4ce1b79f34849fd07e75f7af42
       }else{
         echo "Ada yang kurang nih";
       }
     }
 
     public function doUpdatePendidikan(){
-      echo "ini update";
+      $this->form_validation->set_rules('kode','idPendidikan','required|xss_clean|trim');
+      $this->form_validation->set_rules('selProgram','selectProgram','required|xss_clean|trim');
+      $this->form_validation->set_rules('thn','tahun','required|xss_clean|trim|max_length[4]');
+      $this->form_validation->set_rules('pt','perguruanTinggi','required|xss_clean|trim');
+      $this->form_validation->set_rules('jur','jurusan','required|xss_clean|trim');
+      if(empty($_FILES['ij']['name'])){
+        $this->form_validation->set_rules('ij','ijazah','xss_clean|trim');
+      }
+      if(empty($_FILES['tr']['name'])){
+        $this->form_validation->set_rules('tr','transkrip','xss_clean|trim');
+      }
+
+      if($this->form_validation->run() == TRUE){
+        $no = $this->input->post('kode');
+        $pro = $this->input->post('selProgram');
+        $tahun = $this->input->post('thn');
+        $perT = $this->input->post('pt');
+        $jurusan = $this->input->post('jur');
+
+        //Upload Ijazah
+        if(!empty($_FILES['ij']['name'])){
+          $config['upload_path']          = './media/ijazah/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = 'TRUE';
+          $config['file_name']            = $this->session->userdata('username');
+
+          $this->upload->initialize($config);
+          echo $this->upload->data('file_name');
+          $this->upload->do_upload('ij');
+        }
+
+        //Upload Transkrip
+        if(!empty($_FILES['tr']['name'])){
+          $config['upload_path']          = './media/transkrip/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = 'TRUE';
+          $config['file_name']            = $this->session->userdata('username');
+
+          $this->upload->initialize($config);
+          echo $this->upload->data('file_name');
+          $this->upload->do_upload('tr');
+        }
+        
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'PROGRAM' => $pro,
+          'TAHUN' => $tahun,
+          'PERGURUAN_TINGGI' => $perT,
+          'JURUSAN' => $jurusan,
+          'IJASAH' => $this->upload->data('file_name'),
+          'TRANSKRIP' => $this->upload->data('file_name')
+        );
+
+        $this->model_utama->updatePendidikan($no,$data);
+        redirect(base_url('Module/Pendidikan'));
+      }else{
+        echo "Ada yang kurang nih";
+      }
     }
 
     public function doInsertPengajaran(){

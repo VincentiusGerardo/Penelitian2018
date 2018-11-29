@@ -100,7 +100,7 @@
                 <?php if($this->session->userdata('username') === '0000'){ ?>
                   <li><a href="<?php echo base_url('Module/Users/'); ?>"><i class="fa fa-user"></i> <span>Users</span></a></li>
                 <?php }else{ ?>
-                  `<li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
+                  <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
                   <li><a href="<?php echo base_url('Module/IdentitasDiri/'); ?>"><i class="fa fa-id-card"></i> <span>Identitas Diri</span></a></li>
                   <li><a href="<?php echo base_url('Module/Pendidikan/'); ?>"><i class="fa fa-graduation-cap"></i> <span>Pendidikan</span></a></li>
                   <li><a href="<?php echo base_url('Module/Pengajaran/'); ?>"><i class="fa fa-edit"></i> <span>Pengajaran</span></a></li>
@@ -114,7 +114,7 @@
                   <li><a href="<?php echo base_url('Module/Seminar/'); ?>"><i class="fa fa-desktop"></i> <span>Seminar</span></a></li>
                   <li><a href="<?php echo base_url('Module/PKM/'); ?>"><i class="fa fa-users"></i> <span>Pengabdian Kepada Masyarakat</span></a></li>
                   <li><a href="<?php echo base_url('Module/PengelolaanInstitusi/'); ?>"><i class="fa fa-university"></i> <span>Pengelolaan Institusi</span></a></li>
-                  `<li><a href="<?php echo base_url('Module/CV/'); ?>"><i class="fa fa-print"></i> <span>Buat Curriculum Vitae (CV)</span></a></li>
+                  <li><a href="<?php echo base_url('Module/CV/'); ?>"><i class="fa fa-print"></i> <span>Buat Curriculum Vitae (CV)</span></a></li>
                 <?php } ?>
               </ul>
               <!-- /.sidebar-menu -->

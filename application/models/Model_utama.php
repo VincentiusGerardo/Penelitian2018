@@ -27,10 +27,16 @@
 
     }
 
-    public function insertPendidikan(){
-
+    public function insertPendidikan($data){
+      $q = $this->db->insert('riwayat_pendidikan',$data);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
     }
 
+<<<<<<< HEAD
     public function updatePendidikan(){
 
     }
@@ -54,5 +60,15 @@
 
   		$this->db->where('NIP_NIK', $NIP_NIK);
   		return $this->db->update('identitas_diri', $data);
+=======
+    public function updatePendidikan($num, $data){
+      $c = array('ID_PENDIDIKAN' => $num);
+      $q = $this->db->update('riwayat_pendidikan',$data,$c);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+>>>>>>> 8602fa6420661d4ce1b79f34849fd07e75f7af42
     }
   }
