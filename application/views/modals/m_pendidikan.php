@@ -7,7 +7,7 @@
         <h4 class="modal-title">Add Pendidikan</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" action="<?php echo base_url('do/doInsertPendidikan'); ?>" method="post">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertPendidikan'); ?>" method="post">
          <div class="form-group">
            <label class="control-label col-sm-3">Program:</label>
            <div class="col-sm-5">
@@ -70,16 +70,17 @@
         <h4 class="modal-title">Edit Pendidikan</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" action="<?php echo base_url('do/doUpdatePendidikan'); ?>" method="post">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doUpdatePendidikan'); ?>" method="post">
+          <input type="hidden" value="<?php echo $p->ID_PENDIDIKAN; ?>" name="kode" >
          <div class="form-group">
            <label class="control-label col-sm-3">Program:</label>
            <div class="col-sm-5">
              <select class="selectpicker form-control" title="Select Program" name="selProgram">
-               <option value="DIPLOMA">Diploma</option>
-               <option value="SARJANA">Sarjana</option>
-               <option value="MAGISTER">Magister</option>
-               <option value="SPESIALIS">Spesialis</option>
-               <option value="DOKTOR">Doktor</option>
+               <option value="DIPLOMA" <?php if($p->PROGRAM === 'DIPLOMA') echo 'selected'; ?>>Diploma</option>
+               <option value="SARJANA" <?php if($p->PROGRAM === 'SARJANA') echo 'selected'; ?>>Sarjana</option>
+               <option value="MAGISTER" <?php if($p->PROGRAM === 'MAGISTER') echo 'selected'; ?>>Magister</option>
+               <option value="SPESIALIS" <?php if($p->PROGRAM === 'SPESIALIS') echo 'selected'; ?>>Spesialis</option>
+               <option value="DOKTOR" <?php if($p->PROGRAM === 'DOKTOR') echo 'selected'; ?>>Doktor</option>
              </select>
            </div>
          </div>
@@ -104,13 +105,13 @@
          <div class="form-group">
            <label class="control-label col-sm-3">Ijazah:</label>
            <div class="col-sm-5">
-             <input type="file" name="ij" class="inputFile">
+             <input type="file" name="ij" class="inputFile" accept="application/pdf">
            </div>
          </div>
          <div class="form-group">
            <label class="control-label col-sm-3">Transkrip:</label>
            <div class="col-sm-5">
-             <input type="file" name="tr" class="inputFile">
+             <input type="file" name="tr" class="inputFile" accept="application/pdf">
            </div>
          </div>
       </div>

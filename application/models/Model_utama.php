@@ -27,11 +27,22 @@
 
     }
 
-    public function insertPendidikan(){
-
+    public function insertPendidikan($data){
+      $q = $this->db->insert('riwayat_pendidikan',$data);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
     }
 
-    public function updatePendidikan(){
-      
+    public function updatePendidikan($num, $data){
+      $c = array('ID_PENDIDIKAN' => $num);
+      $q = $this->db->update('riwayat_pendidikan',$data,$c);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
     }
   }
