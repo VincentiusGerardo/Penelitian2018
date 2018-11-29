@@ -15,7 +15,7 @@
 
     public function getIdentitas(){
       $q = $this->db->get_where('identitas_diri',  array('NIP_NIK' => $this->session->userdata('username')));
-      return $q->result();
+      return $q->result_array();
     }
 
     public function getPendidikan(){
@@ -32,6 +32,27 @@
     }
 
     public function updatePendidikan(){
-      
+
+    }
+
+    public function updateIdentitas($NIP_NIK){
+      $data = array(
+  			'NIDN' => $this->input->post('NIDN'),
+  			'NAMA' => $this->input->post('NAMA'),
+  			'JENIS_KELAMIN' =>	$this->input->post('JENIS_KELAMIN'),
+        'TEMPAT_LAHIR' => $this->input->post('TEMPAT_LAHIR'),
+        'TANGGAL_LAHIR'=> $this->input->post('TANGGAL_LAHIR'),
+        'JENIS_KELAMIN' => $this->input->post('JENIS_KELAMIN'),
+        'STATUS_PERKAWINAN' => $this->input->post('STATUS_PERKAWINAN'),
+        'AGAMA' => $this->input->post('AGAMA'),
+        'GOLONGAN' => $this->input->post('GOLONGAN'),
+        'JABATAN_AKADEMIK' => $this->input->post('JABATAN_AKADEMIK'),
+        'PERGURUAN_TINGGI' => $this->input->post('PERGURUAN_TINGGI'),
+        'ALAMAT' => $this->input->post('ALAMAT'),
+        'EMAIL' => $this->input->post('EMAIL')
+  		);
+
+  		$this->db->where('NIP_NIK', $NIP_NIK);
+  		return $this->db->update('identitas_diri', $data);
     }
   }
