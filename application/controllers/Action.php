@@ -55,9 +55,11 @@
           $config['upload_path']          = './media/ijazah/';
           $config['allowed_types']        = 'pdf';
           $config['file_ext_tolower']     = 'TRUE';
-          $config['file_name']            = $this->session->userdata('username');
+          $config['overwrite']            = 'TRUE';
+          $config['file_name']            = 'Ijazah_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username');
 
           $this->upload->initialize($config);
+          $ijazah = $this->upload->data('file_name');
           $this->upload->do_upload('ij');
         }
 
@@ -66,9 +68,11 @@
           $config['upload_path']          = './media/transkrip/';
           $config['allowed_types']        = 'pdf';
           $config['file_ext_tolower']     = 'TRUE';
-          $config['file_name']            = $this->session->userdata('username');
+          $config['overwrite']            = 'TRUE';
+          $config['file_name']            = 'Transkrip_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username');
 
           $this->upload->initialize($config);
+          $transkrip = $this->upload->data('file_name');
           $this->upload->do_upload('tr');
         }
 
@@ -78,8 +82,8 @@
           'TAHUN' => $tahun,
           'PERGURUAN_TINGGI' => $perT,
           'JURUSAN' => $jurusan,
-          'IJASAH' => $this->upload->data('file_name'),
-          'TRANSKRIP' => $this->upload->data('file_name')
+          'IJASAH' => $ijazah,
+          'TRANSKRIP' => $transkrip
         );
 
         $this->model_utama->insertPendidikan($data);
@@ -132,7 +136,7 @@
           echo $this->upload->data('file_name');
           $this->upload->do_upload('tr');
         }
-        
+
         $data = array(
           'NIP_NIK' => $this->session->userdata('username'),
           'PROGRAM' => $pro,
