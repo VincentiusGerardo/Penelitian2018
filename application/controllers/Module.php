@@ -45,8 +45,10 @@
     }
 
     public function pembimbing(){
+      $data['pembimbing'] = $this->model_utama->getPembimbing();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_pembimbing', $data);
+      $this->load->view('modals/m_pembimbing', $data);
       $this->load->view('footer');
     }
 

@@ -176,17 +176,17 @@
                   <select class="form-control selectpicker" title="Pilih Jenis Kelamin" name="JENIS_KELAMIN">
                     <option value="L" <?php
                       if($dosen_s['JENIS_KELAMIN']=="L")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['NAMA'];
+                        echo "";
                     ?>>
                       Laki-Laki
                     </option>
                     <option value="P" <?php
                       if($dosen_s['JENIS_KELAMIN']=="P")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['JENIS_KELAMIN'];
+                        echo "";
                     ?>>
                       Perempuan
                     </option>
@@ -210,27 +210,27 @@
                   <select class="form-control selectpicker" id="statusperkawinan" name="STATUS_PERKAWINAN" title="Pilih Status Perkawinan">
                     <option value="Kawin" <?php
                       if($dosen_s['STATUS_PERKAWINAN']=="Kawin")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['STATUS_PERKAWINAN'];
+                        echo "";
                     ?>>Kawin</option>
                     <option value="Belum Kawin" <?php
                       if($dosen_s['STATUS_PERKAWINAN']=="Belum Kawin")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['STATUS_PERKAWINAN'];
+                        echo "";
                     ?>>Belum Kawin</option>
                     <option value="Duda" <?php
                       if($dosen_s['STATUS_PERKAWINAN']=="Duda")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['STATUS_PERKAWINAN'];
+                        echo "";
                     ?>>Duda</option>
                     <option value="Janda" <?php
                       if($dosen_s['STATUS_PERKAWINAN']=="Janda")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['STATUS_PERKAWINAN'];
+                        echo "";
                     ?>>Janda</option>
                   </select>
                 </div>
@@ -239,39 +239,39 @@
                   <select class="form-control selectpicker" id="agama" name="AGAMA" title="Pilih Agama">
                     <option value="Budha" <?php
                       if($dosen_s['AGAMA']=="Budha")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['AGAMA'];
+                        echo "";
                     ?>>Budha</option>
                     <option value="Hindu" <?php
                       if($dosen_s['AGAMA']=="Hindu")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['AGAMA'];
+                        echo "";
                     ?>>Hindu</option>
                     <option value="Islam" <?php
                       if($dosen_s['AGAMA']=="Islam")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['AGAMA'];
+                        echo "";
                     ?>>Islam</option>
                     <option value="Khatolik" <?php
                       if($dosen_s['AGAMA']=="Khatolik")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['AGAMA'];
+                        echo "";
                     ?>>Khatolik</option>
                     <option value="Kristen" <?php
                       if($dosen_s['AGAMA']=="Kristen")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['AGAMA'];
+                        echo "";
                     ?>>Kristen</option>
                     <option value="Konghucu" <?php
                       if($dosen_s['AGAMA']=="Konghucu")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['AGAMA'];
+                        echo "";
                     ?>>Konghucu</option>
                   </select>
                 </div>
@@ -284,33 +284,33 @@
                   <select class="form-control selectpicker" id="jabatanakademik" title="Pilih Jabatan Akademik" name="JABATAN_AKADEMIK">
                     <option value="TP" <?php
                       if($dosen_s['JABATAN_AKADEMIK']=="TP")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['JABATAN_AKADEMIK'];
+                        echo "";
                     ?>>TP</option>
                     <option value="AA" <?php
                       if($dosen_s['JABATAN_AKADEMIK']=="AA")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['JABATAN_AKADEMIK'];
+                        echo "";
                     ?>>AA</option>
                     <option value="L" <?php
                       if($dosen_s['JABATAN_AKADEMIK']=="L")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['JABATAN_AKADEMIK'];
+                        echo "";
                     ?>>L</option>
                     <option value="LK" <?php
                       if($dosen_s['JABATAN_AKADEMIK']=="LK")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['JABATAN_AKADEMIK'];
+                        echo "";
                     ?>>LK</option>
                     <option value="GB" <?php
                       if($dosen_s['JABATAN_AKADEMIK']=="GB")
-                        echo "";
+                        echo "selected";
                       else
-                        echo $dosen_s['JABATAN_AKADEMIK'];
+                        echo "";
                     ?>>GB</option>
                   </select>
                 </div>
@@ -341,8 +341,9 @@
 </section>
 <script>
     //Date picker
-    $('#tanggallahir').datepicker({
-      autoclose: true
+    $('#tanggallahir').datetimepicker({
+      format: 'YYYY-MM-DD',
+      maxDate: $.now()
     });
     $('#change').click(function(){
       $('#edit').removeClass('hidden');

@@ -17,8 +17,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-select.min.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap/bootstrap-select.min.js'); ?>"></script>
         <script src="<?php echo base_url('js/moment.js'); ?>"></script>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'); ?>"/>
-        <script src="<?php echo base_url('bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap-datetimepicker.css'); ?>"/>
+        <script src="<?php echo base_url('js/bootstrap-datetimepicker.js'); ?>"></script>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-table.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap/bootstrap-table.js'); ?>"></script>
 
@@ -112,7 +112,7 @@
                   <li><a href="<?php echo base_url('Module/Publikasi/'); ?>"><i class="fa fa-book"></i> <span>Publikasi</span></a></li>
                   <li><a href="<?php echo base_url('Module/BahanAjar/'); ?>"><i class="fa fa-file-text-o"></i> <span>Bahan Ajar</span></a></li>
                   <li><a href="<?php echo base_url('Module/Seminar/'); ?>"><i class="fa fa-desktop"></i> <span>Seminar</span></a></li>
-                  <li><a href="<?php echo base_url('Module/PKM/'); ?>"><i class="fa fa-users"></i> <span>Pengabdian Kepada Masyarakat</span></a></li>
+                  <li><a href="<?php echo base_url('Module/PKM/'); ?>"><i class="fa fa-users"></i> <span>Pengabdian Masyarakat</span></a></li>
                   <li><a href="<?php echo base_url('Module/PengelolaanInstitusi/'); ?>"><i class="fa fa-university"></i> <span>Pengelolaan Institusi</span></a></li>
                   <li><a href="<?php echo base_url('Module/CV/'); ?>"><i class="fa fa-print"></i> <span>Buat Curriculum Vitae (CV)</span></a></li>
                 <?php } ?>
