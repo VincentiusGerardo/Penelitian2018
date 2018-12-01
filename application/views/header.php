@@ -19,8 +19,20 @@
         <script src="<?php echo base_url('js/moment.js'); ?>"></script>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap-datetimepicker.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap-datetimepicker.js'); ?>"></script>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-table.css'); ?>"/>
-        <script src="<?php echo base_url('js/bootstrap/bootstrap-table.js'); ?>"></script>
+
+        <!-- bootstrap tabel css-->
+        <link href="<?=base_url();?>datatables/css/dataTables.bootstrap.min.css" rel="stylesheet">
+        <!-- DataTables Responsive CSS -->
+        <link href="<?=base_url();?>datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+        <!-- DataTables JavaScript -->
+        <script src="<?=base_url();?>datatables/js/jquery.dataTables.min.js"></script>
+        <script src="<?=base_url();?>datatables-plugins/dataTables.bootstrap.min.js"></script>
+        <script src="<?=base_url();?>datatables-responsive/dataTables.responsive.js"></script>
+        <script src="<?=base_url();?>datatables/js/dataTables.buttons.min.js"></script>
+        <script src="<?=base_url();?>datatables/js/buttons.print.min.js"></script>
+
+        <!--<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-table.css'); ?>"/>
+        <script src="<?php echo base_url('js/bootstrap/bootstrap-table.js'); ?>"></script>-->
 
         <!--Font Awesome-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('font-awesome/css/font-awesome.min.css'); ?>"/>

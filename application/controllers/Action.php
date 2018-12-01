@@ -204,4 +204,18 @@
 
   		redirect('Module/pembimbing');
     }
+
+    public function doUpdatePembimbing($id){
+      $res = $this->model_utama->updatePembimbing($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah data pembimbing!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah data pembimbing!');
+      }
+
+      redirect('Module/pembimbing');
+    }
   }

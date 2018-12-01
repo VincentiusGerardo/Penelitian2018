@@ -81,4 +81,19 @@
 
   		return $this->db->insert('pembimbing', $data);
     }
+
+    public function updatePembimbing($id){
+      $data = array(
+  			'NAMA' => $this->input->post('NAMA'),
+  			'NIM' =>	$this->input->post('NIM'),
+        'SEMESTER' => $this->input->post('SEMESTER'),
+        'TAHUN'=> $this->input->post('TAHUN'),
+        'PROGRAM' => $this->input->post('PROGRAM'),
+        'JUDUL' => $this->input->post('JUDUL'),
+        'PERANAN' => $this->input->post('PERANAN'),
+  		);
+
+  		$this->db->where('ID_PEMBIMBING', $id);
+  		return $this->db->update('pembimbing', $data);
+    }
   }

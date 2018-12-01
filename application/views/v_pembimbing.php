@@ -1,4 +1,4 @@
-<script src="<?php echo base_url('js/setTable/pembimbing.js') ?>"></script>
+<!--<script src="<?php echo base_url('js/setTable/pembimbing.js') ?>"></script>-->
 <section class="content-header">
  <h1>
    Pembimbing
@@ -12,8 +12,9 @@
       <div class="box box-primary">
         <div class="box-body">
             <button class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd"><span class="fa fa-plus"></span> Tambah Data Pembimbing</button>
-            <table id="tablePembimbing" data-height="400" data-search="true">
-              <!--<thead>
+            <br><br>
+            <table width="100%" class="table table-striped table-bordered" id="tablePembimbing" style="text-align:center">
+              <thead>
                 <tr>
                   <th>No</th>
                   <th>Nama</th>
@@ -25,7 +26,7 @@
                   <th>Peranan</th>
                   <th>Action</th>
                 </tr>
-              </thead>-->
+              </thead>
               <tbody>
                 <?php
                   $no = 1;
@@ -40,7 +41,7 @@
                     <td><?=$pem['PROGRAM']?></td>
                     <td><?=$pem['JUDUL']?></td>
                     <td><?=$pem['PERANAN']?></td>
-                    <td> </td>
+                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$pem['ID_PEMBIMBING']?>"><span class="fa fa-edit"></span></button></td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>
@@ -50,3 +51,22 @@
     </div>
   </div>
 </section>
+<script>
+$(document).ready(function() {
+    $('#tablePembimbing').DataTable({
+        responsive: true
+    });
+});
+</script>
+<!--swal-->
+<script src="<?=base_url('js/sweetalert.min.js');?>"></script>
+<script type="text/javascript">
+  <?php if($this->session->flashdata('alert') != null){ ?>
+    swal({
+      //title: "Berhasil!",
+      text: "<?php echo $this->session->flashdata('msg'); ?>",
+      icon: "<?php echo $this->session->flashdata('alert'); ?>",
+      button: "Ok",
+    });
+  <?php } ?>
+</script>
