@@ -37,6 +37,12 @@
       return $query->result_array();
     }
 
+    public function getOrganisasi(){
+      $q = "SELECT ID_ORGANISASI, DATE_FORMAT(TANGGAL_MULAI, '%e %M %Y') as TANGGAL_MULAIcon, DATE_FORMAT(TANGGAL_AKHIR, '%e %M %Y') as TANGGAL_AKHIRcon, TANGGAL_MULAI, TANGGAL_AKHIR, JENIS_NAMA, JABATAN FROM `organisasi_profesi` WHERE NIP_NIK ='".$this->session->userdata('username')."'";
+    	$query = $this->db->query($q);
+    	return $query->result_array();
+    }
+
     public function insertPendidikan($data){
       $q = $this->db->insert('riwayat_pendidikan',$data);
       if($q){
@@ -131,5 +137,30 @@
 
   		$this->db->where('ID_PENGUJI', $id);
   		return $this->db->update('penguji', $data);
+    }
+
+    public function insertOrganisasi($NOMOR){
+      $data = array(
+  			'NIP_NIK' => $this->session->userdata('username'),
+  			'TANGGAL_MULAI' => $this->input->post('TANGGAL_MULAI'),
+  			'TANGGAL_AKHIR' =>	$this->input->post('TANGGAL_AKHIR'),
+        'JENIS_NAMA' => $this->input->post('JENIS_NAMA'),
+        'JABATAN'=> $this->input->post('JABATAN'),
+        'NOMOR' => $NOMOR
+  		);
+
+  		return $this->db->insert('organisasi_profesi', $data);
+    }
+
+    public function updateOrganisasi($id){
+      $data = array(
+      'TANGGAL_MULAI' => $this->input->post('TANGGAL_MULAI'),
+      'TANGGAL_AKHIR' =>	$this->input->post('TANGGAL_AKHIR'),
+      'JENIS_NAMA' => $this->input->post('JENIS_NAMA'),
+      'JABATAN'=> $this->input->post('JABATAN'),
+  		);
+
+  		$this->db->where('ID_ORGANISASI', $id);
+  		return $this->db->update('organisasi_profesi', $data);
     }
   }

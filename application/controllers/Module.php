@@ -61,8 +61,10 @@
     }
 
     public function organisasiprofesi(){
+      $data['Organisasi'] = $this->model_utama->getOrganisasi();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_organisasi', $data);
+      $this->load->view('modals/m_organisasi', $data);
       $this->load->view('footer');
     }
 

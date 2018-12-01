@@ -107,14 +107,6 @@
 
     }
 
-    public function doInsertOrganisasi(){
-
-    }
-
-    public function doUpdateOrganiasi(){
-
-    }
-
     public function doInsertPenghargaan(){
 
     }
@@ -177,7 +169,7 @@
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = 'TRUE';
         $config['overwrite']            = 'TRUE';
-        $config['file_name']            = $this->input->post('NIM') . $this->input->post('JUDUL') ."_". $this->input->post('PERANAN') ."_". $this->session->userdata('username');
+        $config['file_name']            = $this->input->post('NIM') ."_". $this->input->post('JUDUL') ."_". $this->input->post('PERANAN') ."_". $this->session->userdata('username');
 
         $this->upload->initialize($config);
         $SK = $this->upload->data('file_name');
@@ -217,7 +209,7 @@
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = 'TRUE';
         $config['overwrite']            = 'TRUE';
-        $config['file_name']            = $this->input->post('NIM') . $this->input->post('JUDUL') ."_". $this->input->post('PERANAN') ."_". $this->session->userdata('username');
+        $config['file_name']            = $this->input->post('NIM') ."_". $this->input->post('JUDUL') ."_". $this->input->post('PERANAN') ."_". $this->session->userdata('username');
 
         $this->upload->initialize($config);
         $SK = $this->upload->data('file_name');
@@ -249,5 +241,45 @@
       }
 
       redirect('Module/penguji');
+    }
+
+    public function doInsertOrganisasi(){
+      if(!empty($_FILES['NOMOR']['name'])){
+        $config['upload_path']          = './media/organisasi/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = 'TRUE';
+        $config['file_name']            = $this->session->userdata('username')."_".$this->input->post('JENIS_NAMA')."_".$this->input->post('JABATAN');
+
+        $this->upload->initialize($config);
+        $NOMOR = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('NOMOR');
+      }
+
+      $res = $this->model_utama->insertOrganisasi($NOMOR);
+
+      if($res==true && res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data organisasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menambahkan data organisasi!');
+      }
+
+  		redirect('Module/organisasiprofesi');
+    }
+
+    public function doUpdateOrganisasi($id){
+      $res = $this->model_utama->updateOrganisasi($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah data organisasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah data organisasi!');
+      }
+
+      redirect('Module/organisasiprofesi');
     }
   }
