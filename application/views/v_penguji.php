@@ -1,7 +1,7 @@
-<!--<script src="<?php echo base_url('js/setTable/pembimbing.js') ?>"></script>-->
+<!--<script src="<?php echo base_url('js/setTable/Penguji.js') ?>"></script>-->
 <section class="content-header">
  <h1>
-   Pembimbing
+   Penguji
  </h1>
 </section>
 <section class="content">
@@ -11,9 +11,9 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-body">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd"><span class="fa fa-plus"></span> Tambah Data Pembimbing</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd"><span class="fa fa-plus"></span> Tambah Data Penguji</button>
             <br><br>
-            <table width="100%" class="table table-striped table-bordered" id="tablePembimbing" style="text-align:center">
+            <table width="100%" class="table table-striped table-bordered" id="tablePenguji" style="text-align:center">
               <thead>
                 <tr>
                   <th>No</th>
@@ -30,7 +30,7 @@
               <tbody>
                 <?php
                   $no = 1;
-                  foreach ($pembimbing as $pem):
+                  foreach ($penguji as $pem):
                 ?>
                   <tr>
                     <td><?=$no?></td>
@@ -41,7 +41,7 @@
                     <td><?=$pem['PROGRAM']?></td>
                     <td><?=$pem['JUDUL']?></td>
                     <td><?=$pem['PERANAN']?></td>
-                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$pem['ID_PEMBIMBING']?>"><span class="fa fa-edit"></span></button></td>
+                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$pem['ID_PENGUJI']?>"><span class="fa fa-edit"></span></button></td>
                   </tr>
                 <?php $no++;endforeach; ?>
               </tbody>
@@ -53,7 +53,7 @@
 </section>
 <script>
 $(document).ready(function() {
-    $('#tablePembimbing').DataTable({
+    $('#tablePenguji').DataTable({
         responsive: true
     });
 });

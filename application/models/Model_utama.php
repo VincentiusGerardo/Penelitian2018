@@ -32,6 +32,11 @@
       return $query->result_array();
     }
 
+    public function getPenguji(){
+      $query = $this->db->get_where('penguji', array('NIP_NIK' => $this->session->userdata('username')));
+      return $query->result_array();
+    }
+
     public function insertPendidikan($data){
       $q = $this->db->insert('riwayat_pendidikan',$data);
       if($q){
@@ -95,5 +100,36 @@
 
   		$this->db->where('ID_PEMBIMBING', $id);
   		return $this->db->update('pembimbing', $data);
+    }
+
+    public function insertPenguji($SK){
+      $data = array(
+  			'NIP_NIK' => $this->session->userdata('username'),
+  			'NAMA' => $this->input->post('NAMA'),
+  			'NIM' =>	$this->input->post('NIM'),
+        'SEMESTER' => $this->input->post('SEMESTER'),
+        'TAHUN'=> $this->input->post('TAHUN'),
+        'PROGRAM' => $this->input->post('PROGRAM'),
+        'JUDUL' => $this->input->post('JUDUL'),
+        'PERANAN' => $this->input->post('PERANAN'),
+        'SK' => $SK
+  		);
+
+  		return $this->db->insert('penguji', $data);
+    }
+
+    public function updatePenguji($id){
+      $data = array(
+  			'NAMA' => $this->input->post('NAMA'),
+  			'NIM' =>	$this->input->post('NIM'),
+        'SEMESTER' => $this->input->post('SEMESTER'),
+        'TAHUN'=> $this->input->post('TAHUN'),
+        'PROGRAM' => $this->input->post('PROGRAM'),
+        'JUDUL' => $this->input->post('JUDUL'),
+        'PERANAN' => $this->input->post('PERANAN'),
+  		);
+
+  		$this->db->where('ID_PENGUJI', $id);
+  		return $this->db->update('penguji', $data);
     }
   }

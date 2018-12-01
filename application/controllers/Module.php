@@ -53,8 +53,10 @@
     }
 
     public function penguji(){
+      $data['penguji'] = $this->model_utama->getPenguji();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_penguji', $data);
+      $this->load->view('modals/m_penguji', $data);
       $this->load->view('footer');
     }
 

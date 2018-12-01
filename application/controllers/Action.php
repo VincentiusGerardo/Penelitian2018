@@ -107,14 +107,6 @@
 
     }
 
-    public function doInsertPenguji(){
-
-    }
-
-    public function doUpdatePenguji(){
-
-    }
-
     public function doInsertOrganisasi(){
 
     }
@@ -217,5 +209,45 @@
       }
 
       redirect('Module/pembimbing');
+    }
+
+    public function doInsertPenguji(){
+      if(!empty($_FILES['SK']['name'])){
+        $config['upload_path']          = './media/penguji/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = 'TRUE';
+        $config['file_name']            = $this->input->post('NIM') . $this->input->post('JUDUL') ."_". $this->input->post('PERANAN') ."_". $this->session->userdata('username');
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('SK');
+      }
+
+      $res = $this->model_utama->insertPenguji($SK);
+
+      if($res==true && $res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penguji!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menambahkan data penguji!');
+      }
+
+  		redirect('Module/penguji');
+    }
+
+    public function doUpdatePenguji($id){
+      $res = $this->model_utama->updatePenguji($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah data penguji!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah data penguji!');
+      }
+
+      redirect('Module/penguji');
     }
   }
