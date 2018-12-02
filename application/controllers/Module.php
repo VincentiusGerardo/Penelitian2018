@@ -75,14 +75,18 @@
     }
 
     public function penelitian(){
+      $data['penelitian'] = $this->model_utama->getPenelitian();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_penelitian', $data);
+      $this->load->view('modals/m_penelitian', $data);
       $this->load->view('footer');
     }
 
     public function publikasi(){
+      $data['publikasi'] = $this->model_utama->getPublikasi();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_publikasi', $data);
+      $this->load->view('modals/m_publikasi', $data);
       $this->load->view('footer');
     }
 

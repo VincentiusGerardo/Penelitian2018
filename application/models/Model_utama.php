@@ -43,6 +43,17 @@
     	return $query->result_array();
     }
 
+    public function getPenelitian(){
+      $query = $this->db->get_where('penelitian', array('NIP_NIK' => $this->session->userdata('username')));
+      return $query->result_array();
+    }
+
+    public function getPublikasi(){
+      $q = "SELECT *, DATE_FORMAT(TANGGAL, '%e %M %Y') as TANGGALcon FROM `publikasi` WHERE NIP_NIK ='".$this->session->userdata('username')."'";
+    	$query = $this->db->query($q);
+    	return $query->result_array();
+    }
+
     public function insertPendidikan($data){
       $q = $this->db->insert('riwayat_pendidikan',$data);
       if($q){
@@ -162,5 +173,30 @@
 
   		$this->db->where('ID_ORGANISASI', $id);
   		return $this->db->update('organisasi_profesi', $data);
+    }
+
+    public function insertPenelitian($SURAT_TUGAS){
+      $data = array(
+  			'NIP_NIK' => $this->session->userdata('username'),
+  			'TAHUN' => $this->input->post('TAHUN'),
+  			'JUDUL' =>	$this->input->post('JUDUL'),
+        'PERANAN' => $this->input->post('PERANAN'),
+        'SUMBER_DANA'=> $this->input->post('SUMBER_DANA'),
+        'SURAT_TUGAS' => $SURAT_TUGAS
+  		);
+
+  		return $this->db->insert('penelitian', $data);
+    }
+
+    public function updatePenelitian($id){
+      $data = array(
+        'TAHUN' => $this->input->post('TAHUN'),
+        'JUDUL' =>	$this->input->post('JUDUL'),
+        'PERANAN' => $this->input->post('PERANAN'),
+        'SUMBER_DANA'=> $this->input->post('SUMBER_DANA'),
+  		);
+
+  		$this->db->where('ID_PENELITIAN', $id);
+  		return $this->db->update('penelitian', $data);
     }
   }

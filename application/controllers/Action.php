@@ -116,11 +116,43 @@
     }
 
     public function doInsertPenelitian(){
+      if(!empty($_FILES['SURAT_TUGAS']['name'])){
+        $config['upload_path']          = './media/penelitian/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = 'TRUE';
+        $config['file_name']            = $this->session->userdata('username')."_". $this->input->post('TAHUN') ."_". $this->input->post('JUDUL');
 
+        $this->upload->initialize($config);
+        $SURAT_TUGAS = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('SURAT_TUGAS');
+      }
+
+      $res = $this->model_utama->insertPenelitian($SURAT_TUGAS);
+
+      if($res==true && $res_u=="1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penelitian!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menambahkan data penelitian!');
+      }
+
+      redirect('Module/penelitian');
     }
 
-    public function doUpdatePenelitian(){
+    public function doUpdatePenelitian($id){
+      $res = $this->model_utama->updatePenelitian($id);
 
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah data penelitian!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah data penelitian!');
+      }
+
+      redirect('Module/penelitian');
     }
 
     public function doInsertPublikasi(){
