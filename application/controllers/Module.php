@@ -69,8 +69,10 @@
     }
 
     public function penghargaan(){
+      $data['penghargaan'] = $this->model_utama->getPenghargaan();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_penghargaan', $data);
+      $this->load->view('modals/m_penghargaan', $data);
       $this->load->view('footer');
     }
 

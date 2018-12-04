@@ -107,14 +107,6 @@
 
     }
 
-    public function doInsertPenghargaan(){
-
-    }
-
-    public function doUpdatePenghargaan(){
-
-    }
-
     public function doInsertPenelitian(){
       if(!empty($_FILES['SURAT_TUGAS']['name'])){
         $config['upload_path']          = './media/penelitian/';
@@ -314,4 +306,44 @@
 
       redirect('Module/organisasiprofesi');
     }
+
+    public function doInsertPenghargaan(){
+      if(!empty($_FILES['SERTIFIKAT']['name'])){
+        $config['upload_path']          = './media/penghargaan/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = 'TRUE';
+        $config['file_name']            = $this->session->userdata('username')."_".$this->input->post('BENTUK')."_".$this->input->post('PEMBERI');
+
+        $this->upload->initialize($config);
+        $SERTIFIKAT = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('SERTIFIKAT');
+      }
+
+      $res = $this->model_utama->insertPenghargaan($SERTIFIKAT);
+
+      if($res==true && $res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penghargaan!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menambahkan data penghargaan!');
+      }
+
+  		redirect('Module/penghargaan');
+    }
+
+    public function doUpdatePenghargaan($id){
+      $res = $this->model_utama->updatePenghargaan($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah data penghargaan!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah data penghargaan!');
+      }
+
+      redirect('Module/penghargaan');
   }
+}

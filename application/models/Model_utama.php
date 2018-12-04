@@ -54,6 +54,12 @@
     	return $query->result_array();
     }
 
+    public function getPenghargaan(){
+      $q = "SELECT *, DATE_FORMAT(TANGGAL, '%e %M %Y') as TANGGALcon FROM `penghargaan` WHERE NIP_NIK ='".$this->session->userdata('username')."'";
+    	$query = $this->db->query($q);
+    	return $query->result_array();
+    }
+
     public function insertPendidikan($data){
       $q = $this->db->insert('riwayat_pendidikan',$data);
       if($q){
@@ -198,5 +204,28 @@
 
   		$this->db->where('ID_PENELITIAN', $id);
   		return $this->db->update('penelitian', $data);
+    }
+
+    public function insertPenghargaan($SERTIFIKAT){
+      $data = array(
+  			'NIP_NIK' => $this->session->userdata('username'),
+  			'TANGGAL' => $this->input->post('TANGGAL'),
+  			'BENTUK' =>	$this->input->post('BENTUK'),
+        'PEMBERI' => $this->input->post('PEMBERI'),
+        'SERTIFIKAT'=> $SERTIFIKAT
+  		);
+
+  		return $this->db->insert('penghargaan', $data);
+    }
+
+    public function updatePenghargaan($id){
+      $data = array(
+        'TANGGAL' => $this->input->post('TANGGAL'),
+        'BENTUK' =>	$this->input->post('BENTUK'),
+        'PEMBERI' => $this->input->post('PEMBERI'),
+  		);
+
+  		$this->db->where('ID_PENGHARGAAN', $id);
+  		return $this->db->update('penghargaan', $data);
     }
   }
