@@ -24,7 +24,8 @@
     }
 
     public function getPengajaran(){
-
+      $query = $this->db->get_where('pengajaran', array('NIP_NIK' => $this->session->userdata('username')));
+      return $query->result();
     }
 
     public function getPembimbing(){
