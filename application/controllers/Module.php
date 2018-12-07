@@ -39,8 +39,10 @@
     }
 
     public function pengajaran(){
+      $data['pengajaran'] = $this->model_utama->getPengajaran();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_pengajaran',$data);
+      $this->load->view('modals/m_pengajaran',$data);
       $this->load->view('footer');
     }
 
@@ -93,32 +95,40 @@
     }
 
     public function bahanajar(){
+      $data['pengajaran'] = $this->model_utama->getBahanAjar();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_bahanajar',$data);
+      $this->load->view('modals/m_bahanajar',$data);
       $this->load->view('footer');
     }
 
     public function seminar(){
+      $data['seminar'] = $this->model_utama->getSeminar();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_seminar',$data);
+      $this->load->view('modals/m_seminar',$data);
       $this->load->view('footer');
     }
 
     public function pkm(){
+      $data['pkm'] = $this->model_utama->getPKM();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_pkm',$data);
+      $this->load->view('modals/m_seminar',$data);
       $this->load->view('footer');
     }
 
     public function pengelolaaninstitusi(){
+      $data['pi'] = $this->model_utama->getPI();
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_PI',$data);
+      $this->load->view('modals/m_PI',$data);
       $this->load->view('footer');
     }
 
     public function cv(){
       $this->getHeader();
-      //$this->load->view('');
+      $this->load->view('v_cv');
       $this->load->view('footer');
     }
 
