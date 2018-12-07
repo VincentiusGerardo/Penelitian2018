@@ -7,6 +7,10 @@
       parent::__construct();
     }
 
+    public function verifyPass($kdk){
+      
+    }
+
     public function getUsername(){
       $q = $this->db->get_where('identitas_diri', array('NIP_NIK' => $this->session->userdata('username')));
       $row = $q->row();
@@ -80,6 +84,7 @@
       $query = $this->db->get_where('pkm',array('NIP_NIK' => $this->session->userdata('username')));
       return $query->result();
     }
+
 
     public function insertPendidikan($data){
       $q = $this->db->insert('riwayat_pendidikan',$data);

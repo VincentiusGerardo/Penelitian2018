@@ -137,4 +137,10 @@
       // $this->load->view('', $data);
       $this->load->view('footer');
     }
+
+    public function changePassword(){
+      $this->getHeader();
+      $this->load->view('v_changePassword');
+      $this->load->view('footer');
+    }
   }
