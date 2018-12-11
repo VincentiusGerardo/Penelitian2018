@@ -12,6 +12,23 @@
       $this->load->model('model_utama');
     }
 
+    public function doChangePassword(){
+      $oldPass = $this->input->post('passOld');
+      $newPass = $this->input->post('passNew');
+      $repPass = $this->input->post('passRept')
+      $cond = $this->model_utama->verifyPass($this->session->userdata('username'));
+
+      if($cond === TRUE){
+        
+      }else{
+        echo "Wrong Password! Please Try Again!";
+      }
+
+      }else{
+        echo "Wrong Password! Please Try Again!";
+      }
+    }
+
     public function doInsertDosen(){
 
     }

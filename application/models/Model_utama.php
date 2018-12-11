@@ -7,6 +7,10 @@
       parent::__construct();
     }
 
+    public function verifyPass($kdk){
+      
+    }
+
     public function getUsername(){
       $q = $this->db->get_where('identitas_diri', array('NIP_NIK' => $this->session->userdata('username')));
       $row = $q->row();
@@ -24,7 +28,8 @@
     }
 
     public function getPengajaran(){
-
+      $query = $this->db->get_where('pengajaran', array('NIP_NIK' => $this->session->userdata('username')));
+      return $query->result();
     }
 
     public function getPembimbing(){
@@ -59,6 +64,27 @@
     	$query = $this->db->query($q);
     	return $query->result_array();
     }
+
+    public function getBahanAjar(){
+      $q = $this->db->get_where('bahan_ajar',array('NIP_NIK' => $this->session->userdata('username')));
+      return $q->result();
+    }
+
+    public function getPI(){
+      $q = $this->db->get_where('pengelolaan_institusi',array('NIP_NIK' => $this->session->userdata('username')));
+      return $q->result();
+    }
+
+    public function getSeminar(){
+      $query = $this->db->get_where('seminar_workshop',array('NIP_NIK' => $this->session->userdata('username')));
+      return $query->result();
+    }
+
+    public function getPKM(){
+      $query = $this->db->get_where('pkm',array('NIP_NIK' => $this->session->userdata('username')));
+      return $query->result();
+    }
+
 
     public function insertPendidikan($data){
       $q = $this->db->insert('riwayat_pendidikan',$data);
