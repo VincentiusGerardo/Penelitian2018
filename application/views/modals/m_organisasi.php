@@ -66,7 +66,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Ubah Data Penguji</h4>
+        <h4 class="modal-title">Ubah Data Organisasi Profesi/Ilmiah</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Action/doUpdateOrganisasi/'.$org['ID_ORGANISASI']); ?>" method="post">

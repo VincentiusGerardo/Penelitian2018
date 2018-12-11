@@ -68,7 +68,7 @@
           $ijazah = $this->upload->data('file_name');
           $RES = $this->upload->do_upload('ij');
         }
-        echo $RES;
+        
         //Upload Transkrip
         if(!empty($_FILES['tr']['name'])){
           $config['upload_path']          = './media/transkrip/';
@@ -311,8 +311,8 @@
       if(!empty($_FILES['SERTIFIKAT']['name'])){
         $config['upload_path']          = './media/penghargaan/';
         $config['allowed_types']        = 'pdf';
-        $config['file_ext_tolower']     = 'TRUE';
-        $config['overwrite']            = 'TRUE';
+        //$config['file_ext_tolower']     = TRUE;
+        //$config['overwrite']            = TRUE;
         $config['file_name']            = $this->session->userdata('username')."_".$this->input->post('BENTUK')."_".$this->input->post('PEMBERI');
 
         $this->upload->initialize($config);

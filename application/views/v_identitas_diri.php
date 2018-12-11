@@ -343,7 +343,6 @@
     //Date picker
     $('#tanggallahir').datetimepicker({
       format: 'YYYY-MM-DD',
-      maxDate: $.now()
     });
     $('#change').click(function(){
       $('#edit').removeClass('hidden');
