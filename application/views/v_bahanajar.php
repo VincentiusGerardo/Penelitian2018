@@ -12,7 +12,7 @@
         <div class="box-body">
             <button class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd"><span class="fa fa-plus"></span> Tambah Data Bahan Ajar</button>
             <br><br>
-            <table width="100%" class="table table-striped table-bordered" id="tableOrganisasi" style="text-align:center">
+            <table width="100%" class="table table-striped table-bordered" id="tableBahanAjar" style="text-align:center">
               <thead>
                 <tr>
                   <th>No</th>
@@ -52,7 +52,7 @@
 </section>
 <script>
 $(document).ready(function() {
-    $('#tableOrganisasi').DataTable({
+    $('#tableBahanAjar').DataTable({
         responsive: true
     });
 });

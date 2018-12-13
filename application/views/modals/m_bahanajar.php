@@ -7,7 +7,7 @@
         <h4 class="modal-title">Tambah Data Bahan Ajar</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertOrganisasi'); ?>" method="post">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertBahanAjar'); ?>" method="post">
          <div class="form-group">
            <label class="control-label col-sm-3">Mata Kuliah</label>
            <div class="col-sm-9">
@@ -23,37 +23,43 @@
          <div class="form-group">
            <label class="control-label col-sm-3">Jenis</label>
            <div class="col-sm-9">
-             <div class="col-sm-4">
-               <input type="checkbox" name="jenisnya" value="Cetak"/> Cetak
-             </div>
-             <div class="col-sm-1">&nbsp;</div>
-             <div class="col-sm-4">
-               <input type="checkbox" name="jenisnya" value="Non Cetak"/> Non Cetak
-             </div>
+             <select class="selectpicker" title="Select Jenis Bahan Ajar" name="jenisnya">
+               <option value="Cetak">Cetak</option>
+               <option value="Non Cetak">Non Cetak</option>
+             </select>
            </div>
          </div>
          <div class="form-group">
            <label class="control-label col-sm-3">Semester</label>
            <div class="col-sm-9">
-             <div class="col-sm-4">
-               <input type="checkbox" name="jenisnya" value="Ganjil"/> Ganjil
-             </div>
-             <div class="col-sm-1">&nbsp;</div>
-             <div class="col-sm-4">
-               <input type="checkbox" name="jenisnya" value="Genap"/> Genap
-             </div>
+             <select class="selectpicker" title="Select Semester" name="semesternya">
+               <option value="Ganjil">Ganjil</option>
+               <option value="Genap">Genap</option>
+             </select>
            </div>
          </div>
          <div class="form-group">
-           <label class="control-label col-sm-3">Jabatan</label>
+           <label class="control-label col-sm-3">Tahun</label>
            <div class="col-sm-9">
-             <input type="text" class="form-control" name="JABATAN">
+             <input type="text" class="form-control" name="tahunnya" maxlength="4">
            </div>
          </div>
          <div class="form-group">
-           <label class="control-label col-sm-3">Nomor</label>
+           <label class="control-label col-sm-3">Judul</label>
+           <div class="col-sm-9">
+             <input type="text" class="form-control" name="jdl">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="control-label col-sm-3">Penugasan</label>
            <div class="col-sm-5">
-             <input type="file" name="NOMOR" class="inputFile" accept="application/pdf">
+             <input type="file" name="penug" class="inputFile" accept="application/pdf">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="control-label col-sm-3">Bukti Kinerja</label>
+           <div class="col-sm-5">
+             <input type="file" name="buktiKin" class="inputFile" accept="application/pdf">
            </div>
          </div>
       </div>
@@ -74,42 +80,50 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Ubah Data Penguji</h4>
+        <h4 class="modal-title">Tambah Data Bahan Ajar</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Action/doUpdateOrganisasi/'.$p['ID_ORGANISASI']); ?>" method="post">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertBahanAjar'); ?>" method="post">
          <div class="form-group">
-           <label class="control-label col-sm-3">Tanggal Mulai:</label>
+           <label class="control-label col-sm-3">Mata Kuliah</label>
            <div class="col-sm-9">
-             <div class="input-group date">
-             <div class="input-group-addon">
-               <i class="fa fa-calendar"></i>
-             </div>
-             <input type="text" class="form-control pull-right" id="TANGGAL_MULAIupd" name="TANGGAL_MULAI" value="<?=$p['TANGGAL_MULAI']?>">
-             </div>
+             <input type="text" class="form-control pull-right" name="MatKul">
            </div>
          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-3">Tanggal Berakhir:</label>
-            <div class="col-sm-9">
-              <div class="input-group date">
-              <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <input type="text" class="form-control pull-right" id="TANGGAL_AKHIRupd" name="TANGGAL_AKHIR" value="<?=$p['TANGGAL_AKHIR']?>">
-              </div>
-            </div>
-          </div>
          <div class="form-group">
-           <label class="control-label col-sm-3">Nama Organisasi</label>
+           <label class="control-label col-sm-3">Program</label>
            <div class="col-sm-9">
-             <input type="text" class="form-control" name="JENIS_NAMA" value="<?=$p['JENIS_NAMA']?>">
+             <input type="text" class="form-control pull-right" name="Prog">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="control-label col-sm-3">Jenis</label>
+           <div class="col-sm-9">
+             <select class="selectpicker" title="Select Jenis Bahan Ajar" name="jenisnya">
+               <option value="Cetak">Cetak</option>
+               <option value="Non Cetak">Non Cetak</option>
+             </select>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="control-label col-sm-3">Semester</label>
+           <div class="col-sm-9">
+             <select class="selectpicker" title="Select Semester" name="semesternya">
+               <option value="Ganjil">Ganjil</option>
+               <option value="Genap">Genap</option>
+             </select>
            </div>
          </div>
          <div class="form-group">
            <label class="control-label col-sm-3">Jabatan</label>
            <div class="col-sm-9">
-             <input type="text" class="form-control" name="JABATAN" value="<?=$p['JABATAN']?>">
+             <input type="text" class="form-control" name="JABATAN">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="control-label col-sm-3">Nomor</label>
+           <div class="col-sm-5">
+             <input type="file" name="NOMOR" class="inputFile" accept="application/pdf">
            </div>
          </div>
       </div>

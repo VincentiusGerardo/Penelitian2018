@@ -114,7 +114,7 @@
       $data['pkm'] = $this->model_utama->getPKM();
       $this->getHeader();
       $this->load->view('v_pkm',$data);
-      $this->load->view('modals/m_seminar',$data);
+      $this->load->view('modals/m_pkm',$data);
       $this->load->view('footer');
     }
 
