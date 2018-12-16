@@ -45,7 +45,7 @@
         <script src="<?php echo base_url('js/theme/adminlte.min.js'); ?>"></script>
 
         <!--iCheck-->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/iCheck/square/blue.css'); ?>"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/iCheck/all.css'); ?>"/>
         <script src="<?php echo base_url('css/iCheck/icheck.min.js'); ?>"></script>
 
         <!-- Google Font -->

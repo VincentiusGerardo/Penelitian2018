@@ -1,0 +1,32 @@
+body {
+  background: rgb(204,204,204);
+	font-family: Arial;
+	font-size: 11px; 
+}
+page[size="a4"] {
+  background: white;
+  height: 297mm;
+  width: 210mm;
+  display: block;
+  margin: 0 auto;
+  /*margin-bottom: 0.5cm;*/
+  box-shadow: 0 0 0cm rgba(0,0,0,0.5);
+}
+page[size="legalLandscape"] {
+  background: white;
+  width: 297mm;
+  height: 210mm;
+  display: block;
+  margin: 0 auto;
+  /*margin-bottom: 0.5cm;*/
+  box-shadow: 0 0 0cm rgba(0,0,0,0.5);
+}
+@media print {
+  body, page[size="a4"] {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+@page{
+	margin:0;
+}

@@ -132,6 +132,18 @@
       $this->load->view('footer');
     }
 
+    public function print_cv(){
+      $mulai = $this->input->post('tgl_mulai');
+      $selesai = $this->input->post('tgl_selesai');
+
+      foreach ($_POST['pilih'] as $pilih){
+          $data['pilihan'] = $pilih;
+          $data[$pilih] = $this->model_utama->$pilih();
+      }
+
+      $this->load->view('v_printcv',$data);
+    }
+
     public function users(){
       $this->getHeader();
       // $this->load->view('', $data);
