@@ -14,7 +14,7 @@
 </head>
 <body>
 	<page size="a4">
-		<?php foreach ($pilihan as $plh) { ?>
+		<?php foreach ($_POST['pilih'] as $plh) { ?>
 		<div class="row">
 			<div class="col-md-12" style="padding:10px;">
 				<?php if($plh=="getIdentitas"){ ?>
@@ -59,6 +59,26 @@
 							<td>Golongan / Pangkat</td>
 							<td>:</td>
 							<td><?=$iden['GOLONGAN']?></td>
+						</tr>
+						<tr>
+							<td>Jabatan Akademik</td>
+							<td>:</td>
+							<td><?=$iden['JABATAN_AKADEMIK']?></td>
+						</tr>
+						<tr>
+							<td>Perguruan Tinggi</td>
+							<td>:</td>
+							<td><?=$iden['PERGURUAN_TINGGI']?></td>
+						</tr>
+						<tr>
+							<td>Alamat</td>
+							<td>:</td>
+							<td><?=$iden['ALAMAT']?></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>:</td>
+							<td><?=$iden['EMAIL']?></td>
 						</tr>
 						<?php } ?>
 					</table>
