@@ -20,6 +20,8 @@
                   <th>Tahun</th>
                   <th>Perguruan Tinggi</th>
                   <th>Jurusan</th>
+                  <th>Ijazah</th>
+                  <th>Transkrip</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -35,6 +37,8 @@
                     <td><?= $p->TAHUN; ?></td>
                     <td><?= $p->PERGURUAN_TINGGI; ?></td>
                     <td><?= $p->JURUSAN; ?></td>
+                    <td><a href="<?= base_url('media/ijazah/' . $p->IJASAH . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
+                    <td><a href="<?= base_url('media/transkrip/' . $p->TRANSKRIP . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-success">View</a></td>
                     <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $p->ID_PENDIDIKAN; ?> "><span class="fa fa-edit"></span></button></td>
                   </tr>
                 <?php $no++;endforeach; ?>

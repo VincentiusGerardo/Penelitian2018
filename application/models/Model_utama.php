@@ -98,8 +98,15 @@
       }
     }
 
-    public function updatePendidikan(){
+    public function updatePendidikan($data,$user){
+      $cond = array('NIP_NIK' => $NIP_NIK);
+      $r = $this->db->update('riwayat_pendidikan',$data,$cond);
 
+      if($r){
+        return true;
+      }else{
+        return false;
+      }
     }
 
     public function updateIdentitas($NIP_NIK){

@@ -12,23 +12,6 @@
       $this->load->model('model_utama');
     }
 
-    public function doChangePassword(){
-      $oldPass = $this->input->post('passOld');
-      $newPass = $this->input->post('passNew');
-      $repPass = $this->input->post('passRept')
-      $cond = $this->model_utama->verifyPass($this->session->userdata('username'));
-
-      if($cond === TRUE){
-        
-      }else{
-        echo "Wrong Password! Please Try Again!";
-      }
-
-      }else{
-        echo "Wrong Password! Please Try Again!";
-      }
-    }
-
     public function doInsertDosen(){
 
     }
@@ -73,25 +56,25 @@
         $perT = $this->input->post('pt');
         $jurusan = $this->input->post('jur');
 
-        //Upload Ijazah
+        // //Upload Ijazah
         if(!empty($_FILES['ij']['name'])){
           $config['upload_path']          = './media/ijazah/';
           $config['allowed_types']        = 'pdf';
-          $config['file_ext_tolower']     = 'TRUE';
-          $config['overwrite']            = 'TRUE';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
           $config['file_name']            = 'Ijazah_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username');
 
           $this->upload->initialize($config);
           $ijazah = $this->upload->data('file_name');
           $RES = $this->upload->do_upload('ij');
         }
-        
+
         //Upload Transkrip
         if(!empty($_FILES['tr']['name'])){
           $config['upload_path']          = './media/transkrip/';
           $config['allowed_types']        = 'pdf';
-          $config['file_ext_tolower']     = 'TRUE';
-          $config['overwrite']            = 'TRUE';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
           $config['file_name']            = 'Transkrip_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username');
 
           $this->upload->initialize($config);
@@ -109,10 +92,50 @@
           'TRANSKRIP' => $transkrip
         );
 
-        $this->model_utama->insertPendidikan($data);
-        //redirect(base_url('Module/Pendidikan'));
+        $res = $this->model_utama->insertPendidikan($data);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg', 'Berhasil Menambahkan Pendidikan!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal Menambahkan Pendidikan!');
+        }
+        redirect('Module/Pendidikan');
       }else{
-        echo "Ada yang kurang nih";
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menambahkan Pendidikan! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pendidikan');
+      }
+    }
+
+    public function doUpdatePendidikan(){
+      $this->form_validation->set_rules('kode','Kode Pendidikan','required|trim|xss_clean');
+      $this->form_validation->set_rules('selProgram','Select Program','required|trim|xss_clean');
+      $this->form_validation->set_rules('thn','Tahun','required|trim|xss_clean');
+      $this->form_validation->set_rules('pt','Perguruan Tinggi','required|trim|xss_clean');
+      $this->form_validation->set_rules('jur','Jurusan','required|trim|xss_clean');
+
+      if($this->form_validation->run() == TRUE){
+        $kdk = $this->input->post('kode');
+        $prog = $this->input->post('selProgram');
+        $tahun = $this->input->post('thn');
+        $perT = $this->input->post('pt');
+        $jurusan = $this->input->post('jur');
+
+        if(empty($_FILES['ij']['name']) && empty($_FILES['tr']['name'])){
+          echo "Ijasah dan Transkrip kosong";
+        }else if(empty($_FILES['ij']['name']) && !empty($_FILES['tr']['name'])){
+          echo "Ijasah kosong, Transkrip: " . $_FILES['tr']['name'];
+        }else if(!empty($_FILES['ij']['name']) && empty($_FILES['tr']['name'])){
+          echo "Ijasah: " . $_FILES['ij']['name'] . " Transkrip kosong";
+        }else{
+          echo $_FILES['ij']['name'] . " &nbsp; " . $_FILES['tr']['name'];
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pendidikan');
       }
     }
 
