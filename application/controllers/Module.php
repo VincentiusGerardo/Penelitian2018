@@ -137,7 +137,7 @@
       $selesai = $this->input->post('tgl_selesai');
 
       foreach ($_POST['pilih'] as $pilih){
-          $data[$pilih] = $this->model_utama->$pilih();
+          $data[$pilih] = $this->model_utama->$pilih($mulai, $selesai);
       }
 
       $this->load->view('v_printcv',$data, $_POST['pilih']);
