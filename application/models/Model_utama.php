@@ -263,29 +263,29 @@
       $s = substr($selesai,0,4);
       $query = "SELECT * FROM `penelitian` WHERE TAHUN BETWEEN ".$m." AND ".$s." AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_publikasi($mulai, $selesai){
-      $query = "SELECT * FROM `publikasi` WHERE TANGGAL BETWEEN ".$mulai." AND ".$selesai." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT *, DATE_FORMAT(TANGGAL, '%e %M %Y') as TANGGALcon FROM `publikasi` WHERE TANGGAL BETWEEN '".$mulai."' AND '".$selesai."' AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_pendidikan($mulai, $selesai){
       $m = substr($mulai,0,4);
       $s = substr($selesai,0,4);
-      $query = "SELECT * FROM `riwayat_pendidikan` WHERE TAHUN BETWEEN ".$m." AND ".$s." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT * FROM `riwayat_pendidikan` WHERE NIP_NIK ='".$this->session->userdata('username')."'";//TAHUN BETWEEN ".$m." AND ".$s." AND
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_pengajaran($mulai, $selesai){
       $m = substr($mulai,0,4);
       $s = substr($selesai,0,4);
-      $query = "SELECT * FROM `pengajaran` WHERE TAHUN_AKADEMIK BETWEEN ".$m." AND ".$s." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT * FROM `pengajaran` WHERE TAHUN_AKADEMIK BETWEEN '".$m."' AND '".$s."' AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_bahanajar($mulai, $selesai){
@@ -293,13 +293,13 @@
       $s = substr($selesai,0,4);
       $query = "SELECT * FROM `bahan_ajar` WHERE TAHUN BETWEEN ".$m." AND ".$s." AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_seminar($mulai, $selesai){
-      $query = "SELECT * FROM `seminar_workshop` WHERE TANGGAL BETWEEN ".$mulai." AND ".$selesai." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT * FROM `seminar_workshop` WHERE TANGGAL BETWEEN '".$mulai."' AND '".$selesai."' AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_pembimbing($mulai, $selesai){
@@ -307,7 +307,7 @@
       $s = substr($selesai,0,4);
       $query = "SELECT * FROM `pembimbing` WHERE TAHUN BETWEEN ".$m." AND ".$s." AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_penguji($mulai, $selesai){
@@ -315,36 +315,36 @@
       $s = substr($selesai,0,4);
       $query = "SELECT * FROM `penguji` WHERE TAHUN BETWEEN ".$m." AND ".$s." AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_pkm($mulai, $selesai){
-      $query = "SELECT * FROM `pkm` WHERE TANGGAL BETWEEN ".$mulai." AND ".$selesai." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT * FROM `pkm` WHERE TANGGAL BETWEEN '".$mulai."' AND '".$selesai."' AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_institusi($mulai, $selesai){
-      $query = "SELECT * FROM `pengelolaan_institusi` WHERE TANGGAL_MULAI BETWEEN ".$mulai." AND ".$selesai." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT *, DATE_FORMAT(TANGGAL_MULAI, '%e %M %Y') as TANGGAL_MULAIcon, DATE_FORMAT(TANGGAL_AKHIR, '%e %M %Y') as TANGGAL_AKHIRcon FROM `pengelolaan_institusi` WHERE TANGGAL_MULAI BETWEEN '".$mulai."' AND '".$selesai."' AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_organisasi($mulai, $selesai){
-      $query = "SELECT * FROM `organisasi_profesi` WHERE TANGGAL_MULAI BETWEEN ".$mulai." AND ".$selesai." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT *, DATE_FORMAT(TANGGAL_MULAI, '%e %M %Y') as TANGGAL_MULAIcon, DATE_FORMAT(TANGGAL_AKHIR, '%e %M %Y') as TANGGAL_AKHIRcon FROM `organisasi_profesi` WHERE TANGGAL_MULAI BETWEEN '".$mulai."' AND '".$selesai."' AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_penghargaan($mulai, $selesai){
-      $query = "SELECT * FROM `penghargaan` WHERE TANGGAL BETWEEN ".$mulai." AND ".$selesai." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT *, DATE_FORMAT(TANGGAL, '%e %M %Y') as TANGGALcon FROM `penghargaan` WHERE TANGGAL BETWEEN '".$mulai."' AND '".$selesai."' AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
 
     public function getcv_kemahasiswaan($mulai, $selesai){
-      $query = "SELECT * FROM `kegiatan_kemahasiswaan` WHERE TANGGAL_MULAI BETWEEN ".$mulai." AND ".$selesai." AND NIP_NIK ='".$this->session->userdata('username')."'";
+      $query = "SELECT *, DATE_FORMAT(TANGGAL_MULAI, '%e %M %Y') as TANGGAL_MULAIcon, DATE_FORMAT(TANGGAL_AKHIR, '%e %M %Y') as TANGGAL_AKHIRcon FROM `kegiatan_kemahasiswaan` WHERE TANGGAL_MULAI BETWEEN '".$mulai."' AND '".$selesai."' AND NIP_NIK ='".$this->session->userdata('username')."'";
       $q = $this->db->query($query);
-    	return $query->result_array();
+    	return $q->result_array();
     }
   }

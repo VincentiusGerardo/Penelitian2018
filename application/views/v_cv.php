@@ -19,67 +19,67 @@
                 <label class="control-labeL" for="identitas_diri">Identitas Diri</label>
               </div>
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="penelitian" id="penelitian"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_penelitian" id="penelitian"> &nbsp;
                 <label class="control-labeL" for="penelitian">Penelitian</label>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="pendidikan" id="pendidikan"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_pendidikan" id="pendidikan"> &nbsp;
                 <label class="control-labeL" for="pendidikan">Pendidikan</label>
               </div>
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="publikasi" id="publikasi"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_publikasi" id="publikasi"> &nbsp;
                 <label class="control-labeL" for="publikasi">Publikasi</label>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="pengajaran" id="pengajaran"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_pengajaran" id="pengajaran"> &nbsp;
                 <label class="control-labeL" for="pengajaran">Pengajaran</label>
               </div>
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="bahan_ajar" id="bahan_ajar"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_bahanajar" id="bahan_ajar"> &nbsp;
                 <label class="control-labeL" for="bahan_ajar">Bahan Ajar</label>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="pembimbing" id="pembimbing"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_pembimbing" id="pembimbing"> &nbsp;
                 <label class="control-labeL" for="pembimbing">Pembimbing</label>
               </div>
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="seminar" id="seminar"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_seminar" id="seminar"> &nbsp;
                 <label class="control-labeL" for="seminar">Seminar</label>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="penguji" id="penguji"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_penguji" id="penguji"> &nbsp;
                 <label class="control-labeL" for="penguji">Penguji</label>
               </div>
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="PKM" id="PKM"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_pkm" id="PKM"> &nbsp;
                 <label class="control-labeL" for="PKM">PKM</label>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="organisasi" id="organisasi"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_organisasi" id="organisasi"> &nbsp;
                 <label class="control-labeL" for="organisasi">Organisasi</label>
               </div>
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="intitusi" id="intitusi"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_institusi" id="intitusi"> &nbsp;
                 <label class="control-labeL" for="intitusi">Intitusi</label>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="penghargaan" id="penghargaan"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_penghargaan" id="penghargaan"> &nbsp;
                 <label class="control-labeL" for="penghargaan">Penghargaan</label>
               </div>
               <div class="col-md-2">
-                <input type="checkbox" class="minimal" name="pilih[]" value="kemahasiswaan" id="kemahasiswaan"> &nbsp;
+                <input type="checkbox" class="minimal" name="pilih[]" value="getcv_kemahasiswaan" id="kemahasiswaan"> &nbsp;
                 <label class="control-labeL" for="kemahasiswaan">Kemahasiswaan</label>
               </div>
             </div>
