@@ -16,22 +16,22 @@
 				<tr>
           <td rowspan="4"><?=$no?>) &emsp;</td>
 					<td>Program</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['PROGRAM']?></td>
 				</tr>
 				<tr>
 					<td>Tahun</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['TAHUN']?></td>
 				</tr>
 				<tr>
 					<td>Perguruan Tinggi</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['PERGURUAN_TINGGI']?></td>
 				</tr>
 				<tr>
 					<td>Jurusan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['JURUSAN']?></td>
 				</tr>
 				<?php

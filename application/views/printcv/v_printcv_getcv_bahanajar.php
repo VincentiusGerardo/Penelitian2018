@@ -16,27 +16,27 @@
 				<tr>
           <td rowspan="5"><?=$no?>) &emsp;</td>
 					<td>Mata Kuliah</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['MATA_KULIAH']?></td>
 				</tr>
 				<tr>
 					<td>Program</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['PROGRAM']?></td>
 				</tr>
 				<tr>
 					<td>Jenis</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['JENIS']?></td>
 				</tr>
 				<tr>
 					<td>Semester</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['SEMESTER']?></td>
 				</tr>
 				<tr>
 					<td>Tahun</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pend['TAHUN']?></td>
 				</tr>
 				<?php

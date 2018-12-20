@@ -16,37 +16,37 @@
 				<tr>
           <td rowspan="7"><?=$no?>) &emsp;</td>
 					<td>Mata Kuliah</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$peng['MATA_KULIAH']?></td>
 				</tr>
 				<tr>
 					<td>Program Pendidikan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$peng['PROGRAM_PENDIDIKAN']?></td>
 				</tr>
 				<tr>
 					<td>Institusi</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$peng['INSTITUSI']?></td>
 				</tr>
 				<tr>
 					<td>Jurusan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$peng['JURUSAN']?></td>
 				</tr>
 				<tr>
 					<td>Program Studi</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$peng['PROGRAM_STUDI']?></td>
 				</tr>
 				<tr>
 					<td>Semester</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$peng['SEMESTER']?></td>
 				</tr>
 				<tr>
 					<td>Tahun Akademik</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$peng['TAHUN_AKADEMIK']?></td>
 				</tr>
 				<?php

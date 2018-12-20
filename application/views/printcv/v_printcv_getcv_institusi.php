@@ -16,22 +16,22 @@
 				<tr>
           <td rowspan="4"><?=$no?>) &emsp;</td>
 					<td>Tanggal Mulai</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$ins['TANGGAL_MULAIcon']?></td>
 				</tr>
 				<tr>
 					<td>Tanggal Berakhir</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$ins['TANGGAL_AKHIRcon']?></td>
 				</tr>
 				<tr>
 					<td>Jabatan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$ins['PERAN_JABATAN']?></td>
 				</tr>
 				<tr>
 					<td>Institusi</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$ins['INSTITUSI']?></td>
 				</tr>
 				<?php

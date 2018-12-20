@@ -16,37 +16,37 @@
 				<tr>
           <td rowspan="7"><?=$no?>) &emsp;</td>
 					<td>Nama</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pem['NAMA']?></td>
 				</tr>
 				<tr>
 					<td>NIM</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pem['NIM']?></td>
 				</tr>
 				<tr>
 					<td>Semester</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pem['SEMESTER']?></td>
 				</tr>
 				<tr>
 					<td>Tahun</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pem['TAHUN']?></td>
 				</tr>
 				<tr>
 					<td>Program</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pem['PROGRAM']?></td>
 				</tr>
 				<tr>
 					<td>Judul</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pem['JUDUL']?></td>
 				</tr>
 				<tr>
 					<td>Peranan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pem['PERANAN']?></td>
 				</tr>
 				<?php

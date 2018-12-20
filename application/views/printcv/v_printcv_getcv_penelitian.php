@@ -16,22 +16,22 @@
 				<tr>
           <td rowspan="4"><?=$no?>) &emsp;</td>
 					<td>Tahun</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pen['TAHUN']?></td>
 				</tr>
 				<tr>
 					<td>Judul</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pen['JUDUL']?></td>
 				</tr>
 				<tr>
 					<td>Peranan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pen['PERANAN']?></td>
 				</tr>
 				<tr>
 					<td>Sumber Dana</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pen['SUMBER_DANA']?></td>
 				</tr>
 				<?php $no++;} ?>

@@ -16,27 +16,27 @@
 				<tr>
           <td rowspan="7"><?=$no?>) &emsp;</td>
 					<td>Tanggal</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pkm['TANGGAL']?></td>
 				</tr>
 				<tr>
 					<td>Nama</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pkm['NAMA']?></td>
 				</tr>
 				<tr>
 					<td>Mitra</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pkm['MITRA']?></td>
 				</tr>
 				<tr>
 					<td>Tempat</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pkm['TEMPAT']?></td>
 				</tr>
 				<tr>
 					<td>Peranan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$pkm['PERANAN']?></td>
 				</tr>
 				<?php

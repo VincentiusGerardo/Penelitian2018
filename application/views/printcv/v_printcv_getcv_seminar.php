@@ -16,27 +16,27 @@
 				<tr>
           <td rowspan="5"><?=$no?>) &emsp;</td>
 					<td>Tanggal</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$sem['TANGGAL']?></td>
 				</tr>
 				<tr>
 					<td>Jenis</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$sem['JENIS']?></td>
 				</tr>
 				<tr>
 					<td>Nama</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$sem['JUDUL']?></td>
 				</tr>
 				<tr>
 					<td>Penyelenggara</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$sem['PENYELENGGARA']?></td>
 				</tr>
 				<tr>
 					<td>Peranan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$sem['PERANAN']?></td>
 				</tr>
 				<?php

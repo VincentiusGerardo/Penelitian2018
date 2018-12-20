@@ -16,22 +16,22 @@
 				<tr>
           <td rowspan="4"><?=$no?>) &emsp;</td>
 					<td>Peran Jabatan</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$kmh['PERAN_JABATAN']?></td>
 				</tr>
 				<tr>
 					<td>Tanggal Mulai</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$kmh['TANGGAL_MULAIcon']?></td>
 				</tr>
 				<tr>
 					<td>Tanggal Akhir</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$kmh['TANGGAL_AKHIRcon']?></td>
 				</tr>
 				<tr>
 					<td>Institusi</td>
-					<td>:</td>
+					<td width="30px" align="center">:</td>
 					<td><?=$kmh['INSTITUSI']?></td>
 				</tr>
 				<?php
