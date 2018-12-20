@@ -40,15 +40,54 @@
       return $query->result_array();
     }
 
+    public function getwhere_Pembimbing(){
+      $query = $this->db->get_where('pembimbing', array(
+        'NIP_NIK' => $this->session->userdata('username'),
+  			'NAMA' => $this->input->post('NAMA'),
+  			'NIM' =>	$this->input->post('NIM'),
+        'SEMESTER' => $this->input->post('SEMESTER'),
+        'TAHUN'=> $this->input->post('TAHUN'),
+        'PROGRAM' => $this->input->post('PROGRAM'),
+        'JUDUL' => $this->input->post('JUDUL'),
+        'PERANAN' => $this->input->post('PERANAN'),
+      ));
+      return $query->result_array();
+    }
+
     public function getPenguji(){
       $query = $this->db->get_where('penguji', array('NIP_NIK' => $this->session->userdata('username')));
       return $query->result_array();
     }
 
+    public function getwhere_Penguji(){
+      $query = $this->db->get_where('penguji', array(
+        'NIP_NIK' => $this->session->userdata('username'),
+  			'NAMA' => $this->input->post('NAMA'),
+  			'NIM' =>	$this->input->post('NIM'),
+        'SEMESTER' => $this->input->post('SEMESTER'),
+        'TAHUN'=> $this->input->post('TAHUN'),
+        'PROGRAM' => $this->input->post('PROGRAM'),
+        'JUDUL' => $this->input->post('JUDUL'),
+        'PERANAN' => $this->input->post('PERANAN'),
+      ));
+      return $query->result_array();
+    }
+
     public function getOrganisasi(){
-      $q = "SELECT ID_ORGANISASI, DATE_FORMAT(TANGGAL_MULAI, '%e %M %Y') as TANGGAL_MULAIcon, DATE_FORMAT(TANGGAL_AKHIR, '%e %M %Y') as TANGGAL_AKHIRcon, TANGGAL_MULAI, TANGGAL_AKHIR, JENIS_NAMA, JABATAN FROM `organisasi_profesi` WHERE NIP_NIK ='".$this->session->userdata('username')."'";
+      $q = "SELECT ID_ORGANISASI, DATE_FORMAT(TANGGAL_MULAI, '%e %M %Y') as TANGGAL_MULAIcon, DATE_FORMAT(TANGGAL_AKHIR, '%e %M %Y') as TANGGAL_AKHIRcon, TANGGAL_MULAI, TANGGAL_AKHIR, JENIS_NAMA, JABATAN, NOMOR FROM `organisasi_profesi` WHERE NIP_NIK ='".$this->session->userdata('username')."'";
     	$query = $this->db->query($q);
     	return $query->result_array();
+    }
+
+    public function getwhere_organisasi(){
+      $query = $this->db->get_where('organisasi_profesi', array(
+  			'NIP_NIK' => $this->session->userdata('username'),
+  			'TANGGAL_MULAI' => $this->input->post('TANGGAL_MULAI'),
+  			'TANGGAL_AKHIR' =>	$this->input->post('TANGGAL_AKHIR'),
+        'JENIS_NAMA' => $this->input->post('JENIS_NAMA'),
+        'JABATAN'=> $this->input->post('JABATAN'),
+      ));
+      return $query->result_array();
     }
 
     public function getPenelitian(){
@@ -130,7 +169,8 @@
   		return $this->db->update('identitas_diri', $data);
     }
 
-    public function insertPembimbing($SK){
+    //------------------------------------------------------PEMBIMBING
+    public function insertPembimbing(){
       $data = array(
   			'NIP_NIK' => $this->session->userdata('username'),
   			'NAMA' => $this->input->post('NAMA'),
@@ -140,7 +180,6 @@
         'PROGRAM' => $this->input->post('PROGRAM'),
         'JUDUL' => $this->input->post('JUDUL'),
         'PERANAN' => $this->input->post('PERANAN'),
-        'SK' => $SK
   		);
 
   		return $this->db->insert('pembimbing', $data);
@@ -161,7 +200,23 @@
   		return $this->db->update('pembimbing', $data);
     }
 
-    public function insertPenguji($SK){
+    public function updateDokumenPembimbing($id, $SK){
+      $data = array(
+  			'SK' => $SK
+  		);
+
+  		$this->db->where('ID_PEMBIMBING', $id);
+  		return $this->db->update('pembimbing', $data);
+    }
+
+    public function deletePembimbing($id){
+      $this->db->where('ID_PEMBIMBING', $id);
+      return $this->db->delete('pembimbing');
+    }
+    //----------------------------------------------------PEMBIMBING
+
+    //----------------------------------------------------PENGUJI
+    public function insertPenguji(){
       $data = array(
   			'NIP_NIK' => $this->session->userdata('username'),
   			'NAMA' => $this->input->post('NAMA'),
@@ -170,8 +225,7 @@
         'TAHUN'=> $this->input->post('TAHUN'),
         'PROGRAM' => $this->input->post('PROGRAM'),
         'JUDUL' => $this->input->post('JUDUL'),
-        'PERANAN' => $this->input->post('PERANAN'),
-        'SK' => $SK
+        'PERANAN' => $this->input->post('PERANAN')
   		);
 
   		return $this->db->insert('penguji', $data);
@@ -192,14 +246,29 @@
   		return $this->db->update('penguji', $data);
     }
 
-    public function insertOrganisasi($NOMOR){
+    public function updateDokumenPenguji($id, $SK){
+      $data = array(
+        'SK' => $SK
+      );
+
+      $this->db->where('ID_PENGUJI', $id);
+      return $this->db->update('penguji', $data);
+    }
+
+    public function deletePenguji($id){
+      $this->db->where('ID_PENGUJI', $id);
+      return $this->db->delete('penguji');
+    }
+    //----------------------------------------------------PENGUJI
+
+    //----------------------------------------------------ORGANISASI
+    public function insertOrganisasi(){
       $data = array(
   			'NIP_NIK' => $this->session->userdata('username'),
   			'TANGGAL_MULAI' => $this->input->post('TANGGAL_MULAI'),
   			'TANGGAL_AKHIR' =>	$this->input->post('TANGGAL_AKHIR'),
         'JENIS_NAMA' => $this->input->post('JENIS_NAMA'),
         'JABATAN'=> $this->input->post('JABATAN'),
-        'NOMOR' => $NOMOR
   		);
 
   		return $this->db->insert('organisasi_profesi', $data);
@@ -216,6 +285,21 @@
   		$this->db->where('ID_ORGANISASI', $id);
   		return $this->db->update('organisasi_profesi', $data);
     }
+
+    public function updateDokumenOrganisasi($id, $NOMOR){
+      $data = array(
+        'NOMOR' => $NOMOR
+      );
+
+      $this->db->where('ID_ORGANISASI', $id);
+      return $this->db->update('organisasi_profesi', $data);
+    }
+
+    public function deleteOrganisasi($id){
+      $this->db->where('ID_ORGANISASI', $id);
+      return $this->db->delete('organisasi_profesi');
+    }
+    //----------------------------------------------------ORGANISASI
 
     public function insertPenelitian($SURAT_TUGAS){
       $data = array(

@@ -24,6 +24,7 @@
                   <th>Program Pendidikan</th>
                   <th>Judul</th>
                   <th>Peranan</th>
+                  <th>SK</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -41,7 +42,12 @@
                     <td><?=$pem['PROGRAM']?></td>
                     <td><?=$pem['JUDUL']?></td>
                     <td><?=$pem['PERANAN']?></td>
-                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$pem['ID_PEMBIMBING']?>"><span class="fa fa-edit"></span></button></td>
+                    <td><a href="<?= base_url('media/pembimbing/' . $pem['SK'] . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
+                    <td>
+                      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#ModalDokumen<?=$pem['ID_PEMBIMBING']?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen"><span class="fa fa-file"></span></button> &nbsp;
+                      <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$pem['ID_PEMBIMBING']?>" data-toggle="tooltip" data-placement="bottom" title="Ubah data"><span class="fa fa-edit"></span></button> &nbsp;
+                      <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#ModalDelete<?=$pem['ID_PEMBIMBING']?>" data-toggle="tooltip" data-placement="bottom" title="Hapus data"><span class="fa fa-trash"></span></button>
+                    </td>
                   </tr>
                 <?php $no++;endforeach; ?>
               </tbody>

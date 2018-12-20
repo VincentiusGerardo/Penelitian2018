@@ -20,6 +20,7 @@
                   <th>Tanggal Berakhir</th>
                   <th>Nama Organisasi</th>
                   <th>Jabatan</th>
+                  <th>Nomor</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -34,7 +35,12 @@
                     <td><?=$org['TANGGAL_AKHIRcon']?></td>
                     <td><?=$org['JENIS_NAMA']?></td>
                     <td><?=$org['JABATAN']?></td>
-                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$org['ID_ORGANISASI']?>"><span class="fa fa-edit"></span></button></td>
+                    <td><a href="<?= base_url('media/organisasi/' . $org['NOMOR'] . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
+                    <td>
+                      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#ModalDokumen<?=$org['ID_ORGANISASI']?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen"><span class="fa fa-file"></span></button> &nbsp;
+                      <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$org['ID_ORGANISASI']?>"><span class="fa fa-edit"></span></button >&nbsp;
+                      <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#ModalDelete<?=$org['ID_ORGANISASI']?>" data-toggle="tooltip" data-placement="bottom" title="Hapus data"><span class="fa fa-trash"></span></button>
+                    </td>
                   </tr>
                 <?php $no++;endforeach; ?>
               </tbody>

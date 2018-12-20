@@ -227,22 +227,32 @@
 
     }
 
+    //----------------------------------------------------DO PEMBIMBING
     public function doInsertPembimbing(){
+
+      $res = $this->model_utama->insertPembimbing();
+
+      $dat = $this->model_utama->getwhere_Pembimbing();
+      foreach ($dat as $pem) {
+        $namafile = $pem['ID_PEMBIMBING']."_pembimbing_".$this->session->userdata('username');
+        $id = $pem['ID_PEMBIMBING'];
+      }
+
       if(!empty($_FILES['SK']['name'])){
         $config['upload_path']          = './media/pembimbing/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = 'TRUE';
         $config['overwrite']            = 'TRUE';
-        $config['file_name']            = $this->input->post('NIM') ."_". $this->input->post('JUDUL') ."_". $this->input->post('PERANAN') ."_". $this->session->userdata('username');
+        $config['file_name']            = $namafile;
 
         $this->upload->initialize($config);
         $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('SK');
+
+        $this->model_utama->updateDokumenPembimbing($id, $namafile);
       }
 
-      $res = $this->model_utama->insertPembimbing($SK);
-
-      if($res==true && res_u == "1"){
+      if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menambahkan data pembimbing!');
       }else{
@@ -250,7 +260,7 @@
           $this->session->set_flashdata('msg','Gagal menambahkan data pembimbing!');
       }
 
-  		redirect('Module/pembimbing');
+      redirect('Module/pembimbing');
     }
 
     public function doUpdatePembimbing($id){
@@ -267,20 +277,72 @@
       redirect('Module/pembimbing');
     }
 
-    public function doInsertPenguji(){
+    public function doDeletePembimbing($id){
+      $res = $this->model_utama->deletePembimbing($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menghapus data pembimbing!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menghapus data pembimbing!');
+      }
+
+      redirect('Module/pembimbing');
+    }
+
+    public function doDokumenPembimbing($id){
+      $namafile = $id."_pembimbing_".$this->session->userdata('username');
+
       if(!empty($_FILES['SK']['name'])){
-        $config['upload_path']          = './media/penguji/';
+        $config['upload_path']          = './media/pembimbing/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = 'TRUE';
-        $config['overwrite']            = 'TRUE';
-        $config['file_name']            = $this->input->post('NIM') ."_". $this->input->post('JUDUL') ."_". $this->input->post('PERANAN') ."_". $this->session->userdata('username');
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile;
 
         $this->upload->initialize($config);
         $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('SK');
       }
 
-      $res = $this->model_utama->insertPenguji($SK);
+      if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah dokumen pembimbing!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah dokumen pembimbing!');
+      }
+
+      redirect('Module/pembimbing');
+    }
+    //-------------------------------------------------------DO PEMBIMBING
+
+
+    //----------------------------------------------------DO PENGUJI
+    public function doInsertPenguji(){
+
+      $res = $this->model_utama->insertPenguji();
+
+      $dat = $this->model_utama->getwhere_penguji();
+      foreach ($dat as $pem) {
+        $namafile = $pem['ID_PENGUJI']."_penguji_".$this->session->userdata('username');
+        $id = $pem['ID_PENGUJI'];
+      }
+
+      if(!empty($_FILES['SK']['name'])){
+        $config['upload_path']          = './media/penguji/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = 'TRUE';
+        $config['file_name']            = $namafile;
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('SK');
+
+        $this->model_utama->updateDokumenPenguji($id, $namafile);
+      }
 
       if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
@@ -290,7 +352,7 @@
           $this->session->set_flashdata('msg','Gagal menambahkan data penguji!');
       }
 
-  		redirect('Module/penguji');
+      redirect('Module/penguji');
     }
 
     public function doUpdatePenguji($id){
@@ -307,22 +369,73 @@
       redirect('Module/penguji');
     }
 
+    public function doDeletePenguji($id){
+      $res = $this->model_utama->deletePenguji($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menghapus data penguji!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menghapus data penguji!');
+      }
+
+      redirect('Module/penguji');
+    }
+
+    public function doDokumenPenguji($id){
+      $namafile = $id."_penguji_".$this->session->userdata('username');
+
+      if(!empty($_FILES['SK']['name'])){
+        $config['upload_path']          = './media/penguji/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile;
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('SK');
+      }
+
+      if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah dokumen penguji!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah dokumen penguji!');
+      }
+
+      redirect('Module/penguji');
+    }
+    //-------------------------------------------------------DO PENGUJI
+
+    //-------------------------------------------------------DO ORGANISASI
     public function doInsertOrganisasi(){
+
+      $res = $this->model_utama->insertOrganisasi();
+
+      $dat = $this->model_utama->getwhere_organisasi();
+      foreach ($dat as $pem) {
+        $namafile = $pem['ID_ORGANISASI']."_organisasi_".$this->session->userdata('username');
+        $id = $pem['ID_ORGANISASI'];
+      }
+
       if(!empty($_FILES['NOMOR']['name'])){
         $config['upload_path']          = './media/organisasi/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = 'TRUE';
-        $config['overwrite']            = 'TRUE';
-        $config['file_name']            = $this->session->userdata('username')."_".$this->input->post('JENIS_NAMA')."_".$this->input->post('JABATAN');
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile;
 
         $this->upload->initialize($config);
-        $NOMOR = $this->upload->data('file_name');
+        $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('NOMOR');
+
+        $this->model_utama->updateDokumenOrganisasi($id, $namafile);
       }
 
-      $res = $this->model_utama->insertOrganisasi($NOMOR);
-
-      if($res==true && res_u == "1"){
+      if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menambahkan data organisasi!');
       }else{
@@ -330,7 +443,7 @@
           $this->session->set_flashdata('msg','Gagal menambahkan data organisasi!');
       }
 
-  		redirect('Module/organisasiprofesi');
+      redirect('Module/organisasiprofesi');
     }
 
     public function doUpdateOrganisasi($id){
@@ -346,6 +459,47 @@
 
       redirect('Module/organisasiprofesi');
     }
+
+    public function doDeleteOrganisasi($id){
+      $res = $this->model_utama->deleteOrganisasi($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menghapus data organisasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menghapus data organisasi!');
+      }
+
+      redirect('Module/organisasiprofesi');
+    }
+
+    public function doDokumenOrganisasi($id){
+      $namafile = $id."_organisasi_".$this->session->userdata('username');
+
+      if(!empty($_FILES['NOMOR']['name'])){
+        $config['upload_path']          = './media/organisasi/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile;
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('NOMOR');
+      }
+
+      if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah dokumen organisasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah dokumen organisasi!');
+      }
+
+      redirect('Module/organisasiprofesi  ');
+    }
+    //-------------------------------------------------------DO ORGANISASI
 
     public function doInsertPenghargaan(){
       if(!empty($_FILES['SERTIFIKAT']['name'])){
