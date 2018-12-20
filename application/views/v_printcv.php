@@ -19,7 +19,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap.min.css'); ?>"/>
 		<script src="<?php echo base_url('js/bootstrap/bootstrap.min.js'); ?>"></script>
 </head>
-<body style="background-color: grey ;overflow-x:hidden">
+<body style="overflow-x:hidden">
 	<!--<page size="a4">-->
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3" style="background-color: white;">

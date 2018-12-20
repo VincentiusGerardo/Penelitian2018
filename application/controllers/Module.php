@@ -141,6 +141,23 @@
       }
 
       $this->load->view('v_printcv',$data, $_POST['pilih']);
+
+      $html = $this->output->get_output();
+
+      // Load pdf library
+      $this->load->library('pdfgenerator');
+
+      // Load HTML content
+      $this->dompdf->loadHtml($html);
+
+      // (Optional) Setup the paper size and orientation
+      $this->dompdf->setPaper('A4', 'potrait');
+
+      // Render the HTML as PDF
+      $this->dompdf->render();
+
+      // Output the generated PDF (1 = download and 0 = preview)
+      $this->dompdf->stream("printcv.pdf", array("Attachment"=>0));
     }
 
     public function users(){

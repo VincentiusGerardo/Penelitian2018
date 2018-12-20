@@ -12,7 +12,7 @@
         <div class="box-body">
           <b>Pilih data yang akan di eksport ke cv</b>
           <br><br>
-          <form action="<?=base_url()?>Module/print_cv" method="post">
+          <form action="<?=base_url()?>Module/print_cv" method="post" target="_blank">
             <div class="row">
               <div class="col-md-2">
                 <input type="checkbox" class="minimal" name="pilih[]" value="getIdentitas" id="identitas_diri"> &nbsp;
