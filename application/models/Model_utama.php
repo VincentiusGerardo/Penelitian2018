@@ -85,13 +85,24 @@
   			'TANGGAL_MULAI' => $this->input->post('TANGGAL_MULAI'),
   			'TANGGAL_AKHIR' =>	$this->input->post('TANGGAL_AKHIR'),
         'JENIS_NAMA' => $this->input->post('JENIS_NAMA'),
-        'JABATAN'=> $this->input->post('JABATAN'),
+        'JABATAN'=> $this->input->post('JABATAN')
       ));
       return $query->result_array();
     }
 
     public function getPenelitian(){
       $query = $this->db->get_where('penelitian', array('NIP_NIK' => $this->session->userdata('username')));
+      return $query->result_array();
+    }
+
+    public function getwhere_penelitian(){
+      $query = $this->db->get_where('penelitian', array(
+  			'NIP_NIK' => $this->session->userdata('username'),
+  			'TAHUN' => $this->input->post('TAHUN'),
+  			'JUDUL' =>	$this->input->post('JUDUL'),
+        'PERANAN' => $this->input->post('PERANAN'),
+        'SUMBER_DANA'=> $this->input->post('SUMBER_DANA')
+      ));
       return $query->result_array();
     }
 
@@ -105,6 +116,16 @@
       $q = "SELECT *, DATE_FORMAT(TANGGAL, '%e %M %Y') as TANGGALcon FROM `penghargaan` WHERE NIP_NIK ='".$this->session->userdata('username')."'";
     	$query = $this->db->query($q);
     	return $query->result_array();
+    }
+
+    public function getwhere_penghargaan(){
+      $query = $this->db->get_where('penghargaan', array(
+  			'NIP_NIK' => $this->session->userdata('username'),
+  			'TANGGAL' => $this->input->post('TANGGAL'),
+  			'BENTUK' =>	$this->input->post('BENTUK'),
+        'PEMBERI' => $this->input->post('PEMBERI')
+      ));
+      return $query->result_array();
     }
 
     public function getBahanAjar(){
@@ -301,14 +322,14 @@
     }
     //----------------------------------------------------ORGANISASI
 
-    public function insertPenelitian($SURAT_TUGAS){
+    //----------------------------------------------------PENELITIAN
+    public function insertPenelitian(){
       $data = array(
   			'NIP_NIK' => $this->session->userdata('username'),
   			'TAHUN' => $this->input->post('TAHUN'),
   			'JUDUL' =>	$this->input->post('JUDUL'),
         'PERANAN' => $this->input->post('PERANAN'),
-        'SUMBER_DANA'=> $this->input->post('SUMBER_DANA'),
-        'SURAT_TUGAS' => $SURAT_TUGAS
+        'SUMBER_DANA'=> $this->input->post('SUMBER_DANA')
   		);
 
   		return $this->db->insert('penelitian', $data);
@@ -326,13 +347,28 @@
   		return $this->db->update('penelitian', $data);
     }
 
-    public function insertPenghargaan($SERTIFIKAT){
+    public function updateDokumenPenelitian($id, $SURAT_TUGAS){
+      $data = array(
+        'SURAT_TUGAS' => $SURAT_TUGAS
+      );
+
+      $this->db->where('ID_PENELITIAN', $id);
+      return $this->db->update('penelitian', $data);
+    }
+
+    public function deletePenelitian($id){
+      $this->db->where('ID_PENELITIAN', $id);
+      return $this->db->delete('penelitian');
+    }
+    //----------------------------------------------------PENELITIAN
+
+    //----------------------------------------------------PENGHARGAAN
+    public function insertPenghargaan(){
       $data = array(
   			'NIP_NIK' => $this->session->userdata('username'),
   			'TANGGAL' => $this->input->post('TANGGAL'),
   			'BENTUK' =>	$this->input->post('BENTUK'),
-        'PEMBERI' => $this->input->post('PEMBERI'),
-        'SERTIFIKAT'=> $SERTIFIKAT
+        'PEMBERI' => $this->input->post('PEMBERI')
   		);
 
   		return $this->db->insert('penghargaan', $data);
@@ -348,6 +384,21 @@
   		$this->db->where('ID_PENGHARGAAN', $id);
   		return $this->db->update('penghargaan', $data);
     }
+
+    public function updateDokumenPenghargaan($id, $SERTIFIKAT){
+      $data = array(
+        'SERTIFIKAT' => $SERTIFIKAT
+      );
+
+      $this->db->where('ID_PENGHARGAAN', $id);
+      return $this->db->update('penghargaan', $data);
+    }
+
+    public function deletePenghargaan($id){
+      $this->db->where('ID_PENGHARGAAN', $id);
+      return $this->db->delete('penghargaan');
+    }
+    //----------------------------------------------------PENGHARGAAN
 
     public function getcv_penelitian($mulai, $selesai){
       $m = substr($mulai,0,4);

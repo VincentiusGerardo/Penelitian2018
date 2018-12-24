@@ -20,6 +20,7 @@
                   <th>Judul</th>
                   <th>Peranan</th>
                   <th>Sumber Dana</th>
+                  <th>Surat Tugas</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -34,7 +35,12 @@
                     <td><?=$pen['JUDUL']?></td>
                     <td><?=$pen['PERANAN']?></td>
                     <td><?=$pen['SUMBER_DANA']?></td>
-                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$pen['ID_PENELITIAN']?>"><span class="fa fa-edit"></span></button></td>
+                    <td><a href="<?= base_url('media/penelitian/' . $pen['SURAT_TUGAS'] . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#ModalDokumen<?=$pen['ID_PENELITIAN']?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen"><span class="fa fa-file"></span></button> &nbsp;
+                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$pen['ID_PENELITIAN']?>"><span class="fa fa-edit"></span></button> &nbsp;
+                        <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#ModalDelete<?=$pen['ID_PENELITIAN']?>" data-toggle="tooltip" data-placement="bottom" title="Hapus data"><span class="fa fa-trash"></span></button>
+                    </td>
                   </tr>
                 <?php $no++;endforeach; ?>
               </tbody>

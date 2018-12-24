@@ -147,22 +147,31 @@
 
     }
 
+    //----------------------------------------------------DO PENELITIAN
     public function doInsertPenelitian(){
+      $res = $this->model_utama->insertPenelitian();
+
+      $dat = $this->model_utama->getwhere_penelitian();
+      foreach ($dat as $pem) {
+        $namafile = $pem['ID_PENELITIAN']."_penelitian_".$this->session->userdata('username');
+        $id = $pem['ID_PENELITIAN'];
+      }
+
       if(!empty($_FILES['SURAT_TUGAS']['name'])){
         $config['upload_path']          = './media/penelitian/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = 'TRUE';
         $config['overwrite']            = 'TRUE';
-        $config['file_name']            = $this->session->userdata('username')."_". $this->input->post('TAHUN') ."_". $this->input->post('JUDUL');
+        $config['file_name']            = $namafile;
 
         $this->upload->initialize($config);
-        $SURAT_TUGAS = $this->upload->data('file_name');
+        $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('SURAT_TUGAS');
+
+        $this->model_utama->updateDokumenPenelitian($id, $namafile);
       }
 
-      $res = $this->model_utama->insertPenelitian($SURAT_TUGAS);
-
-      if($res==true && $res_u=="1"){
+      if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menambahkan data penelitian!');
       }else{
@@ -186,6 +195,47 @@
 
       redirect('Module/penelitian');
     }
+
+    public function doDeletePenelitian($id){
+      $res = $this->model_utama->deletePenelitian($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menghapus data Penelitian!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menghapus data Penelitian!');
+      }
+
+      redirect('Module/penelitian');
+    }
+
+    public function doDokumenPenelitian($id){
+      $namafile = $id."_penelitian_".$this->session->userdata('username');
+
+      if(!empty($_FILES['SURAT_TUGAS']['name'])){
+        $config['upload_path']          = './media/penelitian/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile;
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('SURAT_TUGAS');
+      }
+
+      if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah dokumen penelitian!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah dokumen penelitian!');
+      }
+
+      redirect('Module/penelitian');
+    }
+    //----------------------------------------------------DO PENELITIAN
 
     public function doInsertPublikasi(){
 
@@ -317,7 +367,6 @@
       redirect('Module/pembimbing');
     }
     //-------------------------------------------------------DO PEMBIMBING
-
 
     //----------------------------------------------------DO PENGUJI
     public function doInsertPenguji(){
@@ -501,30 +550,39 @@
     }
     //-------------------------------------------------------DO ORGANISASI
 
+    //-------------------------------------------------------DO PENGHARGAAN
     public function doInsertPenghargaan(){
+      $res = $this->model_utama->insertPenghargaan();
+
+      $dat = $this->model_utama->getwhere_penghargaan();
+      foreach ($dat as $pem) {
+        $namafile = $pem['ID_PENGHARGAAN']."_penghargaan_".$this->session->userdata('username');
+        $id = $pem['ID_PENGHARGAAN'];
+      }
+
       if(!empty($_FILES['SERTIFIKAT']['name'])){
         $config['upload_path']          = './media/penghargaan/';
         $config['allowed_types']        = 'pdf';
-        //$config['file_ext_tolower']     = TRUE;
-        //$config['overwrite']            = TRUE;
-        $config['file_name']            = $this->session->userdata('username')."_".$this->input->post('BENTUK')."_".$this->input->post('PEMBERI');
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile;
 
         $this->upload->initialize($config);
-        $SERTIFIKAT = $this->upload->data('file_name');
+        $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('SERTIFIKAT');
-      }
 
-      $res = $this->model_utama->insertPenghargaan($SERTIFIKAT);
+        $this->model_utama->updateDokumenPenghargaan($id, $namafile);
+      }
 
       if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
-          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penghargaan!');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data Penghargaan!');
       }else{
           $this->session->set_flashdata('alert','error');
-          $this->session->set_flashdata('msg','Gagal menambahkan data penghargaan!');
+          $this->session->set_flashdata('msg','Gagal menambahkan data Penghargaan!');
       }
 
-  		redirect('Module/penghargaan');
+      redirect('Module/penghargaan');
     }
 
     public function doUpdatePenghargaan($id){
@@ -539,5 +597,46 @@
       }
 
       redirect('Module/penghargaan');
-  }
+   }
+
+   public function doDeletePenghargaan($id){
+     $res = $this->model_utama->deletePenghargaan($id);
+
+     if($res==true){
+         $this->session->set_flashdata('alert','success');
+         $this->session->set_flashdata('msg', 'Berhasil menghapus data Penghargaan!');
+     }else{
+         $this->session->set_flashdata('alert','error');
+         $this->session->set_flashdata('msg','Gagal menghapus data Penghargaan!');
+     }
+
+     redirect('Module/penghargaan');
+   }
+
+   public function doDokumenPenghargaan($id){
+     $namafile = $id."_penghargaan_".$this->session->userdata('username');
+
+     if(!empty($_FILES['SERTIFIKAT']['name'])){
+       $config['upload_path']          = './media/penghargaan/';
+       $config['allowed_types']        = 'pdf';
+       $config['file_ext_tolower']     = 'TRUE';
+       $config['overwrite']            = TRUE;
+       $config['file_name']            = $namafile;
+
+       $this->upload->initialize($config);
+       $SK = $this->upload->data('file_name');
+       $res_u = $this->upload->do_upload('SERTIFIKAT');
+     }
+
+     if($res_u == "1"){
+         $this->session->set_flashdata('alert','success');
+         $this->session->set_flashdata('msg', 'Berhasil mengubah dokumen Penghargaan!');
+     }else{
+         $this->session->set_flashdata('alert','error');
+         $this->session->set_flashdata('msg','Gagal mengubah dokumen Penghargaan!');
+     }
+
+     redirect('Module/penghargaan');
+   }
+   //-------------------------------------------------------DO PENGHARGAAN
 }
