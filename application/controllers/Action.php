@@ -447,6 +447,7 @@
       $res = $this->model_utama->deletePembimbing($id);
 
       if($res==true){
+          unlink('./media/pembimbing/'. $id."_pembimbing_".$this->session->userdata('username'));
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menghapus data pembimbing!');
       }else{

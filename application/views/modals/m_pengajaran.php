@@ -4,12 +4,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Pendidikan</h4>
+        <h4 class="modal-title">Add Pengajaran</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertPendidikan'); ?>" method="post">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertPengajaran'); ?>" method="post">
          <div class="form-group">
-           <label class="control-label col-sm-3">Program:</label>
+           <label class="control-label col-sm-3">Mata Kuliah:</label>
            <div class="col-sm-5">
              <select class="selectpicker form-control" title="Select Program" name="selProgram">
                <option value="DIPLOMA">Diploma</option>
@@ -59,3 +59,7 @@
     </div>
   </div>
 </div>
+
+<?php foreach($pengajaran as $p){ ?>
+
+<?php } ?>
