@@ -60,6 +60,7 @@
   </div>
 </div>
 
+
 <?php foreach($pendidikan as $p){ ?>
 <!-- Modal Edit -->
 <div id="ModalEdit<?php echo $p->ID_PENDIDIKAN; ?>" class="modal fade" role="dialog">
@@ -102,18 +103,83 @@
              <input type="text" class="form-control" name="jur" value="<?php echo $p->JURUSAN; ?>">
            </div>
          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Dokumen Ijazah-->
+<div id="ModalDokumenI<?= $p->ID_PENDIDIKAN ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload Ijazah</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doUploadIjazah'); ?>" method="post">
+          <input type="hidden" name="idnya" value="<?= $p->ID_PENDIDIKAN ?>">
+          <input type="hidden" name="programnya" value="<?= $p->PROGRAM ?>">
          <div class="form-group">
            <label class="control-label col-sm-3">Ijazah:</label>
            <div class="col-sm-5">
              <input type="file" name="ij" class="inputFile" accept="application/pdf">
            </div>
          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Dokumen Transkrip-->
+<div id="ModalDokumenT<?= $p->ID_PENDIDIKAN ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload Transkrip</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertPendidikan'); ?>" method="post">
+          <input type="hidden" name="idnya" value="<?= $p->ID_PENDIDIKAN ?>">
          <div class="form-group">
            <label class="control-label col-sm-3">Transkrip:</label>
            <div class="col-sm-5">
              <input type="file" name="tr" class="inputFile" accept="application/pdf">
            </div>
          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete-->
+<div id="ModalDelete<?= $p->ID_PENDIDIKAN ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete Pendidikan</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertPendidikan'); ?>" method="post">
+          <input type="hidden" name="idnya" value="<?= $p->ID_PENDIDIKAN ?>">
+         <h1 style="text-align: center;">Are You Sure?</h1>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Submit</button>

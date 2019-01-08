@@ -39,7 +39,12 @@
                     <td><?= $p->JURUSAN; ?></td>
                     <td><a href="<?= base_url('media/ijazah/' . $p->IJASAH . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
                     <td><a href="<?= base_url('media/transkrip/' . $p->TRANSKRIP . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-success">View</a></td>
-                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $p->ID_PENDIDIKAN; ?> "><span class="fa fa-edit"></span></button></td>
+                    <td>
+                      <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $p->ID_PENDIDIKAN ?>"><span class="fa fa-edit"></span></button> &nbsp;
+                      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#ModalDokumenI<?= $p->ID_PENDIDIKAN ?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen Ijazah"><span class="fa fa-file"></span></button> &nbsp;
+                      <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#ModalDokumenT<?= $p->ID_PENDIDIKAN ?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen Transkrip"><span class="fa fa-file"></span></button> &nbsp;
+                      <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#ModalDelete<?= $p->ID_PENDIDIKAN ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus data"><span class="fa fa-trash"></span></button>
+                    </td>
                   </tr>
                 <?php $no++;endforeach; ?>
               </tbody>

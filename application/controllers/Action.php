@@ -38,6 +38,8 @@
   		redirect('Module/identitasdiri');
     }
 
+    // Pendidikan
+
     public function doInsertPendidikan(){
       $this->form_validation->set_rules('selProgram','selectProgram','required|xss_clean|trim');
       $this->form_validation->set_rules('thn','tahun','required|xss_clean|trim|max_length[4]');
@@ -123,20 +125,70 @@
         $perT = $this->input->post('pt');
         $jurusan = $this->input->post('jur');
 
-        if(empty($_FILES['ij']['name']) && empty($_FILES['tr']['name'])){
-          echo "Ijasah dan Transkrip kosong";
-        }else if(empty($_FILES['ij']['name']) && !empty($_FILES['tr']['name'])){
-          echo "Ijasah kosong, Transkrip: " . $_FILES['tr']['name'];
-        }else if(!empty($_FILES['ij']['name']) && empty($_FILES['tr']['name'])){
-          echo "Ijasah: " . $_FILES['ij']['name'] . " Transkrip kosong";
+        $data = array(
+          'PROGRAM' => $prog,
+          'TAHUN' => $tahun,
+          'PERGURUAN_TINGGI' => $perT,
+          'JURUSAN' => $jurusan,
+        );
+
+        $res = $this->model_utama->updatePendidikan($data,$kdk);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg', 'Berhasil Update Pendidikan!');
         }else{
-          echo $_FILES['ij']['name'] . " &nbsp; " . $_FILES['tr']['name'];
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal Update Pendidikan!');
         }
+        redirect('Module/Pendidikan');
       }else{
         $this->session->set_flashdata('alert','error');
         $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
         redirect('Module/Pendidikan');
       }
+    }
+
+    public function doUploadIjazah(){
+      $this->form_validation->set_rules('idnya','id pendidikan','required|xss_clean|trim');
+      $this->form_validation->set_rules('programnya','program pendidikan','required|xss_clean|trim');
+      if(empty($_FILES['ij']['name'])){
+        $this->form_validation->set_rules('ij','ijazah','required|xss_clean|trim');
+      }
+
+      if($this->form_validation->run() == TRUE){
+        $kode = $this->input->post('idnya');
+        $pro = $this->input->post('programnya');
+
+        $config['upload_path']          = './media/ijazah/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'Ijazah_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username');
+
+        $this->upload->initialize($config);
+        $res = $this->upload->do_upload('ij');
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','File Uploaded!');
+          redirect('Module/Pendidikan');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','File Not Uploaded!');
+          redirect('Module/Pendidikan');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','File Not Supported!');
+        redirect('Module/Pendidikan');
+      }
+    }
+
+    public function doUploadTranskrip(){
+
+    }
+
+    public function doDeletePendidikan(){
+
     }
 
     public function doInsertPengajaran(){
@@ -161,7 +213,6 @@
         $config['upload_path']          = './media/penelitian/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = 'TRUE';
-        $config['overwrite']            = 'TRUE';
         $config['file_name']            = $namafile;
 
         $this->upload->initialize($config);

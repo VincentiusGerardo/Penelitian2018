@@ -158,9 +158,20 @@
       }
     }
 
-    public function updatePendidikan($data,$user){
-      $cond = array('NIP_NIK' => $NIP_NIK);
+    public function updatePendidikan($data,$idPendidikan){
+      $cond = array('ID_PENDIDIKAN' => $idPendidikan);
       $r = $this->db->update('riwayat_pendidikan',$data,$cond);
+
+      if($r){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deletePendidikan($id){
+      $cond = array('NIP_NIK' => $id);
+      $r = $this->db->delete('riwayat_pendidikan',$cond);
 
       if($r){
         return true;
