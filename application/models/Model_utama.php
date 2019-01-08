@@ -170,7 +170,7 @@
     }
 
     public function deletePendidikan($id){
-      $cond = array('NIP_NIK' => $id);
+      $cond = array('ID_PENDIDIKAN' => $id);
       $r = $this->db->delete('riwayat_pendidikan',$cond);
 
       if($r){

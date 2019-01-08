@@ -184,11 +184,62 @@
     }
 
     public function doUploadTranskrip(){
+      $this->form_validation->set_rules('idnya','id pendidikan','required|xss_clean|trim');
+      $this->form_validation->set_rules('programnya','program pendidikan','required|xss_clean|trim');
+      if(empty($_FILES['tr']['name'])){
+        $this->form_validation->set_rules('tr','ijazah','required|xss_clean|trim');
+      }
 
+      if($this->form_validation->run() == TRUE){
+        $kode = $this->input->post('idnya');
+        $pro = $this->input->post('programnya');
+
+        $config['upload_path']          = './media/transkrip/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'Transkrip_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username');
+
+        $this->upload->initialize($config);
+        $res = $this->upload->do_upload('tr');
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','File Uploaded!');
+          redirect('Module/Pendidikan');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','File Not Uploaded!');
+          redirect('Module/Pendidikan');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','File Not Supported!');
+        redirect('Module/Pendidikan');
+      }
     }
 
     public function doDeletePendidikan(){
-
+      $this->form_validation->set_rules('idnya','id_pendidikan','required|xss_clean|trim');
+      $this->form_validation->set_rules('programnya','program_pendidikan','required|xss_clean|trim');
+      if($this->form_validation->run() == TRUE){
+        $kode = $this->input->post('idnya');
+        $prog = $this->input->post('programnya');
+        $r = $this->model_utama->deletePendidikan($kode);
+        if($r){
+          unlink(base_url('media/ijasah/Ijazah_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username')));
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Sucessfuly Deleted!');
+          redirect('Module/Pendidikan');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Selection Can Not Be Deleted!');
+          redirect('Module/Pendidikan');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Error!');
+        redirect('Module/Pendidikan');
+      }
     }
 
     public function doInsertPengajaran(){
