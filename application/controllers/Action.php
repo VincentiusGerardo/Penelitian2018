@@ -226,7 +226,8 @@
         $prog = $this->input->post('programnya');
         $r = $this->model_utama->deletePendidikan($kode);
         if($r){
-          unlink(base_url('media/ijasah/Ijazah_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username')));
+          unlink('./media/ijazah/Ijazah_' . ucfirst(strtolower($prog)) . "_" . $this->session->userdata('username') . ".pdf");
+          unlink('./media/transkrip/Transkrip_' . ucfirst(strtolower($prog)) . "_" . $this->session->userdata('username') . ".pdf");
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Sucessfuly Deleted!');
           redirect('Module/Pendidikan');
@@ -242,6 +243,8 @@
       }
     }
 
+    //Pengajaran
+    
     public function doInsertPengajaran(){
 
     }
@@ -250,7 +253,8 @@
 
     }
 
-    //----------------------------------------------------DO PENELITIAN
+    //Penelitian
+    
     public function doInsertPenelitian(){
       $res = $this->model_utama->insertPenelitian();
 
@@ -337,7 +341,8 @@
 
       redirect('Module/penelitian');
     }
-    //----------------------------------------------------DO PENELITIAN
+    
+    //Publikasi
 
     public function doInsertPublikasi(){
 
@@ -347,6 +352,8 @@
 
     }
 
+    //Bahan Ajar
+
     public function doInsertBahanAjar(){
 
     }
@@ -354,6 +361,8 @@
     public function doUpdateBahanAjar(){
 
     }
+
+    //Seminar
 
     public function doInsertSeminar(){
 
@@ -363,6 +372,8 @@
 
     }
 
+    //PKM
+
     public function doInsertPKM(){
 
     }
@@ -370,6 +381,8 @@
     public function doUpdatePKM(){
 
     }
+
+    //Pengelolaan Institusi
 
     public function doInsertPengelolaanInstitusi(){
 
@@ -379,7 +392,8 @@
 
     }
 
-    //----------------------------------------------------DO PEMBIMBING
+    //Pembimbing
+    
     public function doInsertPembimbing(){
 
       $res = $this->model_utama->insertPembimbing();
@@ -468,9 +482,9 @@
 
       redirect('Module/pembimbing');
     }
-    //-------------------------------------------------------DO PEMBIMBING
+    
+    //Penguji
 
-    //----------------------------------------------------DO PENGUJI
     public function doInsertPenguji(){
 
       $res = $this->model_utama->insertPenguji();
@@ -559,9 +573,9 @@
 
       redirect('Module/penguji');
     }
-    //-------------------------------------------------------DO PENGUJI
+    
+    //Organisasi
 
-    //-------------------------------------------------------DO ORGANISASI
     public function doInsertOrganisasi(){
 
       $res = $this->model_utama->insertOrganisasi();
@@ -650,9 +664,9 @@
 
       redirect('Module/organisasiprofesi  ');
     }
-    //-------------------------------------------------------DO ORGANISASI
+    
+    // Penghargaan
 
-    //-------------------------------------------------------DO PENGHARGAAN
     public function doInsertPenghargaan(){
       $res = $this->model_utama->insertPenghargaan();
 
