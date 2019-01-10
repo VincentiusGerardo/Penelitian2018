@@ -246,11 +246,45 @@
     //Pengajaran
     
     public function doInsertPengajaran(){
+      $this->form_validation->set_rules();
+
+      if($this->form_validation->run() == TRUE){
+
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menambahkan Pendidikan! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pendidikan');
+      }
 
     }
 
     public function doUpdatePengajaran(){
+      $this->form_validation->set_rules();
 
+      if($this->form_validation->run() == TRUE){
+
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pendidikan');
+      }
+    }
+
+    public function doUploadSK(){
+      $this->form_validation->set_rules();
+
+      if($this->form_validation->run() == TRUE){
+        
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pendidikan');s
+      }
+
+    }
+
+    public function doDeletePengajaran(){
+      echo $this->input->post('id');
     }
 
     //Penelitian
