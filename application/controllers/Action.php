@@ -372,13 +372,9 @@
       }
 
       if($this->form_validation->run() == TRUE){
-<<<<<<< HEAD
-
-      }else{
         $this->session->set_flashdata('alert','error');
         $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
         redirect('Module/Pendidikan');
-=======
         $id = $this->input->post('id');
         $p = $this->input->post('prog');
         $ps = $this->input->post('prodi');
@@ -406,7 +402,6 @@
         $this->session->set_flashdata('alert','error');
         $this->session->set_flashdata('msg','Gagal Mengubah Pengajaran! Silahkan Check Kembali Inputan!');
         redirect('Module/Pengajaran');
->>>>>>> 0cf950f0e75b937f2468ebcb3b49b02dcbd77d20
       }
     }
 
@@ -530,19 +525,6 @@
 
       redirect('Module/penelitian');
     }
-<<<<<<< HEAD
-=======
-
-    //Publikasi
-
-    public function doInsertPublikasi(){
-
-    }
-
-    public function doUpdatePublikasi(){
-
-    }
->>>>>>> 0cf950f0e75b937f2468ebcb3b49b02dcbd77d20
 
     //Bahan Ajar
 
