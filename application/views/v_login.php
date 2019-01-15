@@ -29,7 +29,18 @@
 
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
-
+        <style>
+          body{
+            margin:0;
+            background-image: url("<?php echo base_url('media/lecture.jpg'); ?>") !important;
+            /* background-color: #cccccc;
+            height: 500px; */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+          }
+        </style>
         <script>
             $(function(){
                 $(".alert").fadeTo(2000, 500).slideUp(500, function(){
@@ -41,7 +52,7 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="<?php echo base_url(); ?>"><b>Portofolio</b> Dosen</a>
+                <a href="<?php echo base_url(); ?>" style="color:white;"><b>Portofolio</b> Dosen</a>
             </div>
             <div class="login-box-body">
                 <p class="login-box-msg"><?php echo $this->session->flashdata('message'); ?></p>
