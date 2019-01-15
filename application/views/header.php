@@ -126,7 +126,7 @@
                   <li><a href="<?php echo base_url('Module/Seminar/'); ?>"><i class="fa fa-desktop"></i> <span>Seminar</span></a></li>
                   <li><a href="<?php echo base_url('Module/PKM/'); ?>"><i class="fa fa-users"></i> <span>Pengabdian Masyarakat</span></a></li>
                   <li><a href="<?php echo base_url('Module/PengelolaanInstitusi/'); ?>"><i class="fa fa-university"></i> <span>Pengelolaan Institusi</span></a></li>
-                  <li><a href="<?php echo base_url('Module/CV/'); ?>"><i class="fa fa-print"></i> <span>Buat Curriculum Vitae (CV)</span></a></li>
+                  <li><a href="<?php echo base_url('Module/CV/'); ?>"><i class="fa fa-print"></i> <span>Buat Portofolio</span></a></li>
                 <?php } ?>
               </ul>
               <!-- /.sidebar-menu -->

@@ -244,7 +244,7 @@
     }
 
     //Pengajaran
-    
+
     public function doInsertPengajaran(){
       $this->form_validation->set_rules();
 
@@ -274,13 +274,12 @@
       $this->form_validation->set_rules();
 
       if($this->form_validation->run() == TRUE){
-        
+
       }else{
         $this->session->set_flashdata('alert','error');
         $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
-        redirect('Module/Pendidikan');s
+        redirect('Module/Pendidikan');
       }
-
     }
 
     public function doDeletePengajaran(){
@@ -288,7 +287,7 @@
     }
 
     //Penelitian
-    
+
     public function doInsertPenelitian(){
       $res = $this->model_utama->insertPenelitian();
 
@@ -375,16 +374,6 @@
 
       redirect('Module/penelitian');
     }
-    
-    //Publikasi
-
-    public function doInsertPublikasi(){
-
-    }
-
-    public function doUpdatePublikasi(){
-
-    }
 
     //Bahan Ajar
 
@@ -427,7 +416,7 @@
     }
 
     //Pembimbing
-    
+
     public function doInsertPembimbing(){
 
       $res = $this->model_utama->insertPembimbing();
@@ -517,7 +506,7 @@
 
       redirect('Module/pembimbing');
     }
-    
+
     //Penguji
 
     public function doInsertPenguji(){
@@ -608,7 +597,7 @@
 
       redirect('Module/penguji');
     }
-    
+
     //Organisasi
 
     public function doInsertOrganisasi(){
@@ -699,7 +688,7 @@
 
       redirect('Module/organisasiprofesi  ');
     }
-    
+
     // Penghargaan
 
     public function doInsertPenghargaan(){
@@ -790,4 +779,139 @@
      redirect('Module/penghargaan');
    }
    //-------------------------------------------------------DO PENGHARGAAN
+
+   //-------------------------------------------------------DO PUBLIKASI
+
+   public function doInsertPublikasi(){
+      $res = $this->model_utama->insertPublikasi();
+
+      $dat = $this->model_utama->getwhere_Publikasi();
+      foreach ($dat as $pem) {
+        $namafile_1 = $pem['ID_PUBLIKASI']."_publikasi_penugasan_".$this->session->userdata('username');
+        $namafile_2 = $pem['ID_PUBLIKASI']."_publikasi_buktiKinerja_".$this->session->userdata('username');
+        $id = $pem['ID_PUBLIKASI'];
+      }
+
+      if(!empty($_FILES['PENUGASAN']['name'])){
+        $config['upload_path']          = './media/publikasi/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile_1;
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u1 = $this->upload->do_upload('PENUGASAN');
+
+      }else{
+        $namafile_1 = "";
+      }
+
+      if(!empty($_FILES['BUKTI_KINERJA']['name'])){
+        $config['upload_path']          = './media/publikasi/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile_2;
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u2 = $this->upload->do_upload('BUKTI_KINERJA');
+
+        $this->model_utama->updateDokumenPublikasi($id, $namafile_1, $namafile_2);
+      }else{
+        $namafile_2 = "";
+      }
+
+      if($res==true && $res_u1 == "1" && $res_u2 == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data Publikasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menambahkan data Publikasi!');
+      }
+
+      redirect('Module/Publikasi');
+    }
+
+    public function doDeletePublikasi($id){
+      $res = $this->model_utama->deletePublikasi($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menghapus data publikasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal menghapus data publikasi!');
+      }
+
+      redirect('Module/publikasi');
+    }
+
+    public function doUpdatePublikasi($id){
+      $res = $this->model_utama->updatePublikasi($id);
+
+      if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah data publikasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah data publikasi!');
+      }
+
+      redirect('Module/publikasi');
+    }
+
+    public function doDokumenPublikasiPenugasan($id){
+      $namafile = $id."_publikasi_penugasan_".$this->session->userdata('username');
+
+      if(!empty($_FILES['PENUGASAN']['name'])){
+        $config['upload_path']          = './media/publikasi/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile;
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('PENUGASAN');
+      }
+
+      if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah dokumen publikasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah dokumen publikasi!');
+      }
+
+      redirect('Module/publikasi');
+    }
+
+    public function doDokumenPublikasiBuktiKinerja($id){
+      $namafile = $id."_publikasi_buktiKinerja_".$this->session->userdata('username');
+
+      if(!empty($_FILES['BUKTI_KINERJA']['name'])){
+        $config['upload_path']          = './media/publikasi/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = 'TRUE';
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = $namafile;
+
+        $this->upload->initialize($config);
+        $SK = $this->upload->data('file_name');
+        $res_u = $this->upload->do_upload('BUKTI_KINERJA');
+      }
+
+      if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengubah dokumen publikasi!');
+      }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal mengubah dokumen publikasi!');
+      }
+
+      redirect('Module/publikasi');
+    }
+   //-------------------------------------------------------DO PUBLIKASI
 }

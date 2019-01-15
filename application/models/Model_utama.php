@@ -49,7 +49,7 @@
         'TAHUN'=> $this->input->post('TAHUN'),
         'PROGRAM' => $this->input->post('PROGRAM'),
         'JUDUL' => $this->input->post('JUDUL'),
-        'PERANAN' => $this->input->post('PERANAN'),
+        'PERANAN' => $this->input->post('PERANAN')
       ));
       return $query->result_array();
     }
@@ -68,7 +68,26 @@
         'TAHUN'=> $this->input->post('TAHUN'),
         'PROGRAM' => $this->input->post('PROGRAM'),
         'JUDUL' => $this->input->post('JUDUL'),
-        'PERANAN' => $this->input->post('PERANAN'),
+        'PERANAN' => $this->input->post('PERANAN')
+      ));
+      return $query->result_array();
+    }
+
+    public function getwhere_Publikasi(){
+      $query = $this->db->get_where('publikasi', array(
+        'NIP_NIK' => $this->session->userdata('username'),
+        'TANGGAL' => $this->input->post('TANGGAL'),
+        'JUDUL' =>  $this->input->post('JUDUL'),
+        'JENIS' => $this->input->post('JENIS'),
+        'JURNAL'=> $this->input->post('JURNAL'),
+        'PENERBIT' => $this->input->post('PENERBIT'),
+        'NOMOR' => $this->input->post('NOMOR'),
+        'VOLUME' => $this->input->post('VOLUME'),
+        'ISSN' => $this->input->post('ISSN'),
+        'ISBN' => $this->input->post('ISBN'),
+        'KONFERENSI' => $this->input->post('KONFERENSI'),
+        'TEMPAT' => $this->input->post('TEMPAT'),
+        'PERANAN' => $this->input->post('PERANAN')
       ));
       return $query->result_array();
     }
@@ -500,4 +519,82 @@
       $q = $this->db->query($query);
     	return $q->result_array();
     }
+
+    //----------------------------------------------------PUBLIKASI
+    public function insertPublikasi(){
+      $data = array(
+        'NIP_NIK' => $this->session->userdata('username'),
+        'TANGGAL' => $this->input->post('TANGGAL'),
+        'JUDUL' =>  $this->input->post('JUDUL'),
+        'JENIS' => $this->input->post('JENIS'),
+        'JURNAL'=> $this->input->post('JURNAL'),
+        'PENERBIT' => $this->input->post('PENERBIT'),
+        'NOMOR' => $this->input->post('NOMOR'),
+        'VOLUME' => $this->input->post('VOLUME'),
+        'ISSN' => $this->input->post('ISSN'),
+        'ISBN' => $this->input->post('ISBN'),
+        'KONFERENSI' => $this->input->post('KONFERENSI'),
+        'TEMPAT' => $this->input->post('TEMPAT'),
+        'PERANAN' => $this->input->post('PERANAN')
+      );
+
+      return $this->db->insert('publikasi', $data);
+    }
+
+    public function updatePublikasi($id){
+      if($this->input->post('JURNAL')!=null || $this->input->post('JURNAL')!=""){
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'TANGGAL' => $this->input->post('TANGGAL'),
+          'JUDUL' =>  $this->input->post('JUDUL'),
+          'JENIS' => $this->input->post('JENIS'),
+          'JURNAL'=> $this->input->post('JURNAL'),
+          'PENERBIT' => $this->input->post('PENERBIT'),
+          'NOMOR' => $this->input->post('NOMOR'),
+          'VOLUME' => $this->input->post('VOLUME'),
+          'ISSN' => $this->input->post('ISSN'),
+          'ISBN' => $this->input->post('ISBN'),
+          //'KONFERENSI' => $this->input->post('KONFERENSI'),
+          //'TEMPAT' => $this->input->post('TEMPAT'),
+          'PERANAN' => $this->input->post('PERANAN')
+        );
+      }else if($this->input->post('KONFERENSI')!=null || $this->input->post('KONFERENSI')!=""){
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'TANGGAL' => $this->input->post('TANGGAL'),
+          'JUDUL' =>  $this->input->post('JUDUL'),
+          'JENIS' => $this->input->post('JENIS'),
+          'KONFERENSI' => $this->input->post('KONFERENSI'),
+          'TEMPAT' => $this->input->post('TEMPAT'),
+          'PERANAN' => $this->input->post('PERANAN')
+        );
+      }else{
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'TANGGAL' => $this->input->post('TANGGAL'),
+          'JUDUL' =>  $this->input->post('JUDUL'),
+          'JENIS' => $this->input->post('JENIS'),
+          'PERANAN' => $this->input->post('PERANAN')
+        );
+      }
+
+      $this->db->where('ID_PUBLIKASI', $id);
+      return $this->db->update('Publikasi', $data);
+    }
+
+    public function updateDokumenPublikasi($id, $SERTIFIKAT, $BUKTI_KINERJA){
+      $data = array(
+        'PENUGASAN' => $SERTIFIKAT,
+        'BUKTI_KINERJA' => $BUKTI_KINERJA
+      );
+
+      $this->db->where('ID_PUBLIKASI', $id);
+      return $this->db->update('publikasi', $data);
+    }
+
+    public function deletePublikasi($id){
+      $this->db->where('ID_PUBLIKASI', $id);
+      return $this->db->delete('Publikasi');
+    }
+    //----------------------------------------------------PUBLIKASI
   }
