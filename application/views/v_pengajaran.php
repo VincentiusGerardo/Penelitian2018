@@ -41,7 +41,7 @@
                     <td><?= $p->PROGRAM_STUDI ?></td>
                     <td><?= ucfirst(strtolower($p->SEMESTER)) ?></td>
                     <td><?= $p->TAHUN_AKADEMIK ?></td>
-                    <td><a href="<?= base_url('./media/sk/sk_' . $this->session->userdata('username') . '.pdf') ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
+                    <td><a href="<?= base_url('./media/sk/' . $p->SK . '.pdf') ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
                     <td>
                       <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $p->ID_PENGAJARAN ?>"><span class="fa fa-edit"></span></button> &nbsp;
                       <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#ModalUploadSK<?= $p->ID_PENGAJARAN ?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen"><span class="fa fa-file"></span></button> &nbsp;

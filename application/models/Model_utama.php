@@ -201,6 +201,35 @@
   		return $this->db->update('identitas_diri', $data);
     }
 
+    public function insertPengajaran($data){
+      $q = $this->db->insert('pengajaran',$data);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updatePengajaran($id,$data){
+      $cond = array('ID_PENGAJARAN' => $id);
+      $q = $this->db->update('pengajaran',$data,$cond);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deletePengajaran($id){
+      $con = array('ID_PENGAJARAN' => $id);
+      $q = $this->db->delete('pengajaran',$con);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     //------------------------------------------------------PEMBIMBING
     public function insertPembimbing(){
       $data = array(
