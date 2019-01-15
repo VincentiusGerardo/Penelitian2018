@@ -90,8 +90,8 @@
           'TAHUN' => $tahun,
           'PERGURUAN_TINGGI' => $perT,
           'JURUSAN' => $jurusan,
-          'IJASAH' => $ijazah,
-          'TRANSKRIP' => $transkrip
+          'IJASAH' => str_replace(" ", "_",$ijazah),
+          'TRANSKRIP' => str_replace(" ", "_",$transkrip)
         );
 
         $res = $this->model_utama->insertPendidikan($data);
@@ -221,13 +221,17 @@
     public function doDeletePendidikan(){
       $this->form_validation->set_rules('idnya','id_pendidikan','required|xss_clean|trim');
       $this->form_validation->set_rules('programnya','program_pendidikan','required|xss_clean|trim');
+      $this->form_validation->set_rules('ijasahnya','ijasah','required|xss_clean|trim');
+      $this->form_validation->set_rules('transkripnya','transkrip','required|xss_clean|trim');
       if($this->form_validation->run() == TRUE){
         $kode = $this->input->post('idnya');
         $prog = $this->input->post('programnya');
+        $ij = $this->input->post('ijasahnya');
+        $tr = $this->input->post('transkripnya');
         $r = $this->model_utama->deletePendidikan($kode);
         if($r){
-          unlink('./media/ijazah/Ijazah_' . ucfirst(strtolower($prog)) . "_" . $this->session->userdata('username') . ".pdf");
-          unlink('./media/transkrip/Transkrip_' . ucfirst(strtolower($prog)) . "_" . $this->session->userdata('username') . ".pdf");
+          unlink('./media/ijazah/' . $ij . ".pdf");
+          unlink('./media/transkrip/' . $tr . ".pdf");
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Sucessfuly Deleted!');
           redirect('Module/Pendidikan');
@@ -246,44 +250,196 @@
     //Pengajaran
 
     public function doInsertPengajaran(){
-      $this->form_validation->set_rules();
+      $this->form_validation->set_rules('matkul','MataKuliah','required|trim|xss_clean');
+      $this->form_validation->set_rules('progPend','ProgramPendidikan','required|trim|xss_clean');
+      $this->form_validation->set_rules('insti','Institusi','required|trim|xss_clean');
+      $this->form_validation->set_rules('jur','jurusan','required|trim|xss_clean');
+      $this->form_validation->set_rules('prostud','ProgramStudi','required|trim|xss_clean');
+      $this->form_validation->set_rules('sem','Semester','required|trim|xss_clean');
+      $this->form_validation->set_rules('ta','TahunAjaran','required|trim|xss_clean');
+      $this->form_validation->set_rules('tsk','TanggalSuratKeputusan','required|trim|xss_clean');
+      if(empty($_FILES['sk']['name'])){
+          $this->form_validation->set_rules('sk','SuratKeputusan','required|trim|xss_clean');
+      }
 
       if($this->form_validation->run() == TRUE){
+        $m = $this->input->post('matkul');
+        $p = $this->input->post('progPend');
+        $i = $this->input->post('insti');
+        $j = $this->input->post('jur');
+        $ps = $this->input->post('prostud');
+        $s = $this->input->post('sem');
+        $t = $this->input->post('ta');
+        $tgl = $this->input->post('tsk');
 
+        $config['upload_path']          = './media/sk/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'sk_' . ucfirst(strtolower($p)) . "_" . $this->session->userdata('username') . "_" . $ps . "_" . $t;
+
+        $this->upload->initialize($config);
+
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'MATA_KULIAH' => $m,
+          'PROGRAM_PENDIDIKAN' => $p,
+          'INSTITUSI' => $i,
+          'JURUSAN' => $j,
+          'PROGRAM_STUDI' => $ps,
+          'SEMESTER' => $s,
+          'TAHUN_AKADEMIK' => $t,
+          'TanggalSK' => $tgl,
+          'SK' => str_replace(" ", "_",$this->upload->data('file_name'))
+        );
+        $res = $this->model_utama->insertPengajaran($data);
+        if($res == true){
+          $this->upload->do_upload('sk');
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menambahkan Pengajaran!');
+          redirect('Module/Pengajaran');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menambahkan Pengajaran!');
+          redirect('Module/Pengajaran');
+        }
       }else{
         $this->session->set_flashdata('alert','error');
-        $this->session->set_flashdata('msg','Gagal Menambahkan Pendidikan! Silahkan Check Kembali Inputan!');
-        redirect('Module/Pendidikan');
+        $this->session->set_flashdata('msg','Gagal Menambahkan Pengajaran! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pengajaran');
       }
 
     }
 
     public function doUpdatePengajaran(){
-      $this->form_validation->set_rules();
+      $this->form_validation->set_rules('id','IDPengajaran','required|trim|xss_clean');
+      $this->form_validation->set_rules('matkul','MataKuliah','required|trim|xss_clean');
+      $this->form_validation->set_rules('progPend','ProgramPendidikan','required|trim|xss_clean');
+      $this->form_validation->set_rules('insti','Institusi','required|trim|xss_clean');
+      $this->form_validation->set_rules('jur','Jurusan','required|trim|xss_clean');
+      $this->form_validation->set_rules('prostud','ProgramStudi','required|trim|xss_clean');
+      $this->form_validation->set_rules('sem','Semester','required|trim|xss_clean');
+      $this->form_validation->set_rules('ta','TahunAkademik','required|trim|xss_clean');
+      $this->form_validation->set_rules('tsk','TanggalSK','required|trim|xss_clean');
 
       if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('id');
+        $mk = $this->input->post('matkul');
+        $program = $this->input->post('progPend');
+        $institusi = $this->input->post('insti');
+        $jurusan = $this->input->post('jur');
+        $programS = $this->input->post('prostud');
+        $semster = $this->input->post('sem');
+        $tahunA = $this->input->post('ta');
+        $tahunSK = $this->input->post('tsk');
 
+        $data = array(
+          'MATA_KULIAH' => $mk,
+          'PROGRAM_PENDIDIKAN' => $program,
+          'INSTITUSI' => $institusi,
+          'JURUSAN' => $jurusan,
+          'PROGRAM_STUDI' => $programS,
+          'SEMESTER' => $semster,
+          'TAHUN_AKADEMIK' => $tahunA,
+          'TanggalSK' => $tahunSK
+        );
+
+        $res = $this->model_utama->updatePengajaran($id,$data);
+
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Mengubah Pengajaran!');
+          redirect('Module/Pengajaran');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Mengubah Pengajaran!');
+          redirect('Module/Pengajaran');
+        }
       }else{
         $this->session->set_flashdata('alert','error');
-        $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
-        redirect('Module/Pendidikan');
+        $this->session->set_flashdata('msg','Gagal Mengubah Pengajaran! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pengajaran');
       }
     }
 
     public function doUploadSK(){
-      $this->form_validation->set_rules();
+      $this->form_validation->set_rules('id','IDPengajran','required|trim|xss_clean');
+      $this->form_validation->set_rules('prog','ProgramPendidikan','required|trim|xss_clean');
+      $this->form_validation->set_rules('prodi','ProgramStudi','required|trim|xss_clean');
+      $this->form_validation->set_rules('ta','TahunAkademik','required|trim|xss_clean');
+      if(empty($_FILES['sk']['name'])){
+        $this->form_validation->set_rules('sk','SuratKeterangan','required|trim|xss_clean');
+      }
 
       if($this->form_validation->run() == TRUE){
+<<<<<<< HEAD
 
       }else{
         $this->session->set_flashdata('alert','error');
         $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
         redirect('Module/Pendidikan');
+=======
+        $id = $this->input->post('id');
+        $p = $this->input->post('prog');
+        $ps = $this->input->post('prodi');
+        $t = $this->input->post('ta');
+
+        $config['upload_path']          = './media/sk/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'sk_' . ucfirst(strtolower($p)) . "_" . $this->session->userdata('username') . "_" . $ps . "_" . $t;
+
+        $this->upload->initialize($config);
+        $res = $this->upload->do_upload('sk');
+
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','File Uploaded!');
+          redirect('Module/Pengajaran');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','File Not Uploaded!');
+          redirect('Module/Pengajaran');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah Pengajaran! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pengajaran');
+>>>>>>> 0cf950f0e75b937f2468ebcb3b49b02dcbd77d20
       }
     }
 
     public function doDeletePengajaran(){
-      echo $this->input->post('id');
+      $this->form_validation->set_rules('id','IDPengajran','required|trim|xss_clean');
+      $this->form_validation->set_rules('prog','ProgramPendidikan','required|trim|xss_clean');
+      $this->form_validation->set_rules('prodi','ProgramStudi','required|trim|xss_clean');
+      $this->form_validation->set_rules('ta','TahunAkademik','required|trim|xss_clean');
+      $this->form_validation->set_rules('sk','SuratKeputusan','required|trim|xss_clean');
+
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('id');
+        $p = $this->input->post('prog');
+        $ps = $this->input->post('prodi');
+        $t = $this->input->post('ta');
+        $sk = $this->input->post('sk');
+
+        $res = $this->model_utama->deletePengajaran($id);
+        if($res == true){
+          unlink('./media/sk/' . $sk . ".pdf");
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Meghapus Pengajaran!');
+          redirect('Module/Pengajaran');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Meghapus Pengajaran!');
+          redirect('Module/Pengajaran');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Meghapus Pengajaran! Silahkan Check Kembali Inputan!');
+        redirect('Module/Pengajaran');
+      }
     }
 
     //Penelitian
@@ -374,15 +530,238 @@
 
       redirect('Module/penelitian');
     }
+<<<<<<< HEAD
+=======
+
+    //Publikasi
+
+    public function doInsertPublikasi(){
+
+    }
+
+    public function doUpdatePublikasi(){
+
+    }
+>>>>>>> 0cf950f0e75b937f2468ebcb3b49b02dcbd77d20
 
     //Bahan Ajar
 
     public function doInsertBahanAjar(){
+      $this->form_validation->set_rules('MatKul','MataKuliah','required|trim|xss_clean');
+      $this->form_validation->set_rules('Prog','Program','required|trim|xss_clean');
+      $this->form_validation->set_rules('jenisnya','JenisBahanAjar','required|trim|xss_clean');
+      $this->form_validation->set_rules('semesternya','Semester','required|trim|xss_clean');
+      $this->form_validation->set_rules('tahunnya','Tahun','required|trim|xss_clean');
+      if(empty($_FILES['penug']['name'])){
+        $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
+      }
 
+      if(empty($_FILES['buktiKin']['name'])){
+        $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
+      }
+
+      if($this->form_validation->run() == TRUE){
+        $mk = $this->input->post('MatKul');
+        $p = $this->input->post('Prog');
+        $j = $this->input->post('jenisnya');
+        $s = $this->input->post('semesternya');
+        $t = $this->input->post('tahunnya');
+
+        if(!empty($_FILES['penug']['name'])){
+          $config['upload_path']          = './media/penugasan/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
+          $config['file_name']            = 'Peugasan_' . $mk . "_" . $this->session->userdata('username') . "_" . $s . "_" . $t;
+
+          $this->upload->initialize($config);
+          $penugasan = $this->upload->data('file_name');
+          $this->upload->do_upload('penug');
+        }
+
+        if(!empty($_FILES['buktiKin']['name'])){
+          $config['upload_path']          = './media/bukti_kinerja/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
+          $config['file_name']            = 'Bukti_Kinerja_' . $mk . "_" . $this->session->userdata('username') . "_" . $s . "_" . $t;
+
+          $this->upload->initialize($config);
+          $buktikinerja = $this->upload->data('file_name');
+          $this->upload->do_upload('buktiKin');
+        }
+
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'MATA_KULIAH' => $mk,
+          'PROGRAM' => $p,
+          'JENIS' => $j,
+          'SEMESTER' => $s,
+          'TAHUN' => $t,
+          'PENUGASAN' => str_replace(" ", "_",$penugasan),
+          'BUKTI_KINERJA' => str_replace(" ", "_",$buktikinerja)
+        );
+
+        // print_r($data);
+
+        $res = $this->model_utama->insertBahanAjar($data);
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menambahkan Bahan Ajar!');
+          redirect('Module/BahanAjar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menambahkan Bahan Ajar!');
+          redirect('Module/BahanAjar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menambahkan Bahan Ajar! Silahkan Check Kembali Inputan!');
+        redirect('Module/BahanAjar');
+      }
     }
 
     public function doUpdateBahanAjar(){
+      $this->form_validation->set_rules('id','IDBA','required|trim|xss_clean');
+      $this->form_validation->set_rules('MatKul','MataKuliah','required|trim|xss_clean');
+      $this->form_validation->set_rules('Prog','Program','required|trim|xss_clean');
+      $this->form_validation->set_rules('jenisnya','JenisBahanAjar','required|trim|xss_clean');
+      $this->form_validation->set_rules('semesternya','Semester','required|trim|xss_clean');
+      $this->form_validation->set_rules('tahunnya','Tahun','required|trim|xss_clean');
 
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('id');
+        $mk = $this->input->post('MatKul');
+        $p = $this->input->post('Prog');
+        $j = $this->input->post('jenisnya');
+        $s = $this->input->post('semesternya');
+        $t = $this->input->post('tahunnya');
+
+        $data = array(
+          'MATA_KULIAH' => $mk,
+          'PROGRAM' => $p,
+          'JENIS' => $j,
+          'SEMESTER' => $s,
+          'TAHUN' => $t
+        );
+
+        $res = $this->model_utama->updateBahanAjar($id,$data);
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Mengubah Bahan Ajar!');
+          redirect('Module/BahanAjar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Mengubah Bahan Ajar!');
+          redirect('Module/BahanAjar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah Bahan Ajar! Silahkan Check Kembali Inputan!');
+        redirect('Module/BahanAjar');
+      }
+    }
+
+    public function doUploadPenugasan(){
+      $this->form_validation->set_rules('idnya','id','required|trim|xss_clean');
+      $this->form_validation->set_rules('mkya','MataKuliah','required|trim|xss_clean');
+      $this->form_validation->set_rules('sem','Semester','required|trim|xss_clean');
+      $this->form_validation->set_rules('thn','Tahun','required|trim|xss_clean');
+      if(empty($_FILES['penug']['name'])){
+        $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
+      }
+      if($this->form_validation->run() == TRUE){
+        $mk = $this->input->post('mkya');
+        $s = $this->input->post('sem');
+        $t = $this->input->post('thn');
+        $config['upload_path']          = './media/penugasan/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'Peugasan_' . $mk . "_" . $this->session->userdata('username') . "_" . $s . "_" . $t;
+
+        $this->upload->initialize($config);
+        $res = $this->upload->do_upload('penug');
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Upload Penugasan!');
+          redirect('Module/BahanAjar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Upload Penugasan!');
+          redirect('Module/BahanAjar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Upload Penugasan! Silahkan Check Kembali Inputan!');
+        redirect('Module/BahanAjar');
+      }
+    }
+
+    public function doUploadBuktiKinerja(){
+      $this->form_validation->set_rules('idnya','id','required|trim|xss_clean');
+      $this->form_validation->set_rules('mkya','MataKuliah','required|trim|xss_clean');
+      $this->form_validation->set_rules('sem','Semester','required|trim|xss_clean');
+      $this->form_validation->set_rules('thn','Tahun','required|trim|xss_clean');
+      if(empty($_FILES['buktiKin']['name'])){
+        $this->form_validation->set_rules('buktiKin','Bukti Kinerja','required|trim|xss_clean');
+      }
+      if($this->form_validation->run() == TRUE){
+        $mk = $this->input->post('mkya');
+        $s = $this->input->post('sem');
+        $t = $this->input->post('thn');
+        $config['upload_path']          = './media/bukti_kinerja/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'Bukti_Kinerja_' . $mk . "_" . $this->session->userdata('username') . "_" . $s . "_" . $t;
+
+        $this->upload->initialize($config);
+        $res = $this->upload->do_upload('buktiKin');
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Upload Penugasan!');
+          redirect('Module/BahanAjar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Upload Penugasan!');
+          redirect('Module/BahanAjar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Upload Penugasan! Silahkan Check Kembali Inputan!');
+        redirect('Module/BahanAjar');
+      }
+    }
+
+    public function doDeleteBahanAjar(){
+      $this->form_validation->set_rules('idnya','id','required|trim|xss_clean');
+      $this->form_validation->set_rules('penugasannya','Penugasan','required|trim|xss_clean');
+      $this->form_validation->set_rules('buktinya','Bukti Kinerja','required|trim|xss_clean');
+
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $p = $this->input->post('penugasannya');
+        $b = $this->input->post('buktinya');
+
+        $res = $this->model_utama->deleteBahanAjar($id);
+
+        if($res == true){
+          unlink('./media/penugasan/'. $p . ".pdf");
+          unlink('./media/bukti_kinerja/'. $b . ".pdf");
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menghapus Bahan Ajar!');
+          redirect('Module/BahanAjar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menghapus Bahan Ajar!');
+          redirect('Module/BahanAjar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menghapus Bahan Ajar! Silahkan Check Kembali Inputan!');
+        redirect('Module/BahanAjar');
+      }
     }
 
     //Seminar

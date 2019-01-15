@@ -181,6 +181,8 @@
         <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doDeletePendidikan'); ?>" method="post">
           <input type="hidden" name="idnya" value="<?= $p->ID_PENDIDIKAN ?>">
           <input type="hidden" name="programnya" value="<?= $p->PROGRAM ?>">
+          <input type="hidden" name="ijasahnya" value="<?= $p->IJASAH ?>">
+          <input type="hidden" name="transkripnya" value="<?= $p->TRANSKRIP ?>">
          <h1 style="text-align: center;">Are You Sure?</h1>
       </div>
       <div class="modal-footer">

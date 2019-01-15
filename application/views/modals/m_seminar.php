@@ -77,7 +77,7 @@
 
 <?php foreach($seminar as $s){ ?>
 <!-- Modal Edit -->
-<div id="ModalEdit<?php echo $p['ID_SEMINAR']; ?>" class="modal fade" role="dialog">
+<div id="ModalEdit<?php echo  $s->ID_SEMINAR ; ?>" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -124,8 +124,8 @@
            <label class="control-label col-sm-3">Peranan</label>
            <div class="col-sm-9">
              <select class="selectpicker form-control" title="Select Peranan Seminar / Workshop" name="peranannya" multiple>
-               <option value="Panitia">Panitia</option>
-               <option value="Peserta">Peserta</option>
+               <option value="Panitia" selected>Panitia</option>
+               <option value="Peserta" selected>Peserta</option>
                <option value="Pembicara">Pembicara</option>
              </select>
            </div>

@@ -126,8 +126,8 @@
            <label class="control-label col-sm-3">Semester:</label>
            <div class="col-sm-5">
              <select name="sem" class="form-control selectpicker" title="Select Semester">
-              <option value="GANJIL">Ganjil</option>
-              <option value="GENAP">Genap</option>
+              <option value="GANJIL" <?php if($p->SEMESTER === "GANJIL") echo 'selected'; ?>>Ganjil</option>
+              <option value="GENAP" <?php if($p->SEMESTER === "GENAP") echo 'selected'; ?>>Genap</option>
              </select>
            </div>
          </div>
@@ -164,6 +164,9 @@
       <div class="modal-body">
         <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doUploadSK'); ?>" method="post">
         <input type="hidden" name="id" value="<?= $p->ID_PENGAJARAN ?>">
+        <input type="hidden" name="prog" value="<?= $p->PROGRAM_PENDIDIKAN ?>">
+        <input type="hidden" name="prodi" value="<?= $p->PROGRAM_STUDI ?>">
+        <input type="hidden" name="ta" value="<?= $p->TAHUN_AKADEMIK ?>">
          <div class="form-group">
            <label class="control-label col-sm-3">SK:</label>
            <div class="col-sm-5">
@@ -190,7 +193,11 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doDeletePengajaran'); ?>" method="post">
-        <input type="hidden" name="id" value="<?= $p->ID_PENGAJARAN ?>">
+          <input type="hidden" name="id" value="<?= $p->ID_PENGAJARAN ?>">
+          <input type="hidden" name="prog" value="<?= $p->PROGRAM_PENDIDIKAN ?>">
+          <input type="hidden" name="prodi" value="<?= $p->PROGRAM_STUDI ?>">
+          <input type="hidden" name="ta" value="<?= $p->TAHUN_AKADEMIK ?>">
+          <input type="hidden" name="sk" value="<?= $p->SK ?>">
         <h1 style="text-align: center;">Are You Sure?</h1>
       </div>
       <div class="modal-footer">

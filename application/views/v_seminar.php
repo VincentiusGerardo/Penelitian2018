@@ -33,14 +33,14 @@
                 ?>
                   <tr>
                     <td><?=$no?></td>
-                    <td><?=$p['TANGGAL']?></td>
-                    <td><?=$p['JENIS']?></td>
-                    <td><?=$p['JUDUL']?></td>
-                    <td><?=$p['PENYELENGGARA']?></td>
-                    <td><?=$p['PERANAN']?></td>
-                    <td><?=$p['PENUGASAN']?></td>
-                    <td><?=$p['BUKTI_KINERJA']?></td>
-                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$p['ID_SEMINAR']?>"><span class="fa fa-edit"></span></button></td>
+                    <td><?= $s->TANGGAL ?></td>
+                    <td><?= $s->JENIS ?></td>
+                    <td><?= $s->JUDUL ?></td>
+                    <td><?= $s->PENYELENGGARA ?></td>
+                    <td><?= $s->PERANAN ?></td>
+                    <td><?= $s->PENUGASAN ?></td>
+                    <td><?= $s->BUKTI_KINERJA ?></td>
+                    <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $s->ID_SEMINAR ?>"><span class="fa fa-edit"></span></button></td>
                   </tr>
                 <?php $no++;endforeach; ?>
               </tbody>
