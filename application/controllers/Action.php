@@ -487,6 +487,9 @@
     }
 
     public function doDeletePenelitian($id){
+
+      $namafile = $id."_penelitian_".$this->session->userdata('username');
+      unlink('./media/penelitian/' . $namafile . ".pdf");
       $res = $this->model_utama->deletePenelitian($id);
 
       if($res==true){
@@ -828,10 +831,13 @@
     }
 
     public function doDeletePembimbing($id){
+
+      $namafile = $id."_pembimbing_".$this->session->userdata('username');
+      unlink('./media/pembimbing/' . $namafile . ".pdf");
+
       $res = $this->model_utama->deletePembimbing($id);
 
       if($res==true){
-          unlink('./media/pembimbing/'. $id."_pembimbing_".$this->session->userdata('username'));
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menghapus data pembimbing!');
       }else{
@@ -920,6 +926,10 @@
     }
 
     public function doDeletePenguji($id){
+
+      $namafile = $id."_penguji_".$this->session->userdata('username');
+      unlink('./media/penguji/' . $namafile . ".pdf");
+
       $res = $this->model_utama->deletePenguji($id);
 
       if($res==true){
@@ -1011,6 +1021,10 @@
     }
 
     public function doDeleteOrganisasi($id){
+
+      $namafile = $id."_organisasi_".$this->session->userdata('username');
+      unlink('./media/organisasi/' . $namafile . ".pdf");
+
       $res = $this->model_utama->deleteOrganisasi($id);
 
       if($res==true){
@@ -1101,6 +1115,9 @@
    }
 
    public function doDeletePenghargaan($id){
+
+     $namafile = $id."_penghargaan_".$this->session->userdata('username');
+     unlink('./media/penghargaan/' . $namafile . ".pdf");
      $res = $this->model_utama->deletePenghargaan($id);
 
      if($res==true){
@@ -1196,6 +1213,11 @@
     }
 
     public function doDeletePublikasi($id){
+
+      $namafile_1 = $id."_publikasi_penugasan_".$this->session->userdata('username');
+      $namafile_2 = $id."_publikasi_buktiKinerja_".$this->session->userdata('username');
+      unlink('./media/publikasi/' . $namafile_1 . ".pdf");
+      unlink('./media/publikasi/' . $namafile_2 . ".pdf");
       $res = $this->model_utama->deletePublikasi($id);
 
       if($res==true){
