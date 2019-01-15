@@ -201,6 +201,7 @@
   		return $this->db->update('identitas_diri', $data);
     }
 
+    //Pengajaran
     public function insertPengajaran($data){
       $q = $this->db->insert('pengajaran',$data);
       if($q){
@@ -224,6 +225,35 @@
       $con = array('ID_PENGAJARAN' => $id);
       $q = $this->db->delete('pengajaran',$con);
       if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    //Bahan Ajar
+
+    public function insertBahanAjar($data){
+      $q = $this->db->insert('bahan_ajar',$data);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updateBahanAjar($id,$data){
+      $u = $this->db->update('bahan_ajar',$data,array('ID_BAHAN_AJAR' => $id));
+      if($u){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deleteBahanAjar($id){
+      $d = $this->db->delete('bahan_ajar',array('ID_BAHAN_AJAR' => $id));
+      if($d){
         return true;
       }else{
         return false;
