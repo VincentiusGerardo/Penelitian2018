@@ -38,8 +38,8 @@
                     <td><?= $p->JENIS ?></td>
                     <td><?= $p->SEMESTER ?></td>
                     <td><?= $p->TAHUN ?></td>
-                    <td><a href="<?= base_url('media/penugasan/' . $p->PENUGASAN . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
-                    <td><a href="<?= base_url('media/bukti_kinerja/' . $p->BUKTI_KINERJA . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
+                    <td><a href="<?= base_url('media/bahan_ajar/penugasan/' . $p->PENUGASAN . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
+                    <td><a href="<?= base_url('media/bahan_ajar/bukti_kinerja/' . $p->BUKTI_KINERJA . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
                     <td>
                       <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $p->ID_BAHAN_AJAR ?>"><span class="fa fa-edit"></span></button> &nbsp;
                       <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#ModalDokumenP<?= $p->ID_BAHAN_AJAR ?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen Ijazah"><span class="fa fa-file"></span></button> &nbsp;

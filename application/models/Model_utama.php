@@ -199,6 +199,24 @@
       }
     }
 
+    public function updateIjasah($id,$data){
+      $s = $this->db->update('riwayat_pendidikan',$data,array('ID_PENDIDIKAN' => $id));
+      if($s){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updateTranskrip($id,$data){
+      $s = $this->db->update('riwayat_pendidikan',$data,array('ID_PENDIDIKAN' => $id));
+      if($s){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     public function updateIdentitas($NIP_NIK){
       $data = array(
   			'NIDN' => $this->input->post('NIDN'),
@@ -250,6 +268,15 @@
       }
     }
 
+    public function updateDokumPengajaran($id,$data){
+      $q = $this->db->update('pengajaran',$data,array('ID_PENGAJARAN' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     //Bahan Ajar
 
     public function insertBahanAjar($data){
@@ -273,6 +300,100 @@
     public function deleteBahanAjar($id){
       $d = $this->db->delete('bahan_ajar',array('ID_BAHAN_AJAR' => $id));
       if($d){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updatePenugasanBA($id,$data){
+      $u = $this->db->update('bahan_ajar',$data,array('ID_BAHAN_AJAR' => $id));
+      if($u){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updateBuktiBA($id,$data){
+      $u = $this->db->update('bahan_ajar',$data,array('ID_BAHAN_AJAR' => $id));
+      if($u){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    //Seminar/Workshop
+
+    public function insertWorkshop($data){
+      $q = $this->db->insert('seminar_workshop',$data);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updateWorkship($id,$data){
+      $q = $this->db->update('seminar_workshop',$data,array('ID_SEMINAR' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updateDokumPenugasan($id,$data){
+      $q = $this->db->update('seminar_workshop',$data,array('ID_SEMINAR' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updateDokumBukti($id,$data){
+      $q = $this->db->update('seminar_workshop',$data,array('ID_SEMINAR' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deleteSeminar($id){
+      $q = $this->db->delete('seminar_workshop',array('ID_SEMINAR' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    //PKM
+
+    public function insertPKM($data){
+      $t = $this->db->insert('pkm',$data);
+      if($t){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updatePKM($id,$data){
+      $t = $this->db->update('pkm',$data,array('ID_SEMINAR' => $id));
+      if($t){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deletePKM($id){
+      $t = $this->db->delete('pkm',array('ID_SEMINAR' => $id));
+      if($t){
         return true;
       }else{
         return false;

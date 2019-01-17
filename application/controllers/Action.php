@@ -60,7 +60,7 @@
 
         // //Upload Ijazah
         if(!empty($_FILES['ij']['name'])){
-          $config['upload_path']          = './media/ijazah/';
+          $config['upload_path']          = './media/pendidikan/ijazah/';
           $config['allowed_types']        = 'pdf';
           $config['file_ext_tolower']     = TRUE;
           $config['overwrite']            = TRUE;
@@ -73,7 +73,7 @@
 
         //Upload Transkrip
         if(!empty($_FILES['tr']['name'])){
-          $config['upload_path']          = './media/transkrip/';
+          $config['upload_path']          = './media/pendidikan/transkrip/';
           $config['allowed_types']        = 'pdf';
           $config['file_ext_tolower']     = TRUE;
           $config['overwrite']            = TRUE;
@@ -159,15 +159,19 @@
         $kode = $this->input->post('idnya');
         $pro = $this->input->post('programnya');
 
-        $config['upload_path']          = './media/ijazah/';
+        $config['upload_path']          = './media/pendidikan/ijazah/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = TRUE;
         $config['overwrite']            = TRUE;
         $config['file_name']            = 'Ijazah_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username');
 
         $this->upload->initialize($config);
-        $res = $this->upload->do_upload('ij');
+        $data = array(
+          'IJASAH' => str_replace(" ", "_",$this->upload->data('file_name'))
+        );
+        $res = $this->model_utama->updateIjasah($kode,$data);
         if($res == true){
+          $this->upload->do_upload('ij');
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','File Uploaded!');
           redirect('Module/Pendidikan');
@@ -194,15 +198,19 @@
         $kode = $this->input->post('idnya');
         $pro = $this->input->post('programnya');
 
-        $config['upload_path']          = './media/transkrip/';
+        $config['upload_path']          = './media/pendidikan/transkrip/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = TRUE;
         $config['overwrite']            = TRUE;
         $config['file_name']            = 'Transkrip_' . ucfirst(strtolower($pro)) . "_" . $this->session->userdata('username');
 
         $this->upload->initialize($config);
-        $res = $this->upload->do_upload('tr');
+        $data = array(
+          'TRANSKRIP' =>str_replace(" ", "_",$this->upload->data('file_name'))
+        );
+        $res = $this->model_utama->updateTranskrip($kode,$data);
         if($res == true){
+          $this->upload->do_upload('tr');
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','File Uploaded!');
           redirect('Module/Pendidikan');
@@ -230,8 +238,8 @@
         $tr = $this->input->post('transkripnya');
         $r = $this->model_utama->deletePendidikan($kode);
         if($r){
-          unlink('./media/ijazah/' . $ij . ".pdf");
-          unlink('./media/transkrip/' . $tr . ".pdf");
+          unlink('./media/pendidikan/ijazah/' . $ij . ".pdf");
+          unlink('./media/pendidikan/transkrip/' . $tr . ".pdf");
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Sucessfuly Deleted!');
           redirect('Module/Pendidikan');
@@ -272,7 +280,7 @@
         $t = $this->input->post('ta');
         $tgl = $this->input->post('tsk');
 
-        $config['upload_path']          = './media/sk/';
+        $config['upload_path']          = './media/pengajaran/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = TRUE;
         $config['overwrite']            = TRUE;
@@ -372,24 +380,25 @@
       }
 
       if($this->form_validation->run() == TRUE){
-        $this->session->set_flashdata('alert','error');
-        $this->session->set_flashdata('msg','Gagal Mengubah Pendidikan! Silahkan Check Kembali Inputan!');
-        redirect('Module/Pendidikan');
         $id = $this->input->post('id');
         $p = $this->input->post('prog');
         $ps = $this->input->post('prodi');
         $t = $this->input->post('ta');
 
-        $config['upload_path']          = './media/sk/';
+        $config['upload_path']          = './media/pengajaran/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = TRUE;
         $config['overwrite']            = TRUE;
         $config['file_name']            = 'sk_' . ucfirst(strtolower($p)) . "_" . $this->session->userdata('username') . "_" . $ps . "_" . $t;
 
         $this->upload->initialize($config);
-        $res = $this->upload->do_upload('sk');
+        $data = array(
+          'SK' => str_replace(" ", "_",$this->upload->data('file_name'))
+        );
+        $res = $this->model_utama->updateDokumPengajaran($id,$data);
 
         if($res == true){
+          $this->upload->do_upload('sk');
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','File Uploaded!');
           redirect('Module/Pengajaran');
@@ -421,7 +430,7 @@
 
         $res = $this->model_utama->deletePengajaran($id);
         if($res == true){
-          unlink('./media/sk/' . $sk . ".pdf");
+          unlink('./media/pengajaran/' . $sk . ".pdf");
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Berhasil Meghapus Pengajaran!');
           redirect('Module/Pengajaran');
@@ -553,7 +562,7 @@
         $t = $this->input->post('tahunnya');
 
         if(!empty($_FILES['penug']['name'])){
-          $config['upload_path']          = './media/penugasan/';
+          $config['upload_path']          = './media/bahan_ajar/penugasan/';
           $config['allowed_types']        = 'pdf';
           $config['file_ext_tolower']     = TRUE;
           $config['overwrite']            = TRUE;
@@ -565,7 +574,7 @@
         }
 
         if(!empty($_FILES['buktiKin']['name'])){
-          $config['upload_path']          = './media/bukti_kinerja/';
+          $config['upload_path']          = './media/bahan_ajar/bukti_kinerja/';
           $config['allowed_types']        = 'pdf';
           $config['file_ext_tolower']     = TRUE;
           $config['overwrite']            = TRUE;
@@ -656,18 +665,23 @@
         $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
       }
       if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
         $mk = $this->input->post('mkya');
         $s = $this->input->post('sem');
         $t = $this->input->post('thn');
-        $config['upload_path']          = './media/penugasan/';
+        $config['upload_path']          = './media/bahan_ajar/penugasan/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = TRUE;
         $config['overwrite']            = TRUE;
         $config['file_name']            = 'Peugasan_' . $mk . "_" . $this->session->userdata('username') . "_" . $s . "_" . $t;
 
         $this->upload->initialize($config);
-        $res = $this->upload->do_upload('penug');
+        $data = array(
+          'PENUGASAN' => str_replace(" ", "_",$penugasan)
+        );
+        $res = $this->model_utama->updatePenugasanBA($id,$data);
         if($res == true){
+          $this->upload->do_upload('penug');
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Berhasil Upload Penugasan!');
           redirect('Module/BahanAjar');
@@ -692,18 +706,23 @@
         $this->form_validation->set_rules('buktiKin','Bukti Kinerja','required|trim|xss_clean');
       }
       if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
         $mk = $this->input->post('mkya');
         $s = $this->input->post('sem');
         $t = $this->input->post('thn');
-        $config['upload_path']          = './media/bukti_kinerja/';
+        $config['upload_path']          = './media/bahan_ajar/bukti_kinerja/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = TRUE;
         $config['overwrite']            = TRUE;
         $config['file_name']            = 'Bukti_Kinerja_' . $mk . "_" . $this->session->userdata('username') . "_" . $s . "_" . $t;
 
         $this->upload->initialize($config);
-        $res = $this->upload->do_upload('buktiKin');
+        $data = array(
+          'BUKTI_KINERJA' => str_replace(" ", "_",$buktikinerja)
+        );
+        $res = $this->model_utama->updateBuktiBA($id,$data);
         if($res == true){
+          $this->upload->do_upload('buktiKin');
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Berhasil Upload Penugasan!');
           redirect('Module/BahanAjar');
@@ -732,8 +751,8 @@
         $res = $this->model_utama->deleteBahanAjar($id);
 
         if($res == true){
-          unlink('./media/penugasan/'. $p . ".pdf");
-          unlink('./media/bukti_kinerja/'. $b . ".pdf");
+          unlink('./media/bahan_ajar/penugasan/'. $p . ".pdf");
+          unlink('./media/bahan_ajar/bukti_kinerja/'. $b . ".pdf");
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Berhasil Menghapus Bahan Ajar!');
           redirect('Module/BahanAjar');
@@ -752,11 +771,155 @@
     //Seminar
 
     public function doInsertSeminar(){
+      $this->form_validation->set_rules('TANGGAL_MULAI','Tanggal','required|trim|xss_clean');
+      $this->form_validation->set_rules('jenisnya','Jenis Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('judulS','Judul Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('penyeleng','Penyelenggara','required|trim|xss_clean');
+      $this->form_validation->set_rules('peranannya','Peran','required|trim|xss_clean');
+      if(empty($_FILES['penug']['name'])){
+        $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
+      }
 
+      if(empty($_FILES['buktiKin']['name'])){
+        $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
+      }
+
+      if($this->form_validation->run() == TRUE){
+        $mulai = $this->input->post('TANGGAL_MULAI');
+        $jenis = $this->input->post('jenisnya');
+        $nama = $this->input->post('judulS');
+        $p = $this->input->post('penyeleng');
+        $peran = $this->input->post('peranannya');
+
+        if(!empty($_FILES['penug']['name'])){
+          $config['upload_path']          = './media/seminar/penugasan/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
+          $config['file_name']            = 'Peugasan_' . $jenis . "_" . $this->session->userdata('username') . "_" . $nama . "_" . $peran . "_" . $mulai;
+
+          $this->upload->initialize($config);
+          $penugasan = $this->upload->data('file_name');
+          $this->upload->do_upload('penug');
+        }
+
+        if(!empty($_FILES['buktiKin']['name'])){
+          $config['upload_path']          = './media/seminar/bukti_kinerja/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
+          $config['file_name']            = 'Bukti_Kinerja_' . $jenis . "_" . $this->session->userdata('username') . "_" . $nama . "_" . $peran . "_" . $mulai;
+
+          $this->upload->initialize($config);
+          $buktikinerja = $this->upload->data('file_name');
+          $this->upload->do_upload('buktiKin');
+        }
+
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'TANGGAL' => $mulai,
+          'JENIS' => $jenis,
+          'JUDUL' => $nama,
+          'PENYELENGGARA' => $p,
+          'PERANAN' => $peran,
+          'PENUGASAN' => str_replace(" ", "_",$penugasan),
+          'BUKTI_KINERJA' => str_replace(" ", "_",$buktikinerja)
+        );
+
+        $res = $this->model_utama->insertWorkshop($data);
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menambahkan Seminar!');
+          redirect('Module/Seminar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menambahkan Seminar!');
+          redirect('Module/Seminar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menambahkan Seminar! Silahkan Check Kembali Inputan!');
+        redirect('Module/Seminar');
+      }
     }
 
     public function doUpdateSeminar(){
+      $this->form_validation->set_rules('id','IDSeminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_MULAIUpd','','required|trim|xss_clean');
+      $this->form_validation->set_rules('jenisnya','Jenis Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('judulS','Judul Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('penyeleng','Penyelenggara','required|trim|xss_clean');
+      $this->form_validation->set_rules('peranannya','Peran','required|trim|xss_clean');
 
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $tgl = $this->input->post('TANGGAL_MULAIUpd');
+        $jenis = $this->input->post('jenisnya');
+        $nama = $this->input->post('judulS');
+        $p = $this->input->post('penyeleng');
+        $peran = $this->input->post('peranannya');
+
+        // echo $tgl . "<br/>" . $jenis . "<br/>" . $nama . "<br/>" . $p . "<br/>" . $peran;
+        $data = array(
+          'TANGGAL' => $mulai,
+          'JENIS' => $jenis,
+          'JUDUL' => $nama,
+          'PENYELENGGARA' => $p,
+          'PERANAN' => $peran
+        );
+
+        $res = $this->model_utama->updateWorkship($id,$data);
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Mengubah Seminar!');
+          redirect('Module/Seminar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Mengubah Seminar!');
+          redirect('Module/Seminar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah Seminar! Silahkan Check Kembali Inputan!');
+        redirect('Module/Seminar');
+      }
+    }
+
+    public function doUploadPenugasanSeminar(){
+
+    }
+
+    public function doUploadBuktiKinerjaSeminar(){
+
+    }
+
+    public function doDeleteSeminar(){
+      $this->form_validation->set_rules('idnya','id Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('pnya','penugasan','required|trim|xss_clean');
+      $this->form_validation->set_rules('bknya','bukti kinerja','required|trim|xss_clean');
+
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $p = $this->input->post('pnya');
+        $b = $this->input->post('bknya');
+
+        $res = $this->model_utama->deleteSeminar($id);
+        if($res == true){
+          unlink('./media/seminar/penugasan/' . $p . '.pdf');
+          unlink('./media/seminar/bukti_kinerja/' . $b . '.pdf');
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menghapus Seminar!');
+          redirect('Module/Seminar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menghapus Seminar!');
+          redirect('Module/Seminar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menghapus Seminar! Silahkan Check Kembali Inputan!');
+        redirect('Module/Seminar');
+      }
     }
 
     //PKM
