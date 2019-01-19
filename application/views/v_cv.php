@@ -1,6 +1,6 @@
 <section class="content-header">
  <h1>
-   Buat Curiculum Vitae
+   Buat Portofolio
  </h1>
 </section>
 <section class="content">
@@ -10,7 +10,7 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-body">
-          <b>Pilih data yang akan di eksport ke cv</b>
+          <b>Pilih data yang akan di eksport ke portofolio</b>
           <br><br>
           <form action="<?=base_url()?>Module/print_cv" method="post" target="_blank">
             <div class="row">
