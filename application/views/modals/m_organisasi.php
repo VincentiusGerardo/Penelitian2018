@@ -77,7 +77,7 @@
              <div class="input-group-addon">
                <i class="fa fa-calendar"></i>
              </div>
-             <input type="text" class="form-control pull-right" id="TANGGAL_MULAIupd" name="TANGGAL_MULAI" value="<?=$org['TANGGAL_MULAI']?>">
+             <input type="text" class="form-control pull-right" id="TANGGAL_MULAIupd<?= $org['ID_ORGANISASI'] ?>" name="TANGGAL_MULAI" value="<?=$org['TANGGAL_MULAI']?>">
              </div>
            </div>
          </div>
@@ -88,7 +88,7 @@
               <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
               </div>
-              <input type="text" class="form-control pull-right" id="TANGGAL_AKHIRupd" name="TANGGAL_AKHIR" value="<?=$org['TANGGAL_AKHIR']?>">
+              <input type="text" class="form-control pull-right" id="TANGGAL_AKHIRupd<?= $org['ID_ORGANISASI'] ?>" name="TANGGAL_AKHIR" value="<?=$org['TANGGAL_AKHIR']?>">
               </div>
             </div>
           </div>
@@ -160,6 +160,15 @@
     </div>
   </div>
 </div>
+
+<script>
+$('#TANGGAL_AKHIRupd<?= $org['ID_ORGANISASI'] ?>').datetimepicker({
+  format: 'YYYY-MM-DD'
+});
+$('#TANGGAL_MULAIupd<?= $org['ID_ORGANISASI'] ?>').datetimepicker({
+  format: 'YYYY-MM-DD'
+});
+</script>
 <?php } ?>
 
 
@@ -169,12 +178,6 @@
       format: 'YYYY-MM-DD'
     });
     $('#TANGGAL_MULAI').datetimepicker({
-      format: 'YYYY-MM-DD'
-    });
-    $('#TANGGAL_AKHIRupd').datetimepicker({
-      format: 'YYYY-MM-DD'
-    });
-    $('#TANGGAL_MULAIupd').datetimepicker({
       format: 'YYYY-MM-DD'
     });
 </script>

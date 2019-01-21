@@ -66,7 +66,7 @@
               <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
               </div>
-              <input type="text" class="form-control pull-right" id="TANGGALupd" name="TANGGAL" value="<?=$pen['TANGGAL']?>">
+              <input type="text" class="form-control pull-right" id="TANGGALupd<?=$pen['ID_PENGHARGAAN'] ?>" name="TANGGAL" value="<?=$pen['TANGGAL']?>">
               </div>
             </div>
           </div>
@@ -138,14 +138,17 @@
     </div>
   </div>
 </div>
+
+<script>
+$('#TANGGALupd<?=$pen['ID_PENGHARGAAN'] ?>').datetimepicker({
+  format: 'YYYY-MM-DD'
+});
+</script>
 <?php } ?>
 
 <script>
     //Date picker
     $('#TANGGAL').datetimepicker({
-      format: 'YYYY-MM-DD'
-    });
-    $('#TANGGALupd').datetimepicker({
       format: 'YYYY-MM-DD'
     });
 </script>

@@ -140,7 +140,12 @@
          <div class="form-group">
            <label class="control-label col-sm-3">Tanggal SK:</label>
            <div class="col-sm-5">
-             <input type="text" class="form-control" name="tsk" value="<?= $p->TanggalSK ?>"/>
+             <div class="input-group date">
+             <div class="input-group-addon">
+               <i class="fa fa-calendar"></i>
+             </div>
+             <input type="text" class="form-control" id="TANGGAL_SK<?= $p->ID_PENGAJARAN ?>" name="tsk" value="<?= $p->TanggalSK ?>"/>
+             </div>
            </div>
          </div>
       </div>
@@ -208,6 +213,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('#TANGGAL_SK<?= $p->ID_PENGAJARAN ?>').datetimepicker({
+    format: 'YYYY-MM-DD'
+  });
+</script>
 <?php } ?>
 
 <script>

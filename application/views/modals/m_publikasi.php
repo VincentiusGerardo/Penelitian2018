@@ -142,7 +142,7 @@
              <div class="input-group-addon">
                <i class="fa fa-calendar"></i>
              </div>
-             <input type="text" class="form-control pull-right" id="TANGGAL" name="TANGGAL" value="<?=$pub['TANGGAL']?>">
+             <input type="text" class="form-control pull-right" id="TANGGAL<?= $pub['ID_PUBLIKASI'] ?>" name="TANGGAL" value="<?=$pub['TANGGAL']?>">
              </div>
            </div>
          </div>
@@ -342,6 +342,12 @@
     </div>
   </div>
 </div>
+
+<script>
+$('#TANGGAL<?= $pub['ID_PUBLIKASI'] ?>').datetimepicker({
+  format: 'YYYY-MM-DD'
+});
+</script>
 <?php } ?>
 
 <script type="text/javascript">
@@ -374,12 +380,6 @@
       format: 'YYYY-MM-DD'
     });
     $('#TANGGAL_MULAI').datetimepicker({
-      format: 'YYYY-MM-DD'
-    });
-    $('#TANGGAL_AKHIRupd').datetimepicker({
-      format: 'YYYY-MM-DD'
-    });
-    $('#TANGGAL_MULAIupd').datetimepicker({
       format: 'YYYY-MM-DD'
     });
 </script>
