@@ -53,15 +53,97 @@
     }
 
     public function doInsertDosen(){
+      $this->form_validation->set_rules('nip','NIP NIK','required|trim|xss_clean');
+      $this->form_validation->set_rules('nd','Nama Dosen','required|trim|xss_clean');
+      $this->form_validation->set_rules('tlhr','','required|trim|xss_clean');
 
+      if($this->form_validation->run() == TRUE){
+        $nik = $this->input->post('nip');
+        $nama = $this->input->post('nd');
+        $tgl = $this->input->post('tlhr');
+        $pass = "Kalbis" . date("dmy",strtotime($tgl));
+
+        $data = array(
+          'NIP_NIK' => $nik,
+          'NAMA' => $nama,
+          'PASSWORD' => password_hash($pass,PASSWORD_DEFAULT),
+          'TANGGAL_LAHIR' => $tgl
+        );
+
+        $res = $this->model_utama->insertDosen($data);
+
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menambahkan Dosen!');
+          redirect('Module/Users');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menambahkan Dosen!');
+          redirect('Module/Users');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menambahkan Dosen! Silahkan Check Kembali Inputan!');
+        redirect('Module/Users');
+      }
     }
 
     public function doUpdateDosen(){
+      $this->form_validation->set_rules('nip','NIP NIK','required|trim|xss_clean');
+      $this->form_validation->set_rules('nd','Nama Dosen','required|trim|xss_clean');
+      $this->form_validation->set_rules('tlhr','','required|trim|xss_clean');
 
+      if($this->form_validation->run() == TRUE){
+        $nik = $this->input->post('nip');
+        $nama = $this->input->post('nd');
+        $tgl = $this->input->post('tlhr');
+        $pass = "Kalbis" . date("dmy",strtotime($tgl));
+
+        $data = array(
+          'NAMA' => $nama,
+          'PASSWORD' => password_hash($pass,PASSWORD_DEFAULT),
+          'TANGGAL_LAHIR' => $tgl
+        );
+
+        $res = $this->model_utama->updateDosen($nik,$data);
+
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Mengubah Dosen!');
+          redirect('Module/Users');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Mengubah Dosen!');
+          redirect('Module/Users');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah Dosen! Silahkan Check Kembali Inputan!');
+        redirect('Module/Users');
+      }
     }
 
     public function doDeleteDosen(){
+      $this->form_validation->set_rules('idnya','NIP NIK','required|trim|xss_clean');
 
+      if($this->form_validation->run() == TRUE){
+        $nik = $this->input->post('idnya');
+        $res = $this->model_utama->deleteDosen($nik);
+
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menghapus Dosen!');
+          redirect('Module/Users');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menghapus Dosen!');
+          redirect('Module/Users');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menghapus Dosen! Silahkan Check Kembali Inputan!');
+        redirect('Module/Users');
+      }
     }
 
     public function doUpdateIdentitas(){

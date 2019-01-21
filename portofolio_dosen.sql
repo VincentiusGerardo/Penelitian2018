@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2019 at 08:15 AM
+-- Generation Time: Jan 21, 2019 at 01:48 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -48,8 +48,7 @@ INSERT INTO `bahan_ajar` (`ID_BAHAN_AJAR`, `NIP_NIK`, `MATA_KULIAH`, `PROGRAM`, 
 (1, 'L15360', 'Database', 'S1', 'CETAK', 'GANJIL', 2018, NULL, NULL),
 (2, 'L15360', 'Introduction to Web Programming', 'S1', 'CETAK', 'GANJIL', 2016, 'Peugasan_Introduction to Web Programming_L15360_Ga', 'Bukti_Kinerja_Introduction to Web Programming_L153'),
 (3, 'L15360', 'Introduction to Information and Communication Tech', 'S1', 'CETAK', 'GANJIL', 2015, 'Peugasan_Introduction to Information and Communication Technology_L15360_Ganjil_2015', 'Bukti_Kinerja_Introduction to Information and Communication Technology_L15360_Ganjil_2015'),
-(4, 'L15360', 'Introduction to Information and Communication Technology', 'S1', 'CETAK', 'GANJIL', 2015, 'Peugasan_Introduction to Information and Communication Technology_L15360_Ganjil_2015', 'Bukti_Kinerja_Introduction to Information and Communication Technology_L15360_Ganjil_2015'),
-(5, 'L15360', 'Introduction to Information and Communication Technology', 'S1', 'CETAK', 'GANJIL', 2015, 'Peugasan_Introduction_to_Information_and_Communication_Technology_L15360_Ganjil_2015', 'Bukti_Kinerja_Introduction_to_Information_and_Communication_Technology_L15360_Ganjil_2015');
+(4, 'L15360', 'Introduction to Information and Communication Technology', 'S1', 'CETAK', 'GANJIL', 2015, 'Peugasan_Introduction to Information and Communication Technology_L15360_Ganjil_2015', 'Bukti_Kinerja_Introduction to Information and Communication Technology_L15360_Ganjil_2015');
 
 -- --------------------------------------------------------
 
@@ -79,9 +78,9 @@ CREATE TABLE `identitas_diri` (
 --
 
 INSERT INTO `identitas_diri` (`NIP_NIK`, `NIDN`, `NAMA`, `PASSWORD`, `TEMPAT_LAHIR`, `TANGGAL_LAHIR`, `JENIS_KELAMIN`, `STATUS_PERKAWINAN`, `AGAMA`, `GOLONGAN`, `JABATAN_AKADEMIK`, `PERGURUAN_TINGGI`, `ALAMAT`, `EMAIL`) VALUES
-('0000', NULL, 'Jullend Gatc', '$2y$10$1xLuG8FOa13cFGj33Qs5TuZFyhWJW43gElc3IIXbniONgOSf8CVXm', NULL, '2018-11-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('L15333', NULL, 'Ivanne Hilda Sionita Simanjuntak', '$2y$10$AGuHHbMDr599VeN8MMRJo.yFvme9sLlp0KUqGJ5wr4WoOpSEhQdv.', NULL, NULL, 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('L15360', '', 'Jullend Gatc', '$2y$10$2KM2YdqT2eJWGbdhWebU9OdfvCqt9TPviajN5ODYbXaLE5UGzPaYO', 'Palangka Raya', '2018-02-06', 'L', 'Belum Kawin', 'Budha', '', '', '', '', '');
+('0000', NULL, 'Administrator', '$2y$10$1xLuG8FOa13cFGj33Qs5TuZFyhWJW43gElc3IIXbniONgOSf8CVXm', NULL, '2018-11-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('L15123', NULL, 'Ivanne Hilda Sionita Simanjuntak', '$2y$10$AGuHHbMDr599VeN8MMRJo.yFvme9sLlp0KUqGJ5wr4WoOpSEhQdv.', NULL, NULL, 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('L15360', '', 'Jullend Gatc', '$2y$10$KE1GZJyneX57y2ybWQDDE.NPdOExTLlPEFvjshCA3bfeRpqmrpLjq', 'Palangka Raya', '2018-02-06', 'L', 'Belum Kawin', 'Budha', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -303,7 +302,7 @@ CREATE TABLE `pkm` (
 --
 
 INSERT INTO `pkm` (`ID_PKM`, `NIP_NIK`, `TANGGAL`, `NAMA`, `MITRA`, `TEMPAT`, `PERANAN`, `PENUGASAN`, `BUKTI_KINERJA`) VALUES
-(1, 'L15360', '2018-12-18', 'Seminar pakai excel', 'Guru PAUD', 'Bekasi', 'Anggota', NULL, NULL);
+(1, 'L15360', '2018-12-19', 'Seminar pakai excel AJA', 'Guru PAUD 1', 'Bekasi Utara', 'Ketua', 'Penugasan_L15360_Seminar_pakai_excel_AJA_Ketua_2018-12-19', 'Bukti_Kinerja_L15360_Seminar_pakai_excel_AJA_Ketua_2018-12-19');
 
 -- --------------------------------------------------------
 
@@ -388,7 +387,8 @@ CREATE TABLE `seminar_workshop` (
 --
 
 INSERT INTO `seminar_workshop` (`ID_SEMINAR`, `NIP_NIK`, `TANGGAL`, `JENIS`, `JUDUL`, `PENYELENGGARA`, `PERANAN`, `PENUGASAN`, `BUKTI_KINERJA`) VALUES
-(1, 'L15360', '2018-12-18', 'Seminar', 'Seminar Malaria', 'Kalbis', 'Panitia', NULL, NULL);
+(1, 'L15360', '2018-12-18', 'Seminar', 'Seminar Malaria', 'Kalbis', 'Panitia', NULL, NULL),
+(2, 'L15360', '2019-01-21', 'Konferensi', 'DILDO', 'Nurhadi-Aldo', 'Panitia', 'Peugasan_Konferensi_l15360_DILDO_Panitia_', 'Bukti_Kinerja_Konferensi_l15360_DILDO_Panitia_');
 
 --
 -- Indexes for dumped tables
@@ -486,7 +486,7 @@ ALTER TABLE `seminar_workshop`
 -- AUTO_INCREMENT for table `bahan_ajar`
 --
 ALTER TABLE `bahan_ajar`
-  MODIFY `ID_BAHAN_AJAR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_BAHAN_AJAR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kegiatan_kemahasiswaan`
@@ -558,7 +558,7 @@ ALTER TABLE `riwayat_pendidikan`
 -- AUTO_INCREMENT for table `seminar_workshop`
 --
 ALTER TABLE `seminar_workshop`
-  MODIFY `ID_SEMINAR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_SEMINAR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

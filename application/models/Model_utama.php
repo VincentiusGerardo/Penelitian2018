@@ -49,6 +49,24 @@
       }
     }
 
+    public function updateDosen($id,$data){
+      $q = $this->db->update('identitas_diri',$data,array('NIP_NIK' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deleteDosen($id){
+      $q = $this->db->delete('identitas_diri',array('NIP_NIK' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     public function getUsername(){
       $q = $this->db->get_where('identitas_diri', array('NIP_NIK' => $this->session->userdata('username')));
       $row = $q->row();

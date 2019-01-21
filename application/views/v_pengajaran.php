@@ -24,6 +24,7 @@
                   <th>Semester</th>
                   <th>Tahun Akademik</th>
                   <th>SK</th>
+                  <th>Tanggal SK<th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -40,6 +41,7 @@
                     <td><?= $p->JURUSAN ?></td>
                     <td><?= $p->PROGRAM_STUDI ?></td>
                     <td><?= ucfirst(strtolower($p->SEMESTER)) ?></td>
+                    <td><?= $p->TanggalSK ?></td>
                     <td><?= $p->TAHUN_AKADEMIK ?></td>
                     <td><a href="<?= base_url('./media/pengajaran/' . $p->SK . '.pdf') ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
                     <td>
