@@ -12,6 +12,46 @@
       $this->load->model('model_utama');
     }
 
+    public function doChangePassword(){
+      $this->form_validation->set_rules('oldPass','Old Password','required|trim|xss_clean');
+      $this->form_validation->set_rules('newPass','New Password','required|trim|xss_clean');
+      $this->form_validation->set_rules('repPass','Repeat New Password','required|trim|xss_clean');
+
+      if($this->form_validation->run() == TRUE){
+        $old = $this->input->post('oldPass');
+        $new = $this->input->post('newPass');
+        $rep = $this->input->post('repPass');
+
+        $b = $this->model_utama->verifyPass($old,$this->session->userdata('username'));
+
+        if($b == true){
+          if($old === $new){
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal Merubah Password! Password Lama Tidak Boleh Sama Dengan Password Lama!');
+            redirect('Module/ChangePassword');
+          }else if($new === $rep){
+            $this->model_utama->updatePassword($this->session->userdata('username'),$new);
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil Merubah Password!');
+            redirect('Module/ChangePassword');
+          }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal Merubah Password! Password Baru Tidak Sama!');
+            redirect('Module/ChangePassword');
+          }
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Merubah Password! Password Salah!');
+          redirect('Module/ChangePassword');
+        }
+
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Merubah Password! Silahkan Check Kembali Inputan!');
+        redirect('Module/ChangePassword');
+      }
+    }
+
     public function doInsertDosen(){
 
     }

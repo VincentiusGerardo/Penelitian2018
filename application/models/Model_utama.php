@@ -7,8 +7,31 @@
       parent::__construct();
     }
 
-    public function verifyPass($kdk){
+    public function getPass($id){
+      $q = $this->db->get_where('identitas_diri',array('NIP_NIK' => $id));
+      $rs = $q->row();
+      return $rs->PASSWORD;
+    }
 
+    public function verifyPass($pass,$id){
+      if(password_verify($pass,$this->getPass($id))){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updatePassword($id,$pass){
+      $d = array('PASSWORD' => password_hash($pass, PASSWORD_DEFAULT));
+      $this->db->set($d);
+      $this->db->where('NIP_NIK',$id);
+      $q = $this->db->update('identitas_diri');
+
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
     }
 
     public function getUsername(){
