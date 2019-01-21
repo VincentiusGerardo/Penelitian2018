@@ -161,8 +161,10 @@
     }
 
     public function users(){
+      $data['dosen'] = $this->model_utama->getDosen();
       $this->getHeader();
-      // $this->load->view('', $data);
+      $this->load->view('v_admin', $data);
+      $this->load->view('modals/m_admin', $data);
       $this->load->view('footer');
     }
 

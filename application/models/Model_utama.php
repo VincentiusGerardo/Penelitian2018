@@ -34,6 +34,21 @@
       }
     }
 
+    public function getDosen(){
+      $this->db->where('NIP_NIK !=', '0000');
+      $q = $this->db->get('identitas_diri');
+      return $q->result();
+    }
+
+    public function insertDosen($data){
+      $q = $this->db->insert('identitas_diri',$data);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     public function getUsername(){
       $q = $this->db->get_where('identitas_diri', array('NIP_NIK' => $this->session->userdata('username')));
       $row = $q->row();
