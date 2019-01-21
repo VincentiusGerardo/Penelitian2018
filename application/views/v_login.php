@@ -58,7 +58,7 @@
                 <p class="login-box-msg"><?php echo $this->session->flashdata('message'); ?></p>
                 <form action="<?php echo base_url('Login/doLogin'); ?>" method="POST">
                     <div class="form-group has-feedback">
-                        <input type="text" name="username" class="form-control" placeholder="Kode Dosen" required autofocus style="text-transform:uppercase"/>
+                        <input type="text" name="username" class="form-control" placeholder="Kode Dosen" required autofocus/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">

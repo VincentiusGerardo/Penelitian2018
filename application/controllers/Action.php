@@ -844,7 +844,7 @@
     }
 
     public function doUpdateSeminar(){
-      $this->form_validation->set_rules('id','IDSeminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('idnya','IDSeminar','required|trim|xss_clean');
       $this->form_validation->set_rules('TANGGAL_MULAIUpd','','required|trim|xss_clean');
       $this->form_validation->set_rules('jenisnya','Jenis Seminar','required|trim|xss_clean');
       $this->form_validation->set_rules('judulS','Judul Seminar','required|trim|xss_clean');
@@ -859,9 +859,9 @@
         $p = $this->input->post('penyeleng');
         $peran = $this->input->post('peranannya');
 
-        // echo $tgl . "<br/>" . $jenis . "<br/>" . $nama . "<br/>" . $p . "<br/>" . $peran;
+        // echo $id . "<br>" . $tgl . "<br/>" . $jenis . "<br/>" . $nama . "<br/>" . $p . "<br/>" . $peran;
         $data = array(
-          'TANGGAL' => $mulai,
+          'TANGGAL' => $tgl,
           'JENIS' => $jenis,
           'JUDUL' => $nama,
           'PENYELENGGARA' => $p,
@@ -886,11 +886,97 @@
     }
 
     public function doUploadPenugasanSeminar(){
+      $this->form_validation->set_rules('idnya','IDSeminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('jenisnya','Jenis Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('judulS','Judul Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('peranannya','Peran','required|trim|xss_clean');
+      if(empty($_FILES['penug']['name'])){
+        $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
+      }
 
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $jenis = $this->input->post('jenisnya');
+        $nama = $this->input->post('judulS');
+        $peran = $this->input->post('peranannya');
+
+        // echo $id . "<br>" . $jenis . "<br>" . $nama . "<br>" . $peran;
+
+        $config['upload_path']          = './media/seminar/penugasan/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'Peugasan_' . $jenis . "_" . $this->session->userdata('username') . "_" . $nama . "_" . $peran . "_" . $mulai;
+
+        $this->upload->initialize($config);
+        $penugasan = $this->upload->data('file_name');
+        $this->upload->do_upload('penug');
+
+        $data = array(
+          'PENUGASAN' => str_replace(" ", "_",$penugasan)
+        );
+
+        $res = $this->model_utama->updateDokumPenugasan($id,$data);
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Upload Penugasan!');
+          redirect('Module/Seminar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Upload Penugasan!');
+          redirect('Module/Seminar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Upload Penugasan! Silahkan Check Kembali Inputan!');
+        redirect('Module/Seminar');
+      }
     }
 
     public function doUploadBuktiKinerjaSeminar(){
+      $this->form_validation->set_rules('idnya','IDSeminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('jenisnya','Jenis Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('judulS','Judul Seminar','required|trim|xss_clean');
+      $this->form_validation->set_rules('peranannya','Peran','required|trim|xss_clean');
+      if(empty($_FILES['buktiKin']['name'])){
+        $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
+      }
 
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $jenis = $this->input->post('jenisnya');
+        $nama = $this->input->post('judulS');
+        $peran = $this->input->post('peranannya');
+
+        $config['upload_path']          = './media/seminar/bukti_kinerja/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'Bukti_Kinerja_' . $jenis . "_" . $this->session->userdata('username') . "_" . $nama . "_" . $peran . "_" . $mulai;
+
+        $this->upload->initialize($config);
+        $buktikinerja = $this->upload->data('file_name');
+        $this->upload->do_upload('buktiKin');
+
+        $data = array(
+          'BUKTI_KINERJA' => str_replace(" ", "_",$buktikinerja)
+        );
+
+        $res = $this->model_utama->updateDokumBukti($id,$data);
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Upload Bukti Kinerja!');
+          redirect('Module/Seminar');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Upload Bukti Kinerja!');
+          redirect('Module/Seminar');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Upload Bukti Kinerja! Silahkan Check Kembali Inputan!');
+        redirect('Module/Seminar');
+      }
     }
 
     public function doDeleteSeminar(){
@@ -925,21 +1011,409 @@
     //PKM
 
     public function doInsertPKM(){
+      $this->form_validation->set_rules('TANGGAL_MULAI','Tanggal Mulai','required|trim|xss_clean');
+      $this->form_validation->set_rules('namaPKM','Nama PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('tempat','Lokasi','required|trim|xss_clean');
+      $this->form_validation->set_rules('mitra','Mitra','required|trim|xss_clean');
+      $this->form_validation->set_rules('peranan','Peranan','required|trim|xss_clean');
+      if(empty($_FILES['penug']['name'])){
+        $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
+      }
 
+      if(empty($_FILES['buktiKin']['name'])){
+        $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
+      }
+
+
+      if($this->form_validation->run() == TRUE){
+        $tgl = $this->input->post('TANGGAL_MULAI');
+        $nama = $this->input->post('namaPKM');
+        $tmpt = $this->input->post('tempat');
+        $mitra = $this->input->post('mitra');
+        $peran = $this->input->post('peranan');
+
+        if(!empty($_FILES['penug']['name'])){
+          $config['upload_path']          = './media/pkm/penugasan/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
+          $config['file_name']            = 'Penugasan_' . $this->session->userdata('username') . "_" . $nama . "_" . $peran . "_" . $tgl;
+
+          $this->upload->initialize($config);
+          $penugasan = $this->upload->data('file_name');
+          $this->upload->do_upload('penug');
+        }
+
+        if(!empty($_FILES['buktiKin']['name'])){
+          $config['upload_path']          = './media/pkm/bukti_kinerja/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
+          $config['file_name']            = 'Bukti_Kinerja_' . $this->session->userdata('username') . "_" . $nama . "_" . $peran . "_" . $tgl;
+
+          $this->upload->initialize($config);
+          $buktikinerja = $this->upload->data('file_name');
+          $this->upload->do_upload('buktiKin');
+        }
+
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'TANGGAL' => $tgl,
+          'NAMA' => $nama,
+          'MITRA' => $mitra,
+          'TEMPAT' => $tmpt,
+          'PERANAN' => $peran,
+          'PENUGASAN' => str_replace(" ", "_",$penugasan),
+          'BUKTI_KINERJA' => str_replace(" ", "_",$buktikinerja)
+         );
+
+         $res = $this->model_utama->insertPKM($data);
+
+         if($res == true){
+           $this->session->set_flashdata('alert','success');
+           $this->session->set_flashdata('msg','Berhasil Menambahkan PKM!');
+           redirect('Module/PKM');
+         }else{
+           $this->session->set_flashdata('alert','error');
+           $this->session->set_flashdata('msg','Gagal Menambahkan PKM!');
+           redirect('Module/PKM');
+         }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menambahkan PKM! Silahkan Check Kembali Inputan!');
+        redirect('Module/PKM');
+      }
     }
 
     public function doUpdatePKM(){
+      $this->form_validation->set_rules('idnya','ID PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_MULAI','Tanggal Mulai','required|trim|xss_clean');
+      $this->form_validation->set_rules('namaPKM','Nama PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('tempat','Lokasi','required|trim|xss_clean');
+      $this->form_validation->set_rules('mitra','Mitra','required|trim|xss_clean');
+      $this->form_validation->set_rules('peranan','Peranan','required|trim|xss_clean');
 
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $tgl = $this->input->post('TANGGAL_MULAI');
+        $nama = $this->input->post('namaPKM');
+        $tmpt = $this->input->post('tempat');
+        $mitra = $this->input->post('mitra');
+        $peran = $this->input->post('peranan');
+
+        $data = array(
+          'TANGGAL' => $tgl,
+          'NAMA' => $nama,
+          'MITRA' => $mitra,
+          'TEMPAT' => $tmpt,
+          'PERANAN' => $peran
+         );
+
+         $res = $this->model_utama->updatePKM($id,$data);
+
+         if($res == true){
+           $this->session->set_flashdata('alert','success');
+           $this->session->set_flashdata('msg','Berhasil Mengubah PKM!');
+           redirect('Module/PKM');
+         }else{
+           $this->session->set_flashdata('alert','error');
+           $this->session->set_flashdata('msg','Gagal Mengubah PKM!');
+           redirect('Module/PKM');
+         }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah PKM! Silahkan Check Kembali Inputan!');
+        redirect('Module/PKM');
+      }
+    }
+
+    public function doUploadPenugasanPKM(){
+      $this->form_validation->set_rules('idnya','ID PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_MULAI','Tanggal Mulai','required|trim|xss_clean');
+      $this->form_validation->set_rules('namaPKM','Nama PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('peranan','Peranan','required|trim|xss_clean');
+
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $tgl = $this->input->post('TANGGAL_MULAI');
+        $nama = $this->input->post('namaPKM');
+        $peran = $this->input->post('peranan');
+
+        $config['upload_path']          = './media/pkm/penugasan/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'Penugasan_' . $this->session->userdata('username') . "_" . $nama . "_" . $peran . "_" . $tgl;
+
+        $this->upload->initialize($config);
+        $penugasan = $this->upload->data('file_name');
+
+        $data = array(
+          'PENUGASAN' => str_replace(" ", "_",$penugasan)
+        );
+
+        $res = $this->model_utama->updateDokumPenugasanPKM($id,$data);
+
+        if($res == true){
+          $this->upload->do_upload('penug');
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Mengubah PKM!');
+          redirect('Module/PKM');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Mengubah PKM!');
+          redirect('Module/PKM');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Upload Penugasan! Silahkan Check Kembali Inputan!');
+        redirect('Module/PKM');
+      }
+    }
+
+    public function doUploadBuktiKinerjaPKM(){
+      $this->form_validation->set_rules('idnya','ID PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_MULAI','Tanggal Mulai','required|trim|xss_clean');
+      $this->form_validation->set_rules('namaPKM','Nama PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('peranan','Peranan','required|trim|xss_clean');
+
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $tgl = $this->input->post('TANGGAL_MULAI');
+        $nama = $this->input->post('namaPKM');
+        $peran = $this->input->post('peranan');
+
+        $config['upload_path']          = './media/pkm/bukti_kinerja/';
+        $config['allowed_types']        = 'pdf';
+        $config['file_ext_tolower']     = TRUE;
+        $config['overwrite']            = TRUE;
+        $config['file_name']            = 'Bukti_Kinerja_' . $this->session->userdata('username') . "_" . $nama . "_" . $peran . "_" . $tgl;
+
+        $this->upload->initialize($config);
+        $buktikinerja = $this->upload->data('file_name');
+
+        $data = array(
+          'BUKTI_KINERJA' => str_replace(" ", "_",$buktikinerja)
+        );
+
+        $res = $this->model_utama->updateDokumBuktiPKM($id,$data);
+
+        if($res == true){
+          $this->upload->do_upload('buktiKin');
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Mengubah PKM!');
+          redirect('Module/PKM');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Mengubah PKM!');
+          redirect('Module/PKM');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Upload Bukti Kinerja! Silahkan Check Kembali Inputan!');
+        redirect('Module/PKM');
+      }
+    }
+
+    public function doDeletePKM(){
+      $this->form_validation->set_rules('idnya','ID PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('penugnya','Penugasan PKM','required|trim|xss_clean');
+      $this->form_validation->set_rules('banya','Bukti Kinerja PKM','required|trim|xss_clean');
+
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $p = $this->input->post('penugnya');
+        $b = $this->input->post('banya');
+
+        $res = $this->model_utama->deletePKM($id);
+
+        if($res == true){
+          unlink('./media/pkm/penugasan/' . $p . '.pdf');
+          unlink('./media/pkm/bukti_kinerja/' . $b . '.pdf');
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menghapus PKM!');
+          redirect('Module/PKM');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menghapus PKM!');
+          redirect('Module/PKM');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menghapus PKM! Silahkan Check Kembali Inputan!');
+        redirect('Module/PKM');
+      }
     }
 
     //Pengelolaan Institusi
 
     public function doInsertPengelolaanInstitusi(){
+      $this->form_validation->set_rules('TANGGAL_MULAI','Tanggal Mulai','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_AKHIR','Tanggal Akhir','required|trim|xss_clean');
+      $this->form_validation->set_rules('jabs','jabatan','required|trim|xss_clean');
+      $this->form_validation->set_rules('institut','Institusi','required|trim|xss_clean');
+      if(empty($_FILES['sk']['name'])){
+        $this->form_validation->set_rules('sk','Surat Keputusan','required|trim|xss_clean');
+      }
 
+      if($this->form_validation->run() == TRUE){
+        $tglM = $this->input->post('TANGGAL_MULAI');
+        $tglA = $this->input->post('TANGGAL_AKHIR');
+        $peran = $this->input->post('jabs');
+        $institusi = $this->input->post('institut');
+
+        if(!empty($_FILES['sk']['name'])){
+          $config['upload_path']          = './media/pengelolaan_institusi/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
+          $config['file_name']            = 'SK_' . $peran . "_" . $this->session->userdata('username') . "_" . $tglM . "-" . $tglA  . "_" .  $institusi;
+
+          $this->upload->initialize($config);
+          $sk = $this->upload->data('file_name');
+        }
+
+        $data = array(
+          'NIP_NIK' => $this->session->userdata('username'),
+          'PERAN_JABATAN' => $peran,
+          'TANGGAL_MULAI' => $tglM,
+          'TANGGAL_AKHIR' => $tglA,
+          'INSTITUSI' => $institusi,
+          'SK' => str_replace(" ", "_",$sk)
+        );
+
+        $res = $this->model_utama->insertPI($data);
+
+        if($res == true){
+          $this->upload->do_upload('sk');
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menambahkan Pengelolaan Institusi!');
+          redirect('Module/PengelolaanInstitusi');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menambahkan Pengelolaan Institusi!');
+          redirect('Module/PengelolaanInstitusi');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menambahkan Pengelolaan Institusi! Silahkan Check Kembali Inputan!');
+        redirect('Module/PengelolaanInstitusi');
+      }
     }
 
     public function doUpdatePengelolaanInstitusi(){
+      $this->form_validation->set_rules('idnya','id PI','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_MULAI','Tanggal Mulai','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_AKHIR','Tanggal Akhir','required|trim|xss_clean');
+      $this->form_validation->set_rules('jabs','jabatan','required|trim|xss_clean');
+      $this->form_validation->set_rules('institut','Institusi','required|trim|xss_clean');
 
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $tglM = $this->input->post('TANGGAL_MULAI');
+        $tglA = $this->input->post('TANGGAL_AKHIR');
+        $peran = $this->input->post('jabs');
+        $institusi = $this->input->post('institut');
+
+        $data = array(
+          'PERAN_JABATAN' => $peran,
+          'TANGGAL_MULAI' => $tglM,
+          'TANGGAL_AKHIR' => $tglA,
+          'INSTITUSI' => $institusi
+        );
+
+        $res = $this->model_utama->updatePI($id,$data);
+        if($res == true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Mengubah Pengelolaan Institusi!');
+          redirect('Module/PengelolaanInstitusi');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Mengubah Pengelolaan Institusi!');
+          redirect('Module/PengelolaanInstitusi');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Mengubah Pengelolaan Institusi! Silahkan Check Kembali Inputan!');
+        redirect('Module/PengelolaanInstitusi');
+      }
+    }
+
+    public function doUploadSKPI(){
+      $this->form_validation->set_rules('idnya','id PI','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_MULAI','Tanggal Mulai','required|trim|xss_clean');
+      $this->form_validation->set_rules('TANGGAL_AKHIR','Tanggal Akhir','required|trim|xss_clean');
+      $this->form_validation->set_rules('jabs','jabatan','required|trim|xss_clean');
+      $this->form_validation->set_rules('institut','Institusi','required|trim|xss_clean');
+      if(empty($_FILES['sk']['name'])){
+        $this->form_validation->set_rules('sk','Surat Keputusan','required|trim|xss_clean');
+      }
+
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $tglM = $this->input->post('TANGGAL_MULAI');
+        $tglA = $this->input->post('TANGGAL_AKHIR');
+        $peran = $this->input->post('jabs');
+        $institusi = $this->input->post('institut');
+
+        if(!empty($_FILES['sk']['name'])){
+          $config['upload_path']          = './media/pengelolaan_institusi/';
+          $config['allowed_types']        = 'pdf';
+          $config['file_ext_tolower']     = TRUE;
+          $config['overwrite']            = TRUE;
+          $config['file_name']            = 'SK_' . $peran . "_" . $this->session->userdata('username') . "_" . $tglM . "-" . $tglA  . "_" .  $institusi;
+
+          $this->upload->initialize($config);
+          $sk = $this->upload->data('file_name');
+        }
+
+        $data = array(
+          'SK' => str_replace(" ", "_",$sk)
+        );
+
+        $res = $this->model_utama->updateSK($id,$data);
+
+        if($res == true){
+          $this->upload->do_upload('sk');
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Upload SK Pengelolaan Institusi!');
+          redirect('Module/PengelolaanInstitusi');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Upload SK Pengelolaan Institusi!');
+          redirect('Module/PengelolaanInstitusi');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Upload SK Pengelolaan Institusi! Silahkan Check Kembali Inputan!');
+        redirect('Module/PengelolaanInstitusi');
+      }
+    }
+
+    public function doDeletePengelolaanInstitusi(){
+      $this->form_validation->set_rules('idnya','id PI','required|trim|xss_clean');
+      $this->form_validation->set_rules('sknya','SK','required|trim|xss_clean');
+      if($this->form_validation->run() == TRUE){
+        $id = $this->input->post('idnya');
+        $s = $this->input->post('sknya');
+
+        $res = $this->model_utama->deletePI($id);
+
+        if($res == true){
+          unlink('./media/pengelolaan_institusi/' . $s . '.pdf');
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg','Berhasil Menghapus Pengelolaan Institusi!');
+          redirect('Module/PengelolaanInstitusi');
+        }else{
+          $this->session->set_flashdata('alert','error');
+          $this->session->set_flashdata('msg','Gagal Menghapus Pengelolaan Institusi!');
+          redirect('Module/PengelolaanInstitusi');
+        }
+      }else{
+        $this->session->set_flashdata('alert','error');
+        $this->session->set_flashdata('msg','Gagal Menghapus Pengelolaan Institusi! Silahkan Check Kembali Inputan!');
+        redirect('Module/PengelolaanInstitusi');
+      }
     }
 
     //Pembimbing

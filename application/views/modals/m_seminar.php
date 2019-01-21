@@ -94,7 +94,7 @@
              <div class="input-group-addon">
                <i class="fa fa-calendar"></i>
              </div>
-             <input type="text" class="form-control pull-right" id="TanggalUpdate" name="TANGGAL_MULAIUpd" value="<?= $s->TANGGAL ?>">
+             <input type="text" class="form-control pull-right datetimepicker" id="TANGGAL_MULAIupd<?= $s->ID_SEMINAR ?>" name="TANGGAL_MULAIUpd" value="<?= $s->TANGGAL ?>">
              </div>
            </div>
          </div>
@@ -152,6 +152,9 @@
       <div class="modal-body">
         <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doUploadPenugasanSeminar'); ?>" method="post">
           <input type="hidden" value="<?= $s->ID_SEMINAR ?>" name="idnya">
+          <input type="hidden" value="<?= $s->JENIS ?>" name="jenisnya"/>
+          <input type="hidden" value="<?= $s->JUDUL ?>" name="judulS"/>
+          <input type="hidden" value="<?= $s->PERANAN ?>" name="peranannya"/>
           <div class="form-group">
             <label class="control-label col-sm-3">Penugasan</label>
             <div class="col-sm-5">
@@ -179,6 +182,9 @@
       <div class="modal-body">
         <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doUploadBuktiKinerjaSeminar'); ?>" method="post">
           <input type="hidden" value="<?= $s->ID_SEMINAR ?>" name="idnya">
+          <input type="hidden" value="<?= $s->JENIS ?>" name="jenisnya"/>
+          <input type="hidden" value="<?= $s->JUDUL ?>" name="judulS"/>
+          <input type="hidden" value="<?= $s->PERANAN ?>" name="peranannya"/>
           <div class="form-group">
             <label class="control-label col-sm-3">Bukti Kinerja</label>
             <div class="col-sm-5">
@@ -220,13 +226,15 @@
     </div>
   </div>
 </div>
+<script>
+$('#TANGGAL_MULAIupd<?= $s->ID_SEMINAR ?>').datetimepicker({
+  format: 'YYYY-MM-DD'
+});
+</script>
 <?php } ?>
 
 <script>
 $('#TANGGAL_MULAI').datetimepicker({
-  format: 'YYYY-MM-DD'
-});
-$('#TanggalUpdate').datetimepicker({
   format: 'YYYY-MM-DD'
 });
 </script>

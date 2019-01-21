@@ -24,4 +24,9 @@ $(function(){
         height: 300,                 // set editor height
         disableResizeEditor: true
     });
+
+    //datetimepicker
+    $('.datetimepicker').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
 });

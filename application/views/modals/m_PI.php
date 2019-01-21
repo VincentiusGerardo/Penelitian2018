@@ -7,7 +7,7 @@
         <h4 class="modal-title">Tambah Data Pengelolaan Institusi</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertPI'); ?>" method="post">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?= base_url('Source/do/doInsertPengelolaanInstitusi'); ?>" method="post">
          <div class="form-group">
            <label class="control-label col-sm-3">Tanggal Mulai</label>
            <div class="col-sm-9">
@@ -61,69 +61,48 @@
 
 <?php foreach($pi as $p){ ?>
 <!-- Modal Edit -->
-<div id="ModalEdit<?php echo $p['ID_pi']; ?>" class="modal fade" role="dialog">
+<div id="ModalEdit<?= $p->ID_PENGELOLAAN_INSTITUSI ?>" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah Data Seminar / Workshop</h4>
+        <h4 class="modal-title">Ubah Data Pengelolaan Institusi</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doInsertBahanAjar'); ?>" method="post">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?= base_url('Source/do/doUpdatePengelolaanInstitusi'); ?>" method="post">
+          <input type="hidden" name="idnya" value="<?= $p->ID_PENGELOLAAN_INSTITUSI ?>">
          <div class="form-group">
-           <label class="control-label col-sm-3">Tanggal</label>
+           <label class="control-label col-sm-3">Tanggal Mulai</label>
            <div class="col-sm-9">
              <div class="input-group date">
              <div class="input-group-addon">
                <i class="fa fa-calendar"></i>
              </div>
-             <input type="text" class="form-control pull-right" id="TANGGAL_MULAIUpd" name="TANGGAL_MULAIUpd">
+             <input type="text" class="form-control pull-right" id="TANGGAL_MULAI<?= $p->ID_PENGELOLAAN_INSTITUSI ?>" name="TANGGAL_MULAI" value="<?= $p->TANGGAL_MULAI ?>">
              </div>
            </div>
          </div>
          <div class="form-group">
-           <label class="control-label col-sm-3">Jenis</label>
+           <label class="control-label col-sm-3">Tanggal Akhir</label>
            <div class="col-sm-9">
-             <select class="selectpicker form-control" title="Select Jenis Seminar / Workshop" name="jenisnya">
-               <option value="Seminar">Seminar</option>
-               <option value="Konferensi">Konferensi</option>
-               <option value="Lokakarya">Lokakarya</option>
-               <option value="Simposium">Simposium</option>
-             </select>
+             <div class="input-group date">
+             <div class="input-group-addon">
+               <i class="fa fa-calendar"></i>
+             </div>
+             <input type="text" class="form-control pull-right" id="TANGGAL_AKHIR<?= $p->ID_PENGELOLAAN_INSTITUSI ?>" name="TANGGAL_AKHIR" value="<?= $p->TANGGAL_AKHIR ?>">
+             </div>
            </div>
          </div>
          <div class="form-group">
-           <label class="control-label col-sm-3">Nama</label>
+           <label class="control-label col-sm-3">Peran / Jabatan</label>
            <div class="col-sm-9">
-             <input type="text" class="form-control" name="namaS">
+             <input type="text" class="form-control" name="jabs" value="<?= $p->PERAN_JABATAN ?>">
            </div>
          </div>
          <div class="form-group">
-           <label class="control-label col-sm-3">Penyelenggara</label>
+           <label class="control-label col-sm-3">Institusi</label>
            <div class="col-sm-9">
-             <input type="text" class="form-control" name="penyeleng">
-           </div>
-         </div>
-         <div class="form-group">
-           <label class="control-label col-sm-3">Peranan</label>
-           <div class="col-sm-9">
-             <select class="selectpicker form-control" title="Select Peranan Seminar / Workshop" name="peranannya" multiple>
-               <option value="Panitia">Panitia</option>
-               <option value="Peserta">Peserta</option>
-               <option value="Pembicara">Pembicara</option>
-             </select>
-           </div>
-         </div>
-         <div class="form-group">
-           <label class="control-label col-sm-3">Penugasan</label>
-           <div class="col-sm-5">
-             <input type="file" name="penug" class="inputFile" accept="application/pdf">
-           </div>
-         </div>
-         <div class="form-group">
-           <label class="control-label col-sm-3">Bukti Kinerja</label>
-           <div class="col-sm-5">
-             <input type="file" name="buktiKin" class="inputFile" accept="application/pdf">
+             <input type="text" class="form-control" name="institut" value="<?= $p->INSTITUSI ?>">
            </div>
          </div>
       </div>
@@ -135,14 +114,76 @@
     </div>
   </div>
 </div>
+
+<!-- Upload SK -->
+<div id="ModalUploadSK<?= $p->ID_PENGELOLAAN_INSTITUSI ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload SK Pengelolaan Institusi</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?= base_url('Source/do/doUploadSKPI'); ?>" method="post">
+          <input type="hidden" name="idnya" value="<?= $p->ID_PENGELOLAAN_INSTITUSI ?>">
+          <input type="hidden" name="TANGGAL_MULAI" value="<?= $p->TANGGAL_MULAI ?>">
+          <input type="hidden" name="TANGGAL_AKHIR" value="<?= $p->TANGGAL_AKHIR ?>">
+          <input type="hidden" name="jabs" value="<?= $p->PERAN_JABATAN ?>">
+          <input type="hidden" name="institut" value="<?= $p->INSTITUSI ?>">
+         <div class="form-group">
+           <label class="control-label col-sm-3">SK</label>
+           <div class="col-sm-5">
+             <input type="file" name="sk" class="inputFile" accept="application/pdf">
+           </div>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete PI -->
+<div id="ModalDelete<?= $p->ID_PENGELOLAAN_INSTITUSI ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Hapus Data Pengelolaan Institusi</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?= base_url('Source/do/doDeletePengelolaanInstitusi'); ?>" method="post">
+          <input type="hidden" name="idnya" value="<?= $p->ID_PENGELOLAAN_INSTITUSI ?>">
+          <input type="hidden" name="sknya" value="<?= $p->SK ?>">
+         <h1 style="text-align: center;">Are You Sure?</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script>
+$('#TANGGAL_MULAI<?= $p->ID_PENGELOLAAN_INSTITUSI ?>').datetimepicker({
+  format: 'YYYY-MM-DD'
+});
+$('#TANGGAL_AKHIR<?= $p->ID_PENGELOLAAN_INSTITUSI ?>').datetimepicker({
+  format: 'YYYY-MM-DD'
+});
+</script>
 <?php } ?>
 
 <script>
-
 $('#TANGGAL_MULAI').datetimepicker({
   format: 'YYYY-MM-DD'
 });
-$('#TANGGAL_MULAIUpd').datetimepicker({
+$('#TANGGAL_AKHIR').datetimepicker({
   format: 'YYYY-MM-DD'
 });
 </script>

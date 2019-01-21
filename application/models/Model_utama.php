@@ -383,7 +383,7 @@
     }
 
     public function updatePKM($id,$data){
-      $t = $this->db->update('pkm',$data,array('ID_SEMINAR' => $id));
+      $t = $this->db->update('pkm',$data,array('ID_PKM' => $id));
       if($t){
         return true;
       }else{
@@ -391,9 +391,64 @@
       }
     }
 
+    public function updateDokumPenugasanPKM($id,$data){
+      $q = $this->db->update('pkm',$data,array('ID_PKM' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updateDokumBuktiPKM($id,$data){
+      $q = $this->db->update('pkm',$data,array('ID_PKM' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     public function deletePKM($id){
-      $t = $this->db->delete('pkm',array('ID_SEMINAR' => $id));
+      $t = $this->db->delete('pkm',array('ID_PKM' => $id));
       if($t){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    // Pengelolaan Institusi
+    public function insertPI($data){
+      $q = $this->db->insert('pengelolaan_institusi',$data);
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updatePI($id,$data){
+      $q = $this->db->update('pengelolaan_institusi',$data,array('ID_PENGELOLAAN_INSTITUSI' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updateSK($id,$data){
+      $q = $this->db->update('pengelolaan_institusi',$data,array('ID_PENGELOLAAN_INSTITUSI' => $id));
+      if($q){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deletePI($id){
+      $q = $this->db->delete('pengelolaan_institusi',array('ID_PENGELOLAAN_INSTITUSI' => $id));
+      if($q){
         return true;
       }else{
         return false;
