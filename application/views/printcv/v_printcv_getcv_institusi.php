@@ -3,40 +3,32 @@
 		<?php if($plh=="getcv_institusi"){ ?>
 			<h3>Pengelolaan Institusi</h3>
 			<hr>
-			<table>
-				<?php
-          $no = 1;
-          foreach ($getcv_institusi as $ins) {
-            if($no>1){
-        ?>
-          <tr><td colspan="5"><hr></td></tr>
-        <?php
-            }
-        ?>
-				<tr>
-          <td rowspan="4"><?=$no?>) &emsp;</td>
-					<td>Tanggal Mulai</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$ins['TANGGAL_MULAIcon']?></td>
-				</tr>
-				<tr>
-					<td>Tanggal Berakhir</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$ins['TANGGAL_AKHIRcon']?></td>
-				</tr>
-				<tr>
-					<td>Jabatan</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$ins['PERAN_JABATAN']?></td>
-				</tr>
-				<tr>
-					<td>Institusi</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$ins['INSTITUSI']?></td>
-				</tr>
-				<?php
-          $no++;}
-        ?>
+			<table border="1" width="100%" style="text-align: center">
+				<thead>
+					<tr>
+						<th align="center">No</th>
+						<th align="center">Tanggal Mulai</th>
+						<th align="center">Tanggal Berakhir</th>
+						<th align="center">Jabatan</th>
+						<th align="center">Institusi</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+			          $no = 1;
+			          foreach ($getcv_institusi as $ins) {
+			        ?>
+						<tr>
+		          			<td align="center"><?=$no?> &nbsp;</td>
+							<td><?=$ins['TANGGAL_MULAIcon']?></td>
+							<td><?=$ins['TANGGAL_AKHIRcon']?></td>
+							<td><?=$ins['PERAN_JABATAN']?></td>
+							<td><?=$ins['INSTITUSI']?></td>
+						</tr>
+					<?php
+			          $no++;}
+			        ?>
+		        </tbody>
 			</table>
 			<br>
 		<?php } ?>

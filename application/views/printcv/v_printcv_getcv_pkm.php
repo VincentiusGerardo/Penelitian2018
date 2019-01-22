@@ -3,45 +3,34 @@
 		<?php if($plh=="getcv_pkm"){ ?>
 			<h3>Pengabdian Kepada Masyarakat</h3>
 			<hr>
-			<table>
-				<?php
-          $no = 1;
-          foreach ($getcv_pkm as $pkm) {
-            if($no>1){
-        ?>
-          <tr><td colspan="5"><hr></td></tr>
-        <?php
-            }
-        ?>
-				<tr>
-          <td rowspan="7"><?=$no?>) &emsp;</td>
-					<td>Tanggal</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pkm['TANGGAL']?></td>
-				</tr>
-				<tr>
-					<td>Nama</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pkm['NAMA']?></td>
-				</tr>
-				<tr>
-					<td>Mitra</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pkm['MITRA']?></td>
-				</tr>
-				<tr>
-					<td>Tempat</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pkm['TEMPAT']?></td>
-				</tr>
-				<tr>
-					<td>Peranan</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pkm['PERANAN']?></td>
-				</tr>
-				<?php
-          $no++;}
-        ?>
+			<table border="1" width="100%" style="text-align: center">
+				<thead>
+					<tr>
+						<th align="center">No</th>
+						<th align="center">Tangal</th>
+						<th align="center">Nama</th>
+						<th align="center">Mitra</th>
+						<th align="center">Tempat</th>
+						<th align="center">Peranan</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+			          $no = 1;
+			          foreach ($getcv_pkm as $pkm) {
+			        ?>
+						<tr>
+							<td align="center"><?=$no?> &nbsp;</td>
+							<td><?=$pkm['TANGGAL']?></td>
+							<td><?=$pkm['NAMA']?></td>
+							<td><?=$pkm['MITRA']?></td>
+							<td><?=$pkm['TEMPAT']?></td>
+							<td><?=$pkm['PERANAN']?></td>
+						</tr>
+					<?php
+			          $no++;}
+			        ?>
+	        	</tbody>
 			</table>
 			<br>
 		<?php } ?>

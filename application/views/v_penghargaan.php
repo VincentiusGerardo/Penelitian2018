@@ -30,7 +30,7 @@
                 ?>
                   <tr>
                     <td><?=$no?></td>
-                    <td><?=$pen['TANGGAL']?></td>
+                    <td><?=$pen['TANGGALcon']?></td>
                     <td><?=$pen['BENTUK']?></td>
                     <td><?=$pen['PEMBERI']?></td>
                     <td><a href="<?= base_url('media/penghargaan/' . $pen['SERTIFIKAT'] . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>

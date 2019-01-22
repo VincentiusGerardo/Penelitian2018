@@ -24,7 +24,7 @@
                   <th>Semester</th>
                   <th>Tahun Akademik</th>
                   <th>SK</th>
-                  <th>Tanggal SK<th>
+                  <th>Tanggal SK</th>
                   <th>Action</th>
                 </tr>
               </thead>

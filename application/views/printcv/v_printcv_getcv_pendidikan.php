@@ -3,40 +3,32 @@
 		<?php if($plh=="getcv_pendidikan"){ ?>
 			<h3>Pendidikan</h3>
 			<hr>
-			<table>
+			<table border="1" width="100%" style="text-align: center">
+				<thead>
+					<tr>
+						<th align="center">No</th>
+						<th align="center">Program</th>
+						<th align="center">Tahun</th>
+						<th align="center">Perguruan Tinggi</th>
+						<th align="center">Jurusan</th>
+					</tr>
+				</thead>
+				<tbody>
 				<?php
-          $no = 1;
-          foreach ($getcv_pendidikan as $pend) {
-            if($no>1){
-        ?>
-          <tr><td colspan="4"><hr></td></tr>
-        <?php
-            }
-        ?>
+		          $no = 1;
+		          foreach ($getcv_pendidikan as $pend) {
+		        ?>
 				<tr>
-          <td rowspan="4"><?=$no?>) &emsp;</td>
-					<td>Program</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pend['PROGRAM']?></td>
-				</tr>
-				<tr>
-					<td>Tahun</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pend['TAHUN']?></td>
-				</tr>
-				<tr>
-					<td>Perguruan Tinggi</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pend['PERGURUAN_TINGGI']?></td>
-				</tr>
-				<tr>
-					<td>Jurusan</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pend['JURUSAN']?></td>
+				    <td align="center"><?=$no?> &nbsp;</td>
+					<td align="center"><?=$pend['PROGRAM']?></td>
+					<td align="center"><?=$pend['TAHUN']?></td>
+					<td align="center"><?=$pend['PERGURUAN_TINGGI']?></td>
+					<td align="center"><?=$pend['JURUSAN']?></td>
 				</tr>
 				<?php
-          $no++;}
-        ?>
+		          $no++;}
+		        ?>
+				</tbody>
 			</table>
 			<br>
 		<?php } ?>

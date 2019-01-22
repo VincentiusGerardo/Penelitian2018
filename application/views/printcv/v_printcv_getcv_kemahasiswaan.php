@@ -3,40 +3,32 @@
 		<?php if($plh=="getcv_kemahasiswaan"){ ?>
 			<h3>Kegiatan Kemahasiswaan</h3>
 			<hr>
-			<table>
-				<?php
-          $no = 1;
-          foreach ($getcv_kemahasiswaan as $kmh) {
-            if($no>1){
-        ?>
-          <tr><td colspan="4"><hr></td></tr>
-        <?php
-            }
-        ?>
-				<tr>
-          <td rowspan="4"><?=$no?>) &emsp;</td>
-					<td>Peran Jabatan</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$kmh['PERAN_JABATAN']?></td>
-				</tr>
-				<tr>
-					<td>Tanggal Mulai</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$kmh['TANGGAL_MULAIcon']?></td>
-				</tr>
-				<tr>
-					<td>Tanggal Akhir</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$kmh['TANGGAL_AKHIRcon']?></td>
-				</tr>
-				<tr>
-					<td>Institusi</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$kmh['INSTITUSI']?></td>
-				</tr>
-				<?php
-          $no++;}
-        ?>
+			<table border="1" width="100%" style="text-align: center">
+				<thead>
+					<tr>
+						<th align="center">No</th>
+						<th align="center">Peran Jabatan</th>
+						<th align="center">Tanggal Mulai</th>
+						<th align="center">Tanggal Akhir</th>
+						<th align="center">Institusi</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+			          $no = 1;
+			          foreach ($getcv_kemahasiswaan as $kmh) {
+			        ?>
+						<tr>
+				          	<td align="center"><?=$no?> &nbsp;</td>
+							<td><?=$kmh['PERAN_JABATAN']?></td>
+							<td><?=$kmh['TANGGAL_MULAIcon']?></td>
+							<td><?=$kmh['TANGGAL_AKHIRcon']?></td>
+							<td><?=$kmh['INSTITUSI']?></td>
+						</tr>
+					<?php
+			          $no++;}
+			        ?>
+        		</tbody>
 			</table>
 			<br>
 		<?php } ?>

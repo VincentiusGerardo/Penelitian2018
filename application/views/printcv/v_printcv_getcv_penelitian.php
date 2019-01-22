@@ -3,38 +3,30 @@
 		<?php if($plh=="getcv_penelitian"){ ?>
 			<h3>Penelitian</h3>
 			<hr>
-			<table>
-				<?php
-          $no = 1;
-          foreach ($getcv_penelitian as $pen) {
-            if($no>1){
-        ?>
-          <tr><td colspan="4"><hr></td></tr>
-        <?php
-            }
-        ?>
-				<tr>
-          <td rowspan="4"><?=$no?>) &emsp;</td>
-					<td>Tahun</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pen['TAHUN']?></td>
-				</tr>
-				<tr>
-					<td>Judul</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pen['JUDUL']?></td>
-				</tr>
-				<tr>
-					<td>Peranan</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pen['PERANAN']?></td>
-				</tr>
-				<tr>
-					<td>Sumber Dana</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$pen['SUMBER_DANA']?></td>
-				</tr>
-				<?php $no++;} ?>
+			<table border="1" width="100%" style="text-align: center">
+				<thead>
+					<tr>
+						<th align="center">No</th>
+						<th align="center">Tahun</th>
+						<th align="center">Judul</th>
+						<th align="center">Peranan</th>
+						<th align="center">Sumber Dana</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+			          $no = 1;
+			          foreach ($getcv_penelitian as $pen) {
+			        ?>
+						<tr>
+						    <td align="center"><?=$no?> &nbsp;</td>
+							<td><?=$pen['TAHUN']?></td>
+							<td><?=$pen['JUDUL']?></td>
+							<td><?=$pen['PERANAN']?></td>
+							<td><?=$pen['SUMBER_DANA']?></td>
+						</tr>
+					<?php $no++;} ?>
+				</tbody>
 			</table>
 			<br>
 		<?php } ?>
