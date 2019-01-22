@@ -167,12 +167,12 @@
       $this->form_validation->set_rules('thn','tahun','required|xss_clean|trim|max_length[4]');
       $this->form_validation->set_rules('pt','perguruanTinggi','required|xss_clean|trim');
       $this->form_validation->set_rules('jur','jurusan','required|xss_clean|trim');
-      if(empty($_FILES['ij']['name'])){
-        $this->form_validation->set_rules('ij','ijazah','required|xss_clean|trim');
-      }
-      if(empty($_FILES['tr']['name'])){
-        $this->form_validation->set_rules('tr','transkrip','required|xss_clean|trim');
-      }
+      // if(empty($_FILES['ij']['name'])){
+      //   $this->form_validation->set_rules('ij','ijazah','required|xss_clean|trim');
+      // }
+      // if(empty($_FILES['tr']['name'])){
+      //   $this->form_validation->set_rules('tr','transkrip','required|xss_clean|trim');
+      // }
 
       if($this->form_validation->run() == TRUE){
         $pro = $this->input->post('selProgram');
@@ -191,6 +191,8 @@
           $this->upload->initialize($config);
           $ijazah = $this->upload->data('file_name');
           $RES = $this->upload->do_upload('ij');
+        }else{
+          $ijazah = null;
         }
 
         //Upload Transkrip
@@ -204,6 +206,8 @@
           $this->upload->initialize($config);
           $transkrip = $this->upload->data('file_name');
           $this->upload->do_upload('tr');
+        }else{
+          $transkrip = null;
         }
 
         $data = array(
@@ -388,9 +392,9 @@
       $this->form_validation->set_rules('sem','Semester','required|trim|xss_clean');
       $this->form_validation->set_rules('ta','TahunAjaran','required|trim|xss_clean');
       $this->form_validation->set_rules('tsk','TanggalSuratKeputusan','required|trim|xss_clean');
-      if(empty($_FILES['sk']['name'])){
-          $this->form_validation->set_rules('sk','SuratKeputusan','required|trim|xss_clean');
-      }
+      // if(empty($_FILES['sk']['name'])){
+      //     $this->form_validation->set_rules('sk','SuratKeputusan','required|trim|xss_clean');
+      // }
 
       if($this->form_validation->run() == TRUE){
         $m = $this->input->post('matkul');
@@ -402,6 +406,7 @@
         $t = $this->input->post('ta');
         $tgl = $this->input->post('tsk');
 
+        if(empty($_FILES['sk']['name'])){
         $config['upload_path']          = './media/pengajaran/';
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = TRUE;
@@ -409,6 +414,11 @@
         $config['file_name']            = 'sk_' . ucfirst(strtolower($p)) . "_" . $this->session->userdata('username') . "_" . $ps . "_" . $t;
 
         $this->upload->initialize($config);
+        $sk = $this->upload->data('file_name');
+        $this->upload->do_upload('sk');
+        }else{
+          $sk = null;
+        }
 
         $data = array(
           'NIP_NIK' => $this->session->userdata('username'),
@@ -420,11 +430,10 @@
           'SEMESTER' => $s,
           'TAHUN_AKADEMIK' => $t,
           'TanggalSK' => $tgl,
-          'SK' => str_replace(" ", "_",$this->upload->data('file_name'))
+          'SK' => str_replace(" ", "_",$sk)
         );
         $res = $this->model_utama->insertPengajaran($data);
         if($res == true){
-          $this->upload->do_upload('sk');
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Berhasil Menambahkan Pengajaran!');
           redirect('Module/Pengajaran');
@@ -668,13 +677,13 @@
       $this->form_validation->set_rules('jenisnya','JenisBahanAjar','required|trim|xss_clean');
       $this->form_validation->set_rules('semesternya','Semester','required|trim|xss_clean');
       $this->form_validation->set_rules('tahunnya','Tahun','required|trim|xss_clean');
-      if(empty($_FILES['penug']['name'])){
-        $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
-      }
+      // if(empty($_FILES['penug']['name'])){
+      //   $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
+      // }
 
-      if(empty($_FILES['buktiKin']['name'])){
-        $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
-      }
+      // if(empty($_FILES['buktiKin']['name'])){
+      //   $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
+      // }
 
       if($this->form_validation->run() == TRUE){
         $mk = $this->input->post('MatKul');
@@ -693,6 +702,8 @@
           $this->upload->initialize($config);
           $penugasan = $this->upload->data('file_name');
           $this->upload->do_upload('penug');
+        }else{
+          $penugasan = null;
         }
 
         if(!empty($_FILES['buktiKin']['name'])){
@@ -705,6 +716,8 @@
           $this->upload->initialize($config);
           $buktikinerja = $this->upload->data('file_name');
           $this->upload->do_upload('buktiKin');
+        }else{
+          $buktikinerja = null;
         }
 
         $data = array(
@@ -898,13 +911,13 @@
       $this->form_validation->set_rules('judulS','Judul Seminar','required|trim|xss_clean');
       $this->form_validation->set_rules('penyeleng','Penyelenggara','required|trim|xss_clean');
       $this->form_validation->set_rules('peranannya','Peran','required|trim|xss_clean');
-      if(empty($_FILES['penug']['name'])){
-        $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
-      }
+      // if(empty($_FILES['penug']['name'])){
+      //   $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
+      // }
 
-      if(empty($_FILES['buktiKin']['name'])){
-        $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
-      }
+      // if(empty($_FILES['buktiKin']['name'])){
+      //   $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
+      // }
 
       if($this->form_validation->run() == TRUE){
         $mulai = $this->input->post('TANGGAL_MULAI');
@@ -923,6 +936,8 @@
           $this->upload->initialize($config);
           $penugasan = $this->upload->data('file_name');
           $this->upload->do_upload('penug');
+        }else{
+          $penugasan = null;
         }
 
         if(!empty($_FILES['buktiKin']['name'])){
@@ -935,6 +950,8 @@
           $this->upload->initialize($config);
           $buktikinerja = $this->upload->data('file_name');
           $this->upload->do_upload('buktiKin');
+        }else{
+          $buktikinerja = null;
         }
 
         $data = array(
@@ -1138,13 +1155,13 @@
       $this->form_validation->set_rules('tempat','Lokasi','required|trim|xss_clean');
       $this->form_validation->set_rules('mitra','Mitra','required|trim|xss_clean');
       $this->form_validation->set_rules('peranan','Peranan','required|trim|xss_clean');
-      if(empty($_FILES['penug']['name'])){
-        $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
-      }
+      // if(empty($_FILES['penug']['name'])){
+      //   $this->form_validation->set_rules('penug','Penugasan','required|trim|xss_clean');
+      // }
 
-      if(empty($_FILES['buktiKin']['name'])){
-        $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
-      }
+      // if(empty($_FILES['buktiKin']['name'])){
+      //   $this->form_validation->set_rules('buktiKin','BuktiKinerja','required|trim|xss_clean');
+      // }
 
 
       if($this->form_validation->run() == TRUE){
@@ -1164,6 +1181,8 @@
           $this->upload->initialize($config);
           $penugasan = $this->upload->data('file_name');
           $this->upload->do_upload('penug');
+        }else{
+          $penugasan = null;
         }
 
         if(!empty($_FILES['buktiKin']['name'])){
@@ -1176,6 +1195,8 @@
           $this->upload->initialize($config);
           $buktikinerja = $this->upload->data('file_name');
           $this->upload->do_upload('buktiKin');
+        }else{
+          $buktikinerja = null;
         }
 
         $data = array(
@@ -1374,9 +1395,9 @@
       $this->form_validation->set_rules('TANGGAL_AKHIR','Tanggal Akhir','required|trim|xss_clean');
       $this->form_validation->set_rules('jabs','jabatan','required|trim|xss_clean');
       $this->form_validation->set_rules('institut','Institusi','required|trim|xss_clean');
-      if(empty($_FILES['sk']['name'])){
-        $this->form_validation->set_rules('sk','Surat Keputusan','required|trim|xss_clean');
-      }
+      // if(empty($_FILES['sk']['name'])){
+      //   $this->form_validation->set_rules('sk','Surat Keputusan','required|trim|xss_clean');
+      // }
 
       if($this->form_validation->run() == TRUE){
         $tglM = $this->input->post('TANGGAL_MULAI');
@@ -1393,6 +1414,9 @@
 
           $this->upload->initialize($config);
           $sk = $this->upload->data('file_name');
+          $this->upload->do_upload('sk');
+        }else{
+          $sk = null;
         }
 
         $data = array(
@@ -1407,7 +1431,6 @@
         $res = $this->model_utama->insertPI($data);
 
         if($res == true){
-          $this->upload->do_upload('sk');
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Berhasil Menambahkan Pengelolaan Institusi!');
           redirect('Module/PengelolaanInstitusi');
