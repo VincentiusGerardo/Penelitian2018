@@ -3,55 +3,38 @@
 		<?php if($plh=="getcv_pengajaran"){ ?>
 			<h3>Pengajaran</h3>
 			<hr>
-			<table>
-				<?php
-          $no = 1;
-          foreach ($getcv_pengajaran as $peng) {
-            if($no>1){
-        ?>
-          <tr><td colspan="4"><hr></td></tr>
-        <?php
-            }
-        ?>
-				<tr>
-          <td rowspan="7"><?=$no?>) &emsp;</td>
-					<td>Mata Kuliah</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['MATA_KULIAH']?></td>
-				</tr>
-				<tr>
-					<td>Program Pendidikan</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['PROGRAM_PENDIDIKAN']?></td>
-				</tr>
-				<tr>
-					<td>Institusi</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['INSTITUSI']?></td>
-				</tr>
-				<tr>
-					<td>Jurusan</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['JURUSAN']?></td>
-				</tr>
-				<tr>
-					<td>Program Studi</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['PROGRAM_STUDI']?></td>
-				</tr>
-				<tr>
-					<td>Semester</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['SEMESTER']?></td>
-				</tr>
-				<tr>
-					<td>Tahun Akademik</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['TAHUN_AKADEMIK']?></td>
-				</tr>
-				<?php
-          $no++;}
-        ?>
+			<table border="1" width="100%" style="text-align: center">
+				<thead>
+					<tr>
+						<th align="center">No</th>
+						<th align="center">Mata Kuliah</th>
+						<th align="center">Program Pendidikan</th>
+						<th align="center">Institusi</th>
+						<th align="center">Jurusan</th>
+						<th align="center">Program Studi</th>
+						<th align="center">Semester</th>
+						<th align="center">Tahun Akademik</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+			          $no = 1;
+			          foreach ($getcv_pengajaran as $peng) {
+			        ?>
+						<tr>
+							<td align="center"><?=$no?> &nbsp;</td>
+							<td align="center"><?=$peng['MATA_KULIAH']?></td>
+							<td align="center"><?=$peng['PROGRAM_PENDIDIKAN']?></td>
+							<td align="center"><?=$peng['INSTITUSI']?></td>
+							<td align="center"><?=$peng['JURUSAN']?></td>
+							<td align="center"><?=$peng['PROGRAM_STUDI']?></td>
+							<td align="center"><?=$peng['SEMESTER']?></td>
+							<td align="center"><?=$peng['TAHUN_AKADEMIK']?></td>
+						</tr>
+					<?php
+			          $no++;}
+			        ?>
+	        	</tbody>
 			</table>
 			<br>
 		<?php } ?>

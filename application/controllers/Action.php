@@ -538,16 +538,10 @@
 
     public function doDeletePengajaran(){
       $this->form_validation->set_rules('id','IDPengajran','required|trim|xss_clean');
-      $this->form_validation->set_rules('prog','ProgramPendidikan','required|trim|xss_clean');
-      $this->form_validation->set_rules('prodi','ProgramStudi','required|trim|xss_clean');
-      $this->form_validation->set_rules('ta','TahunAkademik','required|trim|xss_clean');
       $this->form_validation->set_rules('sk','SuratKeputusan','required|trim|xss_clean');
 
       if($this->form_validation->run() == TRUE){
         $id = $this->input->post('id');
-        $p = $this->input->post('prog');
-        $ps = $this->input->post('prodi');
-        $t = $this->input->post('ta');
         $sk = $this->input->post('sk');
 
         $res = $this->model_utama->deletePengajaran($id);

@@ -199,9 +199,6 @@
       <div class="modal-body">
         <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('Source/do/doDeletePengajaran'); ?>" method="post">
           <input type="hidden" name="id" value="<?= $p->ID_PENGAJARAN ?>">
-          <input type="hidden" name="prog" value="<?= $p->PROGRAM_PENDIDIKAN ?>">
-          <input type="hidden" name="prodi" value="<?= $p->PROGRAM_STUDI ?>">
-          <input type="hidden" name="ta" value="<?= $p->TAHUN_AKADEMIK ?>">
           <input type="hidden" name="sk" value="<?= $p->SK ?>">
         <h1 style="text-align: center;">Are You Sure?</h1>
       </div>

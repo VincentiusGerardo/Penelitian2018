@@ -3,55 +3,38 @@
 		<?php if($plh=="getcv_penguji"){ ?>
 			<h3>Penguji</h3>
 			<hr>
-			<table>
-				<?php
-          $no = 1;
-          foreach ($getcv_penguji as $peng) {
-            if($no>1){
-        ?>
-          <tr><td colspan="4"><hr></td></tr>
-        <?php
-            }
-        ?>
-				<tr>
-          <td rowspan="7"><?=$no?>) &emsp;</td>
-					<td>Nama</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['NAMA']?></td>
-				</tr>
-				<tr>
-					<td>NIM</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['NIM']?></td>
-				</tr>
-				<tr>
-					<td>Semester</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['SEMESTER']?></td>
-				</tr>
-				<tr>
-					<td>Tahun</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['TAHUN']?></td>
-				</tr>
-				<tr>
-					<td>Program</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['PROGRAM']?></td>
-				</tr>
-				<tr>
-					<td>Judul</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['JUDUL']?></td>
-				</tr>
-				<tr>
-					<td>Peranan</td>
-					<td width="30px" align="center">:</td>
-					<td><?=$peng['PERANAN']?></td>
-				</tr>
-				<?php
-          $no++;}
-        ?>
+			<table border="1" width="100%" style="text-align: center">
+				<thead>
+					<tr>
+						<th align="center">No</th>
+						<th align="center">Nama</th>
+						<th align="center">NIM</th>
+						<th align="center">Semester</th>
+						<th align="center">Tahun</th>
+						<th align="center">Program</th>
+						<th align="center">Judul</th>
+						<th align="center">Peranan</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+			          $no = 1;
+			          foreach ($getcv_penguji as $peng) {
+			        ?>
+						<tr>
+							<td align="center"><?=$no?> &nbsp;</td>
+							<td><?=$peng['NAMA']?></td>
+							<td><?=$peng['NIM']?></td>
+							<td><?=$peng['SEMESTER']?></td>
+							<td><?=$peng['TAHUN']?></td>
+							<td><?=$peng['PROGRAM']?></td>
+							<td><?=$peng['JUDUL']?></td>
+							<td><?=$peng['PERANAN']?></td>
+						</tr>
+					<?php
+			          $no++;}
+			        ?>
+	        	</tbody>
 			</table>
 			<br>
 		<?php } ?>

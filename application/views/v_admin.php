@@ -34,7 +34,7 @@
                     <td><?= $d->NAMA ?></td>
                     <td><?= $d->TANGGAL_LAHIR; ?></td>
                     <td>
-                      <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $d->NIP_NIK ?>"><span class="fa fa-edit"></span></button> &nbsp;
+                      <!-- <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $d->NIP_NIK ?>"><span class="fa fa-edit"></span></button> &nbsp; -->
                       <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#ModalDelete<?= $d->NIP_NIK ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus data"><span class="fa fa-trash"></span></button>
                     </td>
                   </tr>
