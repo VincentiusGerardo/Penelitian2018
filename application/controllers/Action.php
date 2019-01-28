@@ -580,6 +580,7 @@
       foreach ($dat as $pem) {
         $namafile = $pem['ID_PENELITIAN']."_penelitian_".$this->session->userdata('username');
         $id = $pem['ID_PENELITIAN'];
+        $this->model_utama->updateDokumenPenelitian($id, $namafile);
       }
 
       if(!empty($_FILES['SURAT_TUGAS']['name'])){
@@ -592,15 +593,20 @@
         $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('SURAT_TUGAS');
 
-        $this->model_utama->updateDokumenPenelitian($id, $namafile);
       }
 
       if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
-          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penelitian!');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penghargaan dan mengupload sertifikat!');
+      }else if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penghargaan!');
+      }else if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengupload sertifikat!');
       }else{
           $this->session->set_flashdata('alert','error');
-          $this->session->set_flashdata('msg','Gagal menambahkan data penelitian!');
+          $this->session->set_flashdata('msg','Gagal menambahkan data penghargaan!');
       }
 
       redirect('Module/penelitian');
@@ -802,11 +808,11 @@
         $config['allowed_types']        = 'pdf';
         $config['file_ext_tolower']     = TRUE;
         $config['overwrite']            = TRUE;
-        $config['file_name']            = 'Peugasan_' . $mk . "_" . $this->session->userdata('username') . "_" . $s . "_" . $t;
+        $config['file_name']            = 'Penugasan_' . $mk . "_" . $this->session->userdata('username') . "_" . $s . "_" . $t;
 
         $this->upload->initialize($config);
         $data = array(
-          'PENUGASAN' => str_replace(" ", "_",$penugasan)
+          'PENUGASAN' => str_replace(" ", "_",$this->upload->data('file_name'))
         );
         $res = $this->model_utama->updatePenugasanBA($id,$data);
         if($res == true){
@@ -847,7 +853,7 @@
 
         $this->upload->initialize($config);
         $data = array(
-          'BUKTI_KINERJA' => str_replace(" ", "_",$buktikinerja)
+          'BUKTI_KINERJA' => str_replace(" ", "_",$this->upload->data('file_name'))
         );
         $res = $this->model_utama->updateBuktiBA($id,$data);
         if($res == true){
@@ -1565,6 +1571,7 @@
       foreach ($dat as $pem) {
         $namafile = $pem['ID_PEMBIMBING']."_pembimbing_".$this->session->userdata('username');
         $id = $pem['ID_PEMBIMBING'];
+        $this->model_utama->updateDokumenPembimbing($id, $namafile);
       }
 
       if(!empty($_FILES['SK']['name'])){
@@ -1577,13 +1584,17 @@
         $this->upload->initialize($config);
         $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('SK');
-
-        $this->model_utama->updateDokumenPembimbing($id, $namafile);
       }
 
       if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data pembimbing dan mengupload SK!');
+      }else if($res==true){
+          $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menambahkan data pembimbing!');
+      }else if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengupload SK!');
       }else{
           $this->session->set_flashdata('alert','error');
           $this->session->set_flashdata('msg','Gagal menambahkan data pembimbing!');
@@ -1660,6 +1671,8 @@
       foreach ($dat as $pem) {
         $namafile = $pem['ID_PENGUJI']."_penguji_".$this->session->userdata('username');
         $id = $pem['ID_PENGUJI'];
+
+        $this->model_utama->updateDokumenPenguji($id, $namafile);
       }
 
       if(!empty($_FILES['SK']['name'])){
@@ -1672,13 +1685,17 @@
         $this->upload->initialize($config);
         $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('SK');
-
-        $this->model_utama->updateDokumenPenguji($id, $namafile);
       }
 
       if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penguji dan mengupload SK!');
+      }else if($res==true){
+          $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menambahkan data penguji!');
+      }else if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengupload SK!');
       }else{
           $this->session->set_flashdata('alert','error');
           $this->session->set_flashdata('msg','Gagal menambahkan data penguji!');
@@ -1755,6 +1772,8 @@
       foreach ($dat as $pem) {
         $namafile = $pem['ID_ORGANISASI']."_organisasi_".$this->session->userdata('username');
         $id = $pem['ID_ORGANISASI'];
+
+        $this->model_utama->updateDokumenOrganisasi($id, $namafile);
       }
 
       if(!empty($_FILES['NOMOR']['name'])){
@@ -1767,13 +1786,17 @@
         $this->upload->initialize($config);
         $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('NOMOR');
-
-        $this->model_utama->updateDokumenOrganisasi($id, $namafile);
       }
 
       if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data organisasi dan mengupload nomor!');
+      }else if($res==true){
+          $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menambahkan data organisasi!');
+      }else if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengupload nomor!');
       }else{
           $this->session->set_flashdata('alert','error');
           $this->session->set_flashdata('msg','Gagal menambahkan data organisasi!');
@@ -1849,6 +1872,7 @@
       foreach ($dat as $pem) {
         $namafile = $pem['ID_PENGHARGAAN']."_penghargaan_".$this->session->userdata('username');
         $id = $pem['ID_PENGHARGAAN'];
+        $this->model_utama->updateDokumenPenghargaan($id, $namafile);
       }
 
       if(!empty($_FILES['SERTIFIKAT']['name'])){
@@ -1862,15 +1886,20 @@
         $SK = $this->upload->data('file_name');
         $res_u = $this->upload->do_upload('SERTIFIKAT');
 
-        $this->model_utama->updateDokumenPenghargaan($id, $namafile);
       }
 
       if($res==true && $res_u == "1"){
           $this->session->set_flashdata('alert','success');
-          $this->session->set_flashdata('msg', 'Berhasil menambahkan data Penghargaan!');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penghargaan dan mengupload sertifikat!');
+      }else if($res==true){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data penghargaan!');
+      }else if($res_u == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil mengupload sertifikat!');
       }else{
           $this->session->set_flashdata('alert','error');
-          $this->session->set_flashdata('msg','Gagal menambahkan data Penghargaan!');
+          $this->session->set_flashdata('msg','Gagal menambahkan data penghargaan!');
       }
 
       redirect('Module/penghargaan');
@@ -1944,6 +1973,7 @@
         $namafile_1 = $pem['ID_PUBLIKASI']."_publikasi_penugasan_".$this->session->userdata('username');
         $namafile_2 = $pem['ID_PUBLIKASI']."_publikasi_buktiKinerja_".$this->session->userdata('username');
         $id = $pem['ID_PUBLIKASI'];
+        $this->model_utama->updateDokumenPublikasi($id, $namafile_1, $namafile_2);
       }
 
       if(!empty($_FILES['PENUGASAN']['name'])){
@@ -1957,9 +1987,10 @@
         $SK = $this->upload->data('file_name');
         $res_u1 = $this->upload->do_upload('PENUGASAN');
 
-      }else{
-        $namafile_1 = "";
       }
+      // else{
+      //   $namafile_1 = "";
+      // }
 
       if(!empty($_FILES['BUKTI_KINERJA']['name'])){
         $config['upload_path']          = './media/publikasi/';
@@ -1972,12 +2003,21 @@
         $SK = $this->upload->data('file_name');
         $res_u2 = $this->upload->do_upload('BUKTI_KINERJA');
 
-        $this->model_utama->updateDokumenPublikasi($id, $namafile_1, $namafile_2);
-      }else{
-        $namafile_2 = "";
       }
+      // else{
+      //   $namafile_2 = "";
+      // }
 
       if($res==true && $res_u1 == "1" && $res_u2 == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data Publikasi, penugasan, dan bukti kinerja!');
+      }else if($res==true && $res_u1 == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data Publikasi dan penugasan!');
+      }else if($res==true && $res_u2 == "1"){
+          $this->session->set_flashdata('alert','success');
+          $this->session->set_flashdata('msg', 'Berhasil menambahkan data Publikasi dan bukti kinerja!');
+      }else if($res==true){
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg', 'Berhasil menambahkan data Publikasi!');
       }else{

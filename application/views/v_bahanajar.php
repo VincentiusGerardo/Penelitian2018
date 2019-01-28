@@ -42,8 +42,8 @@
                     <td><a href="<?= base_url('media/bahan_ajar/bukti_kinerja/' . $p->BUKTI_KINERJA . '.pdf'); ?>" target="_blank" class="btn btn-xs btn-primary">View</a></td>
                     <td>
                       <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ModalEdit<?= $p->ID_BAHAN_AJAR ?>"><span class="fa fa-edit"></span></button> &nbsp;
-                      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#ModalDokumenP<?= $p->ID_BAHAN_AJAR ?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen Ijazah"><span class="fa fa-file"></span></button> &nbsp;
-                      <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#ModalDokumenBA<?= $p->ID_BAHAN_AJAR ?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen Transkrip"><span class="fa fa-file"></span></button> &nbsp;
+                      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#ModalDokumenP<?= $p->ID_BAHAN_AJAR ?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen Penugasan"><span class="fa fa-file"></span></button> &nbsp;
+                      <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#ModalDokumenBA<?= $p->ID_BAHAN_AJAR ?>" data-toggle="tooltip" data-placement="bottom" title="Ubah dokumen Bukti Kinerja"><span class="fa fa-file"></span></button> &nbsp;
                       <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#ModalDelete<?= $p->ID_BAHAN_AJAR ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus data"><span class="fa fa-trash"></span></button>
                     </td>
                   </tr>
