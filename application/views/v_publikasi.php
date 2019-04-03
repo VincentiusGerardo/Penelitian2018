@@ -24,7 +24,8 @@
                   <th>Nomor</th>
                   <th>Volume</th>
                   <th>ISSN</th>
-                  <th>ISBN</th>
+                  <th>Tahun</th>
+                  <th>URL</th>
                   <th>Konferensi</th>
                   <th>Tempat</th>
                   <th>Peranan</th>
@@ -48,7 +49,8 @@
                   <td><?=$pub['NOMOR']==null?"-":$pub['NOMOR']?></td>
                   <td><?=$pub['VOLUME']==null?"-":$pub['VOLUME']?></td>
                   <td><?=$pub['ISSN']==null?"-":$pub['ISSN']?></td>
-                  <td><?=$pub['ISBN']==null?"-":$pub['ISBN']?></td>
+                  <td><?=$pub['Tahun']==null?"-":$pub['Tahun']?></td>
+                  <td><?=$pub['URL']==null?"-":$pub['URL']?></td>
                   <td><?=$pub['KONFERENSI']==null?"-":$pub['KONFERENSI']?></td>
                   <td><?=$pub['TEMPAT']==null?"-":$pub['TEMPAT']?></td>
                   <td><?=$pub['PERANAN']?></td>

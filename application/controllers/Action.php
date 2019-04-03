@@ -355,8 +355,8 @@
     public function doDeletePendidikan(){
       $this->form_validation->set_rules('idnya','id_pendidikan','required|xss_clean|trim');
       $this->form_validation->set_rules('programnya','program_pendidikan','required|xss_clean|trim');
-      $this->form_validation->set_rules('ijasahnya','ijasah','required|xss_clean|trim');
-      $this->form_validation->set_rules('transkripnya','transkrip','required|xss_clean|trim');
+      $this->form_validation->set_rules('ijasahnya','ijasah','xss_clean|trim');
+      $this->form_validation->set_rules('transkripnya','transkrip','xss_clean|trim');
       if($this->form_validation->run() == TRUE){
         $kode = $this->input->post('idnya');
         $prog = $this->input->post('programnya');
@@ -364,8 +364,14 @@
         $tr = $this->input->post('transkripnya');
         $r = $this->model_utama->deletePendidikan($kode);
         if($r){
-          unlink('./media/pendidikan/ijazah/' . $ij . ".pdf");
-          unlink('./media/pendidikan/transkrip/' . $tr . ".pdf");
+          if(file_exists('./media/pendidikan/ijazah/' . $ij . ".pdf") && file_exists('./media/pendidikan/transkrip/' . $tr . ".pdf")){
+            unlink('./media/pendidikan/ijazah/' . $ij . ".pdf");
+            unlink('./media/pendidikan/transkrip/' . $tr . ".pdf");
+          }else if(file_exists('./media/pendidikan/ijazah/' . $ij . ".pdf")){
+            unlink('./media/pendidikan/ijazah/' . $ij . ".pdf");
+          }else if(file_exists('./media/pendidikan/transkrip/' . $tr . ".pdf")){
+            unlink('./media/pendidikan/transkrip/' . $tr . ".pdf");
+          }
           $this->session->set_flashdata('alert','success');
           $this->session->set_flashdata('msg','Sucessfuly Deleted!');
           redirect('Module/Pendidikan');

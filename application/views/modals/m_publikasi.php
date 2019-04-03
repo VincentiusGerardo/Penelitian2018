@@ -80,9 +80,15 @@
              </div>
            </div>
            <div class="form-group">
-             <label class="control-label col-sm-3">ISBN</label>
+             <label class="control-label col-sm-3">Tahun</label>
              <div class="col-sm-9">
-               <input type="text" class="form-control" name="ISBN">
+               <input type="text" class="form-control" name="Tahun">
+             </div>
+           </div>
+           <div class="form-group">
+             <label class="control-label col-sm-3">URL</label>
+             <div class="col-sm-9">
+               <input type="text" class="form-control" name="URL">
              </div>
            </div>
          </div>
@@ -235,9 +241,15 @@
              </div>
            </div>
            <div class="form-group">
-             <label class="control-label col-sm-3">ISBN</label>
+             <label class="control-label col-sm-3">Tahun</label>
              <div class="col-sm-9">
-               <input type="text" class="form-control" name="ISBN" value="<?=$pub['ISBN']?>">
+               <input type="text" class="form-control" name="ISBN" value="<?=$pub['Tahun']?>">
+             </div>
+           </div>
+           <div class="form-group">
+             <label class="control-label col-sm-3">URL</label>
+             <div class="col-sm-9">
+               <input type="text" class="form-control" name="ISBN" value="<?=$pub['URL']?>">
              </div>
            </div>
          </div>

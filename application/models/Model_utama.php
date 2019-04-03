@@ -140,7 +140,8 @@
         'NOMOR' => $this->input->post('NOMOR'),
         'VOLUME' => $this->input->post('VOLUME'),
         'ISSN' => $this->input->post('ISSN'),
-        'ISBN' => $this->input->post('ISBN'),
+        'Tahun' => $this->input->post('Tahun'),
+        'URL' => $this->input->post('URL'),
         'KONFERENSI' => $this->input->post('KONFERENSI'),
         'TEMPAT' => $this->input->post('TEMPAT'),
         'PERANAN' => $this->input->post('PERANAN')
@@ -823,7 +824,8 @@
         'NOMOR' => $this->input->post('NOMOR'),
         'VOLUME' => $this->input->post('VOLUME'),
         'ISSN' => $this->input->post('ISSN'),
-        'ISBN' => $this->input->post('ISBN'),
+        'Tahun' => $this->input->post('Tahun'),
+        'URL' => $this->input->post('URL'),
         'KONFERENSI' => $this->input->post('KONFERENSI'),
         'TEMPAT' => $this->input->post('TEMPAT'),
         'PERANAN' => $this->input->post('PERANAN')
@@ -844,7 +846,8 @@
           'NOMOR' => $this->input->post('NOMOR'),
           'VOLUME' => $this->input->post('VOLUME'),
           'ISSN' => $this->input->post('ISSN'),
-          'ISBN' => $this->input->post('ISBN'),
+          'Tahun' => $this->input->post('Tahun'),
+          'URL' => $this->input->post('URL'),
           //'KONFERENSI' => $this->input->post('KONFERENSI'),
           //'TEMPAT' => $this->input->post('TEMPAT'),
           'PERANAN' => $this->input->post('PERANAN')
